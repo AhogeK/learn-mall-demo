@@ -22,7 +22,7 @@ public class CommonPage<T> {
 
     private Integer pageSize;
 
-    private Integer totalPage;
+    private Integer pages;
 
     private Long total;
 

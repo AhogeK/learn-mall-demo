@@ -5,9 +5,10 @@ import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.mbg.model.PmsBrand;
 import com.example.learnmalldemo.service.PmsBrandService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +29,11 @@ import java.util.List;
 @RequestMapping("/brand")
 public class PmsBrandController {
 
-    @Autowired
-    private PmsBrandService pmsBrandService;
+    private final PmsBrandService pmsBrandService;
+
+    public PmsBrandController(PmsBrandService pmsBrandService) {
+        this.pmsBrandService = pmsBrandService;
+    }
 
     @ApiOperation("获取所有品牌列表")
     @GetMapping("/listAll")
@@ -88,6 +92,12 @@ public class PmsBrandController {
     @ApiOperation("分页查询品牌列表")
     @GetMapping("/list")
     @ResponseBody
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNum", value = "分页当前页", defaultValue = "1", dataType = "integer",
+                    paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "分页每页条数", defaultValue = "3", dataType = "integer",
+                    paramType = "query")
+    })
     public CommonResult<CommonPage<PmsBrand>> listBrand(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                         @RequestParam(value = "pageSize", defaultValue = "3") Integer pageSize) {
         List<PmsBrand> brandList = pmsBrandService.listBrand(pageNum, pageSize);
