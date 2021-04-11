@@ -28,17 +28,16 @@ public class Generator {
             SQLException, InterruptedException {
         // 存储 MBG 运行中的警告信息
         List<String> warnings = new ArrayList<>();
-        // 当生成的代码重复时，覆盖原代码
-        boolean overwrite = true;
         // 读取 MBG 配置文件
         InputStream is = Generator.class.getResourceAsStream("/generatorConfig.xml");
         // 实例化 MBG 配置解析器
         ConfigurationParser cp = new ConfigurationParser(warnings);
         // 解析 xml 配置文件
         Configuration config = cp.parseConfiguration(is);
+        assert is != null;
         is.close();
 
-        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+        DefaultShellCallback callback = new DefaultShellCallback(true);
         // 创建 MBG
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         // 执行生成代码
