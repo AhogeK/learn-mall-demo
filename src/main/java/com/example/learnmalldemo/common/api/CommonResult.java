@@ -14,16 +14,25 @@ import lombok.Data;
 @Data
 public class CommonResult<T> {
 
-    private Long code;
+    private Integer code;
 
     private String message;
 
     private T data;
 
-    protected CommonResult(long code, String message, T data) {
+    protected CommonResult(Integer code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    protected CommonResult(Integer code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
+    }
+
+    public static <T> CommonResult<T> success() {
+        return new CommonResult<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage());
     }
 
     /**
@@ -40,12 +49,24 @@ public class CommonResult<T> {
     /**
      * 失败返回结果
      *
-     * @param errorCode 错误码
-     * @param <T>       结果类型
+     * @param resultCode 错误码
+     * @param <T>        结果类型
      * @return 失败结果
      */
-    public static <T> CommonResult<T> failed(IErrorCode errorCode) {
-        return new CommonResult<>(errorCode.getCode(), errorCode.getMessage(), null);
+    public static <T> CommonResult<T> failed(ResultCode resultCode) {
+        return new CommonResult<>(resultCode.getCode(), resultCode.getMessage(), null);
+    }
+
+    /**
+     * 异常返回结果
+     *
+     * @param code    错误码
+     * @param message 错误类型
+     * @param <T>     错误数据类型（无）
+     * @return 失败结果
+     */
+    public static <T> CommonResult<T> failed(Integer code, String message) {
+        return new CommonResult<>(code, message);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.example.learnmalldemo.common.api;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -12,7 +13,8 @@ import lombok.Getter;
  * @since 1.00
  */
 @Getter
-public enum ResultCode implements IErrorCode{
+@AllArgsConstructor
+public enum ResultCode{
     /*
      * 操作成功
      */
@@ -25,31 +27,20 @@ public enum ResultCode implements IErrorCode{
      * 参数校验失败
      */
     VALIDATE_FAILED(404, "参数检验失败"),
+    /**
+     * 验证码校验失败
+     */
+    AUTH_CODE_VALIDATE_FAILED(404, "验证码校验失败"),
     /*
      * token过期
      */
     UNAUTHORIZED(401, "暂未登录或token已经过期"),
     /*
-     * 每有相关权限
+     * 没有相关权限
      */
     FORBIDDEN(403, "没有相关权限");
 
-    private final Long code;
+    private final  Integer code;
 
     private final String message;
-
-    ResultCode(long code, String message) {
-        this.code = code;
-        this.message = message;
-    }
-
-    @Override
-    public Long getCode() {
-        return code;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
-    }
 }
