@@ -6,9 +6,7 @@ import com.example.learnmalldemo.service.PmsBrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,29 +31,33 @@ public class PmsBrandController {
         this.pmsBrandService = pmsBrandService;
     }
 
+    /**
+     * 获取所有品牌列表
+     *
+     * @return 所有品牌列表
+     * @author AhogeK ahgoek@gmail.com
+     * @date 2021-04-14 21:37
+     */
     @ApiOperation("获取所有品牌列表")
     @GetMapping("/listAll")
     public CommonResult<List<PmsBrand>> getBrandList() {
         return CommonResult.success(pmsBrandService.listAllBrand());
     }
 
-    // @ApiOperation("添加品牌")
-    // @PostMapping("/create")
-    // @ResponseBody
-    // public CommonResult<PmsBrand> createBrand(@RequestBody PmsBrand pmsBrand) {
-    //     CommonResult<PmsBrand> commonResult;
-    //     int count = pmsBrandService.createBrand(pmsBrand);
-    //     if (count == 1) {
-    //         commonResult = CommonResult.success(pmsBrand);
-    //         log.debug("createBrand success:{}", pmsBrand);
-    //
-    //     } else {
-    //         commonResult = CommonResult.failed("操作失败");
-    //         log.debug("createBrand failed:{}", pmsBrand);
-    //     }
-    //     return commonResult;
-    // }
-    //
+    /**
+     * 添加品牌
+     *
+     * @param pmsBrand 品牌实体
+     * @return 新增成功的品牌实体
+     * @author AhogeK ahogek@gmail.com
+     * @date 2021-04-14 21:38
+     */
+    @ApiOperation("添加品牌")
+    @PostMapping("/create")
+    public CommonResult<PmsBrand> createBrand(@RequestBody PmsBrand pmsBrand) {
+        return CommonResult.success(pmsBrandService.createBrand(pmsBrand));
+    }
+
     // @ApiOperation("更新制定id品牌信息")
     // @PostMapping("/update/{id}")
     // @ResponseBody

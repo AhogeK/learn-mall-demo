@@ -28,9 +28,11 @@ public interface PmsBrandService {
      * 新建品牌
      *
      * @param brand 品牌实体
-     * @return 成功数
+     * @return 成功对象
+     * @author ahogek ahogek@gmail.com
+     * @date 2021-04-14 21:21
      */
-    int createBrand(PmsBrand brand);
+    PmsBrand createBrand(PmsBrand brand);
 
     /**
      * 更新品牌

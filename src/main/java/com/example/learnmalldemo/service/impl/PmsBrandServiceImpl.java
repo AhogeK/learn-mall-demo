@@ -1,10 +1,13 @@
 package com.example.learnmalldemo.service.impl;
 
+import com.example.learnmalldemo.common.api.ResultCode;
+import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.mbg.mapper.PmsBrandMapper;
 import com.example.learnmalldemo.mbg.model.PmsBrand;
 import com.example.learnmalldemo.mbg.model.PmsBrandExample;
 import com.example.learnmalldemo.service.PmsBrandService;
 import com.github.pagehelper.PageHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.List;
  * @since 1.00
  */
 @Service
+@Slf4j
 public class PmsBrandServiceImpl implements PmsBrandService {
 
     private final PmsBrandMapper brandMapper;
@@ -33,8 +37,13 @@ public class PmsBrandServiceImpl implements PmsBrandService {
     }
 
     @Override
-    public int createBrand(PmsBrand brand) {
-        return brandMapper.insertSelective(brand);
+    public PmsBrand createBrand(PmsBrand brand) {
+        if (brandMapper.insertSelective(brand) != 1) {
+            log.debug("createBrand failed:{}", brand);
+            throw new MallException(ResultCode.INSERT_FAILED);
+        }
+        log.debug("createBrand success:{}", brand);
+        return brand;
     }
 
     @Override

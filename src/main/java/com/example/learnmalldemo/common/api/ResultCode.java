@@ -24,6 +24,10 @@ public enum ResultCode{
      */
     FAILED(500, "操作失败"),
     /*
+     * 更新操作失败
+     */
+    INSERT_FAILED(500, "新增操作失败"),
+    /*
      * 参数校验失败
      */
     VALIDATE_FAILED(404, "参数检验失败"),
