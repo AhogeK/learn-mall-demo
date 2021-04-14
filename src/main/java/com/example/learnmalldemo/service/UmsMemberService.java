@@ -1,5 +1,7 @@
 package com.example.learnmalldemo.service;
 
+import com.example.learnmalldemo.form.VerifyAuthCodeForm;
+
 /**
  * <p>
  * 会员登录注册管理服务层
@@ -18,4 +20,11 @@ public interface UmsMemberService {
      * @return 验证码
      */
     String getAuthCode(String telephone);
+
+    /**
+     * 校验验证码
+     *
+     * @param verifyAuthCodeForm 校验验证码请求表单
+     */
+    void verifyAuthCode(VerifyAuthCodeForm verifyAuthCodeForm);
 }

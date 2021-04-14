@@ -1,5 +1,9 @@
 package com.example.learnmalldemo.service.impl;
 
+import com.example.learnmalldemo.common.api.ResultCode;
+import com.example.learnmalldemo.common.constants.NumberConstants;
+import com.example.learnmalldemo.exception.MallException;
+import com.example.learnmalldemo.form.VerifyAuthCodeForm;
 import com.example.learnmalldemo.service.RedisService;
 import com.example.learnmalldemo.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,12 +39,20 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     public String getAuthCode(String telephone) {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
-        for (int i = 0; i < 6; i++) {
-            sb.append(random.nextInt(10));
+        for (int i = NumberConstants.ZERO; i < NumberConstants.SIX; i++) {
+            sb.append(random.nextInt(NumberConstants.TEN));
         }
         //验证码绑定手机号并存储到redis
         redisService.set(redisKeyPrefixAuthCode + telephone, sb.toString());
         redisService.expire(redisKeyPrefixAuthCode + telephone, redisKeyExpireAuthCode);
         return sb.toString();
+    }
+
+    @Override
+    public void verifyAuthCode(VerifyAuthCodeForm verifyAuthCodeForm) {
+        String realAuthCode = redisService.get(redisKeyPrefixAuthCode + verifyAuthCodeForm.getTelephone());
+        if (!verifyAuthCodeForm.getAuthCode().equals(realAuthCode)) {
+            throw new MallException(ResultCode.AUTH_CODE_VALIDATE_FAILED);
+        }
     }
 }

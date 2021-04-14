@@ -1,14 +1,16 @@
 package com.example.learnmalldemo.controller;
 
 import com.example.learnmalldemo.common.api.CommonResult;
+import com.example.learnmalldemo.form.VerifyAuthCodeForm;
 import com.example.learnmalldemo.service.UmsMemberService;
-import com.sun.istack.internal.NotNull;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(tags = "会员登录注册管理")
 @RequestMapping("/sso")
+@Validated
 public class UmsMemberController {
 
     private final UmsMemberService umsMemberService;
@@ -37,9 +40,22 @@ public class UmsMemberController {
      * @return 验证码
      */
     @ApiOperation("获取验证码")
-    @GetMapping("/getAuthCode")
-    @ApiImplicitParam(name = "telephone", value = "用户手机号", dataType = "string", paramType = "query", required = true)
-    public CommonResult<String> getAuthCode(@NotNull String telephone) {
+    @GetMapping("/get-auth-code")
+    @ApiImplicitParam(name = "telephone", value = "用户手机号", dataType = "string", paramType = "query")
+    public CommonResult<String> getAuthCode(@NotNull(message = "{notnull}") String telephone) {
         return CommonResult.success(umsMemberService.getAuthCode(telephone));
+    }
+
+    /**
+     * 校验验证码
+     *
+     * @param verifyAuthCodeForm 校验验证码请求表单
+     * @return 验证是否成功
+     */
+    @ApiOperation("校验验证码")
+    @PostMapping("/verify-auth-code")
+    public CommonResult<Void> verifyAuthCode(@RequestBody @Valid VerifyAuthCodeForm verifyAuthCodeForm) {
+        umsMemberService.verifyAuthCode(verifyAuthCodeForm);
+        return CommonResult.success();
     }
 }
