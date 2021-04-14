@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * <p>
- * 品牌新增表单
+ * 品牌表单
  * </p>
  *
  * @author AhogeK ahogek@gmail.com
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * @since 1.00
  */
 @Data
-public class PmsBrandAddForm {
+public class PmsBrandForm {
 
     @ApiModelProperty("品牌名")
     @NotNull(message = "{notnull}")

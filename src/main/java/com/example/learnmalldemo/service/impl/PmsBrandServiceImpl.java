@@ -2,7 +2,7 @@ package com.example.learnmalldemo.service.impl;
 
 import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.exception.MallException;
-import com.example.learnmalldemo.form.PmsBrandAddForm;
+import com.example.learnmalldemo.form.PmsBrandForm;
 import com.example.learnmalldemo.mbg.mapper.PmsBrandMapper;
 import com.example.learnmalldemo.mbg.model.PmsBrand;
 import com.example.learnmalldemo.mbg.model.PmsBrandExample;
@@ -39,7 +39,7 @@ public class PmsBrandServiceImpl implements PmsBrandService {
     }
 
     @Override
-    public PmsBrand createBrand(PmsBrandAddForm brand) {
+    public PmsBrand createBrand(PmsBrandForm brand) {
         PmsBrand pmsBrand = new PmsBrand();
         BeanUtils.copyProperties(brand, pmsBrand);
         if (brandMapper.insertSelective(pmsBrand) != 1) {
@@ -51,9 +51,16 @@ public class PmsBrandServiceImpl implements PmsBrandService {
     }
 
     @Override
-    public int updateBrand(Long id, PmsBrand brand) {
-        brand.setId(id);
-        return brandMapper.updateByPrimaryKeySelective(brand);
+    public PmsBrand updateBrand(Long id, PmsBrandForm brand) {
+        PmsBrand pmsBrand = new PmsBrand();
+        BeanUtils.copyProperties(brand, pmsBrand);
+        pmsBrand.setId(id);
+        if (brandMapper.updateByPrimaryKeySelective(pmsBrand) != 1) {
+            log.debug("updateBrand failed:{}", pmsBrand);
+            throw new MallException(ResultCode.UPDATE_FAILED);
+        }
+        log.debug("updateBrand success:{}", pmsBrand);
+        return pmsBrand;
     }
 
     @Override

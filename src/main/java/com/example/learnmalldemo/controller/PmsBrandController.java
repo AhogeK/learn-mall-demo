@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.controller;
 
 import com.example.learnmalldemo.common.api.CommonResult;
-import com.example.learnmalldemo.form.PmsBrandAddForm;
+import com.example.learnmalldemo.form.PmsBrandForm;
 import com.example.learnmalldemo.mbg.model.PmsBrand;
 import com.example.learnmalldemo.service.PmsBrandService;
 import io.swagger.annotations.Api;
@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -55,26 +56,17 @@ public class PmsBrandController {
      */
     @ApiOperation("添加品牌")
     @PostMapping("/create")
-    public CommonResult<PmsBrand> createBrand(@RequestBody PmsBrandAddForm pmsBrandForm) {
+    public CommonResult<PmsBrand> createBrand(@RequestBody PmsBrandForm pmsBrandForm) {
         return CommonResult.success(pmsBrandService.createBrand(pmsBrandForm));
     }
 
-    // @ApiOperation("更新制定id品牌信息")
-    // @PostMapping("/update/{id}")
-    // @ResponseBody
-    // public CommonResult<PmsBrand> updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto, BindingResult result) {
-    //     CommonResult<PmsBrand> commonResult;
-    //     int count = pmsBrandService.updateBrand(id, pmsBrandDto);
-    //     if (count == 1) {
-    //         commonResult = CommonResult.success(pmsBrandDto);
-    //         log.debug("updateBrand success:{}", pmsBrandDto);
-    //     } else {
-    //         commonResult = CommonResult.failed("操作失败");
-    //         log.debug("updateBrand failed:{}", pmsBrandDto);
-    //     }
-    //     return commonResult;
-    // }
-    //
+    @ApiOperation("更新制定id品牌信息")
+    @PostMapping("/update/{id}")
+    public CommonResult<PmsBrand> updateBrand(@PathVariable("id") @NotNull(message = "{notnull}") Long id,
+                                              @RequestBody PmsBrandForm brandForm) {
+        return CommonResult.success(pmsBrandService.updateBrand(id, brandForm));
+    }
+
     // @ApiOperation("删除制定id的品牌")
     // @GetMapping("/delete/{id}")
     // @ResponseBody
