@@ -1,5 +1,6 @@
 package com.example.learnmalldemo.service;
 
+import com.example.learnmalldemo.form.PmsBrandAddForm;
 import com.example.learnmalldemo.mbg.model.PmsBrand;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public interface PmsBrandService {
      * @author ahogek ahogek@gmail.com
      * @date 2021-04-14 21:21
      */
-    PmsBrand createBrand(PmsBrand brand);
+    PmsBrand createBrand(PmsBrandAddForm brand);
 
     /**
      * 更新品牌

@@ -1,6 +1,7 @@
 package com.example.learnmalldemo.controller;
 
 import com.example.learnmalldemo.common.api.CommonResult;
+import com.example.learnmalldemo.form.PmsBrandAddForm;
 import com.example.learnmalldemo.mbg.model.PmsBrand;
 import com.example.learnmalldemo.service.PmsBrandService;
 import io.swagger.annotations.Api;
@@ -47,15 +48,15 @@ public class PmsBrandController {
     /**
      * 添加品牌
      *
-     * @param pmsBrand 品牌实体
+     * @param pmsBrandForm 品牌实体
      * @return 新增成功的品牌实体
      * @author AhogeK ahogek@gmail.com
      * @date 2021-04-14 21:38
      */
     @ApiOperation("添加品牌")
     @PostMapping("/create")
-    public CommonResult<PmsBrand> createBrand(@RequestBody PmsBrand pmsBrand) {
-        return CommonResult.success(pmsBrandService.createBrand(pmsBrand));
+    public CommonResult<PmsBrand> createBrand(@RequestBody PmsBrandAddForm pmsBrandForm) {
+        return CommonResult.success(pmsBrandService.createBrand(pmsBrandForm));
     }
 
     // @ApiOperation("更新制定id品牌信息")
