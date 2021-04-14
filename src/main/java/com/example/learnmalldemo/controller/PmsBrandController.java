@@ -1,9 +1,16 @@
 package com.example.learnmalldemo.controller;
 
+import com.example.learnmalldemo.common.api.CommonResult;
+import com.example.learnmalldemo.mbg.model.PmsBrand;
+import com.example.learnmalldemo.service.PmsBrandService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,19 +27,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/brand")
 public class PmsBrandController {
 
-    // private final PmsBrandService pmsBrandService;
-    //
-    // public PmsBrandController(PmsBrandService pmsBrandService) {
-    //     this.pmsBrandService = pmsBrandService;
-    // }
+    private final PmsBrandService pmsBrandService;
 
-    // @ApiOperation("获取所有品牌列表")
-    // @GetMapping("/listAll")
-    // @ResponseBody
-    // public CommonResult<List<PmsBrand>> getBrandList() {
-    //     return CommonResult.success(pmsBrandService.listAllBrand());
-    // }
-    //
+    public PmsBrandController(PmsBrandService pmsBrandService) {
+        this.pmsBrandService = pmsBrandService;
+    }
+
+    @ApiOperation("获取所有品牌列表")
+    @GetMapping("/listAll")
+    public CommonResult<List<PmsBrand>> getBrandList() {
+        return CommonResult.success(pmsBrandService.listAllBrand());
+    }
+
     // @ApiOperation("添加品牌")
     // @PostMapping("/create")
     // @ResponseBody

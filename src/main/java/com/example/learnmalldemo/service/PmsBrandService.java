@@ -19,6 +19,8 @@ public interface PmsBrandService {
      * 获取品牌列表
      *
      * @return 品牌列表
+     * @author ahogek
+     * @date 2020-04-14 16:58
      */
     List<PmsBrand> listAllBrand();
 
