@@ -46,14 +46,15 @@ public interface PmsBrandService extends IService<PmsBrand> {
      */
     void updateBrand(Long id, PmsBrandForm brand);
 
-    // /**
-    //  * 删除品牌
-    //  *
-    //  * @param id 品牌id
-    //  * @return 成功数量
-    //  */
-    // int deleteBrand(Long id);
-    //
+    /**
+     * 删除品牌
+     *
+     * @param id 品牌id
+     * @author AhogeK ahogek@gmail.com
+     * @date 2021-04-15 18:22
+     */
+    void deleteBrand(Long id);
+
     // /**
     //  * 品牌分页
     //  *

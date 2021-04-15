@@ -73,28 +73,28 @@ public class PmsBrandController {
      * @date 2021-04-15 18:08
      */
     @ApiOperation("更新制定id品牌信息")
-    @PostMapping("/{id}")
-    @ApiImplicitParam(name = "id", value = "品牌id", required = true, dataType = "integer", paramType = "path")
+    @PutMapping("/{id}")
+    @ApiImplicitParam(name = "id", value = "品牌id", required = true, dataTypeClass = String.class, paramType = "path")
     public CommonResult<Void> updateBrand(@PathVariable("id") @NotNull(message = "{notnull}") Long id,
-                                              @RequestBody @Valid PmsBrandForm brandForm) {
+                                          @RequestBody @Valid PmsBrandForm brandForm) {
         pmsBrandService.updateBrand(id, brandForm);
         return CommonResult.success();
     }
 
-    // @ApiOperation("删除制定id的品牌")
-    // @GetMapping("/delete/{id}")
-    // @ResponseBody
-    // public CommonResult<Void> deleteBrand(@PathVariable("id") Long id) {
-    //     int count = pmsBrandService.deleteBrand(id);
-    //     if (count == 1) {
-    //         log.debug("deleteBrand success :id={}", id);
-    //         return CommonResult.success(null);
-    //     } else {
-    //         log.debug("deleteBrand failed :id={}", id);
-    //         return CommonResult.failed("操作失败");
-    //     }
-    // }
-    //
+    /**
+     * 删除品牌
+     *
+     * @param id 品牌ID
+     * @return 接口请求是否成功
+     */
+    @ApiOperation("删除制定id的品牌")
+    @DeleteMapping("/{id}")
+    @ApiImplicitParam(name = "id", value = "品牌id", required = true, dataTypeClass = String.class, paramType = "path")
+    public CommonResult<Void> deleteBrand(@PathVariable("id") @NotNull(message = "{notnull}") Long id) {
+        pmsBrandService.deleteBrand(id);
+        return CommonResult.success();
+    }
+
     // @ApiOperation("分页查询品牌列表")
     // @GetMapping("/list")
     // @ResponseBody

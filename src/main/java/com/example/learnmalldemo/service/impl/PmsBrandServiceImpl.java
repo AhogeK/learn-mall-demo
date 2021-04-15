@@ -56,11 +56,15 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
         log.debug("updateBrand success:{}", pmsBrand);
     }
 
-    // @Override
-    // public int deleteBrand(Long id) {
-    //     return brandMapper.deleteByPrimaryKey(id);
-    // }
-    //
+    @Override
+    public void deleteBrand(Long id) {
+        if (!removeById(id)) {
+            log.debug("delete brand failed.");
+            throw new MallException(ResultCode.DELETE_FAILED);
+        }
+        log.debug("delete brand success.");
+    }
+
     // @Override
     // public List<PmsBrand> listBrand(int pageNum, int pageSize) {
     //     PageHelper.startPage(pageNum, pageSize);

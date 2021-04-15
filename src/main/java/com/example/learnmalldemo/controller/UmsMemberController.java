@@ -41,7 +41,7 @@ public class UmsMemberController {
      */
     @ApiOperation("获取验证码")
     @GetMapping("/get-auth-code")
-    @ApiImplicitParam(name = "telephone", value = "用户手机号", dataType = "string", paramType = "query")
+    @ApiImplicitParam(name = "telephone", value = "用户手机号", dataTypeClass = String.class, paramType = "query")
     public CommonResult<String> getAuthCode(@NotNull(message = "{notnull}") String telephone) {
         return CommonResult.success(umsMemberService.getAuthCode(telephone));
     }

@@ -1,5 +1,6 @@
 package com.example.learnmalldemo.config;
 
+import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -24,6 +25,12 @@ import springfox.documentation.spring.web.plugins.Docket;
 @EnableOpenApi
 public class SwaggerConfig {
 
+    private final TypeResolver typeResolver;
+
+    public SwaggerConfig(TypeResolver typeResolver) {
+        this.typeResolver = typeResolver;
+    }
+
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -32,7 +39,8 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.example.learnmalldemo.controller"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .additionalModels(typeResolver.resolve(Void.class));
     }
 
     private ApiInfo apiInfo() {

@@ -31,6 +31,10 @@ public enum ResultCode{
      * 更新操作失败
      */
     UPDATE_FAILED(500, "更新操作失败"),
+    /**
+     * 删除操作失败
+     */
+    DELETE_FAILED(500, "删除更新失败"),
     /*
      * 参数校验失败
      */
