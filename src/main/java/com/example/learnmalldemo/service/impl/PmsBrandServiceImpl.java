@@ -1,13 +1,14 @@
 package com.example.learnmalldemo.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.common.api.ResultCode;
+import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.form.PmsBrandForm;
-import com.example.learnmalldemo.mbg.mapper.PmsBrandMapper;
-import com.example.learnmalldemo.mbg.model.PmsBrand;
-import com.example.learnmalldemo.mbg.model.PmsBrandExample;
+import com.example.learnmalldemo.mapper.PmsBrandMapper;
 import com.example.learnmalldemo.service.PmsBrandService;
-import com.github.pagehelper.PageHelper;
+import com.example.learnmalldemo.utils.BeanCopyUtil;
+import com.example.learnmalldemo.vo.PmsBrandVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -25,57 +26,49 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class PmsBrandServiceImpl implements PmsBrandService {
+public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> implements PmsBrandService {
 
-    private final PmsBrandMapper brandMapper;
-
-    public PmsBrandServiceImpl(PmsBrandMapper brandMapper) {
-        this.brandMapper = brandMapper;
+    @Override
+    public List<PmsBrandVo> listAllBrand() {
+        return BeanCopyUtil.createCopyBeanPropCollection(list(), PmsBrandVo.class);
     }
 
     @Override
-    public List<PmsBrand> listAllBrand() {
-        return brandMapper.selectByExample(new PmsBrandExample());
-    }
-
-    @Override
-    public PmsBrand createBrand(PmsBrandForm brand) {
+    public void createBrand(PmsBrandForm brand) {
         PmsBrand pmsBrand = new PmsBrand();
         BeanUtils.copyProperties(brand, pmsBrand);
-        if (brandMapper.insertSelective(pmsBrand) != 1) {
+        if (!save(pmsBrand)) {
             log.debug("createBrand failed:{}", pmsBrand);
             throw new MallException(ResultCode.INSERT_FAILED);
         }
         log.debug("createBrand success:{}", pmsBrand);
-        return pmsBrand;
     }
 
     @Override
-    public PmsBrand updateBrand(Long id, PmsBrandForm brand) {
+    public void updateBrand(Long id, PmsBrandForm brand) {
         PmsBrand pmsBrand = new PmsBrand();
         BeanUtils.copyProperties(brand, pmsBrand);
         pmsBrand.setId(id);
-        if (brandMapper.updateByPrimaryKeySelective(pmsBrand) != 1) {
+        if (!updateById(pmsBrand)) {
             log.debug("updateBrand failed:{}", pmsBrand);
             throw new MallException(ResultCode.UPDATE_FAILED);
         }
         log.debug("updateBrand success:{}", pmsBrand);
-        return pmsBrand;
     }
 
-    @Override
-    public int deleteBrand(Long id) {
-        return brandMapper.deleteByPrimaryKey(id);
-    }
-
-    @Override
-    public List<PmsBrand> listBrand(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        return brandMapper.selectByExample(new PmsBrandExample());
-    }
-
-    @Override
-    public PmsBrand getBrand(Long id) {
-        return brandMapper.selectByPrimaryKey(id);
-    }
+    // @Override
+    // public int deleteBrand(Long id) {
+    //     return brandMapper.deleteByPrimaryKey(id);
+    // }
+    //
+    // @Override
+    // public List<PmsBrand> listBrand(int pageNum, int pageSize) {
+    //     PageHelper.startPage(pageNum, pageSize);
+    //     return brandMapper.selectByExample(new PmsBrandExample());
+    // }
+    //
+    // @Override
+    // public PmsBrand getBrand(Long id) {
+    //     return brandMapper.selectByPrimaryKey(id);
+    // }
 }

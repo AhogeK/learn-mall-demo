@@ -1,7 +1,9 @@
 package com.example.learnmalldemo.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.form.PmsBrandForm;
-import com.example.learnmalldemo.mbg.model.PmsBrand;
+import com.example.learnmalldemo.vo.PmsBrandVo;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ import java.util.List;
  * @date 2021-03-31 16:55
  * @since 1.00
  */
-public interface PmsBrandService {
+public interface PmsBrandService extends IService<PmsBrand> {
 
     /**
      * 获取品牌列表
@@ -23,51 +25,49 @@ public interface PmsBrandService {
      * @author ahogek
      * @date 2020-04-14 16:58
      */
-    List<PmsBrand> listAllBrand();
+    List<PmsBrandVo> listAllBrand();
 
     /**
      * 新建品牌
      *
      * @param brand 品牌实体
-     * @return 成功对象
-     * @author ahogek ahogek@gmail.com
+     * @author AhogeK ahogek@gmail.com
      * @date 2021-04-14 21:21
      */
-    PmsBrand createBrand(PmsBrandForm brand);
+    void createBrand(PmsBrandForm brand);
 
     /**
      * 更新品牌
      *
      * @param id    品牌id
      * @param brand 品牌实体
-     * @return 成功实体
      * @author AhogeK ahogek@gmail.com
      * @date 2021-04-14 23:07
      */
-    PmsBrand updateBrand(Long id, PmsBrandForm brand);
+    void updateBrand(Long id, PmsBrandForm brand);
 
-    /**
-     * 删除品牌
-     *
-     * @param id 品牌id
-     * @return 成功数量
-     */
-    int deleteBrand(Long id);
-
-    /**
-     * 品牌分页
-     *
-     * @param pageNum  当前页
-     * @param pageSize 每页条数
-     * @return 品牌分页
-     */
-    List<PmsBrand> listBrand(int pageNum, int pageSize);
-
-    /**
-     * 获取指定id品牌
-     *
-     * @param id 品牌id
-     * @return 品牌
-     */
-    PmsBrand getBrand(Long id);
+    // /**
+    //  * 删除品牌
+    //  *
+    //  * @param id 品牌id
+    //  * @return 成功数量
+    //  */
+    // int deleteBrand(Long id);
+    //
+    // /**
+    //  * 品牌分页
+    //  *
+    //  * @param pageNum  当前页
+    //  * @param pageSize 每页条数
+    //  * @return 品牌分页
+    //  */
+    // List<PmsBrand> listBrand(int pageNum, int pageSize);
+    //
+    // /**
+    //  * 获取指定id品牌
+    //  *
+    //  * @param id 品牌id
+    //  * @return 品牌
+    //  */
+    // PmsBrand getBrand(Long id);
 }
