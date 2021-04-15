@@ -1,5 +1,8 @@
 package com.example.learnmalldemo.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.entity.PmsBrand;
@@ -63,6 +66,20 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
             throw new MallException(ResultCode.DELETE_FAILED);
         }
         log.debug("delete brand success.");
+    }
+
+    @Override
+    public IPage<PmsBrandVo> getBrandPage(Page<PmsBrand> pmsBrandPage) {
+        Page<PmsBrand> brandPage = page(pmsBrandPage);
+        IPage<PmsBrandVo> resultPage = new Page<>();
+        BeanUtils.copyProperties(brandPage, resultPage);
+        if (CollectionUtils.isEmpty(brandPage.getRecords())) {
+            log.debug("brand has no page");
+            return resultPage;
+        }
+        resultPage.setRecords(BeanCopyUtil.createCopyBeanPropCollection(brandPage.getRecords(), PmsBrandVo.class));
+        log.debug("brand page data:{}", brandPage);
+        return resultPage;
     }
 
     // @Override

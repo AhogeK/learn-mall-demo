@@ -1,5 +1,7 @@
 package com.example.learnmalldemo.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.form.PmsBrandForm;
@@ -54,6 +56,16 @@ public interface PmsBrandService extends IService<PmsBrand> {
      * @date 2021-04-15 18:22
      */
     void deleteBrand(Long id);
+
+    /**
+     * 查询品牌分页
+     *
+     * @param pmsBrandPage 品牌分页参数
+     * @return 品牌分页列表
+     * @author AhogeK ahogek@gmail.com
+     * @date 2021-04-15 22:32
+     */
+    IPage<PmsBrandVo> getBrandPage(Page<PmsBrand> pmsBrandPage);
 
     // /**
     //  * 品牌分页

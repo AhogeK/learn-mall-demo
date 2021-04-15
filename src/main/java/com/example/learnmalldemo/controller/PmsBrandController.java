@@ -1,11 +1,15 @@
 package com.example.learnmalldemo.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.learnmalldemo.common.api.CommonResult;
+import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.form.PmsBrandForm;
 import com.example.learnmalldemo.service.PmsBrandService;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
@@ -86,6 +90,8 @@ public class PmsBrandController {
      *
      * @param id 品牌ID
      * @return 接口请求是否成功
+     * @author AhogeK ahogek@gmail.com
+     * @date 2021-04-15 22:29
      */
     @ApiOperation("删除制定id的品牌")
     @DeleteMapping("/{id}")
@@ -95,21 +101,29 @@ public class PmsBrandController {
         return CommonResult.success();
     }
 
-    // @ApiOperation("分页查询品牌列表")
-    // @GetMapping("/list")
-    // @ResponseBody
-    // @ApiImplicitParams({
-    //         @ApiImplicitParam(name = "pageNum", value = "分页当前页", defaultValue = "1", dataType = "integer",
-    //                 paramType = "query"),
-    //         @ApiImplicitParam(name = "pageSize", value = "分页每页条数", defaultValue = "3", dataType = "integer",
-    //                 paramType = "query")
-    // })
-    // public CommonResult<CommonPage<PmsBrand>> listBrand(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-    //                                                     @RequestParam(value = "pageSize", defaultValue = "3") Integer pageSize) {
-    //     List<PmsBrand> brandList = pmsBrandService.listBrand(pageNum, pageSize);
-    //     return CommonResult.success(CommonPage.restPage(brandList));
-    // }
-    //
+    /**
+     * 分页查询品牌列表
+     *
+     * @param current 分页当前页
+     * @param size    分页每页条数
+     * @return 品牌分页列表
+     * @author AhogeK ahogek@gmail.com
+     * @date 2021-04-15 22:30
+     */
+    @ApiOperation("分页查询品牌列表")
+    @GetMapping("/page")
+    @ResponseBody
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "current", value = "分页当前页", dataType = "integer",
+                    dataTypeClass = Integer.class, paramType = "query", example = "1"),
+            @ApiImplicitParam(name = "size", value = "分页每页条数", dataType= "integer",
+                    dataTypeClass = Integer.class, paramType = "query", example = "3")
+    })
+    public CommonResult<IPage<PmsBrandVo>> listBrand(@RequestParam(defaultValue = "1") Integer current,
+                                                     @RequestParam(defaultValue = "3") Integer size) {
+        return CommonResult.success(pmsBrandService.getBrandPage(new Page<PmsBrand>(current, size)));
+    }
+
     // @ApiOperation("获取指定id的品牌详情")
     // @GetMapping("/{id}")
     // @ResponseBody
