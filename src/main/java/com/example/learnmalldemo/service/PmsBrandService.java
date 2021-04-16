@@ -67,20 +67,11 @@ public interface PmsBrandService extends IService<PmsBrand> {
      */
     IPage<PmsBrandVo> getBrandPage(Page<PmsBrand> pmsBrandPage);
 
-    // /**
-    //  * 品牌分页
-    //  *
-    //  * @param pageNum  当前页
-    //  * @param pageSize 每页条数
-    //  * @return 品牌分页
-    //  */
-    // List<PmsBrand> listBrand(int pageNum, int pageSize);
-    //
-    // /**
-    //  * 获取指定id品牌
-    //  *
-    //  * @param id 品牌id
-    //  * @return 品牌
-    //  */
-    // PmsBrand getBrand(Long id);
+    /**
+     * 获取指定id品牌
+     *
+     * @param id 品牌id
+     * @return 品牌
+     */
+    PmsBrand getBrand(Long id);
 }

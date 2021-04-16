@@ -3,6 +3,7 @@ package com.example.learnmalldemo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -55,9 +56,11 @@ public class PmsBrand {
     private String brandStory;
 
     @ApiModelProperty(value = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd mm:HH:ss")
     private LocalDateTime createTime;
 
     @ApiModelProperty(value = "更新时间")
+    @JsonFormat(pattern = "yyyy-MM-dd mm:HH:ss")
     private LocalDateTime updateTime;
 
     @TableLogic

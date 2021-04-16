@@ -2,6 +2,7 @@ package com.example.learnmalldemo.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.common.api.ResultCode;
@@ -82,14 +83,14 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
         return resultPage;
     }
 
-    // @Override
-    // public List<PmsBrand> listBrand(int pageNum, int pageSize) {
-    //     PageHelper.startPage(pageNum, pageSize);
-    //     return brandMapper.selectByExample(new PmsBrandExample());
-    // }
-    //
-    // @Override
-    // public PmsBrand getBrand(Long id) {
-    //     return brandMapper.selectByPrimaryKey(id);
-    // }
+    @Override
+    public PmsBrand getBrand(Long id) {
+        PmsBrand brand = getById(id);
+        if (ObjectUtils.isEmpty(brand)) {
+            log.debug("get a empty brand");
+            throw new MallException(ResultCode.SELECT_FAILED);
+        }
+        log.debug("get a brand:{}", brand);
+        return brand;
+    }
 }

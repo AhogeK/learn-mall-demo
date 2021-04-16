@@ -124,10 +124,16 @@ public class PmsBrandController {
         return CommonResult.success(pmsBrandService.getBrandPage(new Page<PmsBrand>(current, size)));
     }
 
-    // @ApiOperation("获取指定id的品牌详情")
-    // @GetMapping("/{id}")
-    // @ResponseBody
-    // public CommonResult<PmsBrand> brand(@PathVariable("id") Long id) {
-    //     return CommonResult.success(pmsBrandService.getBrand(id));
-    // }
+    /**
+     * 根据制定id获取品牌详情
+     *
+     * @param id 品牌id
+     * @return 品牌详细信息
+     */
+    @ApiOperation("获取指定id的品牌详情")
+    @GetMapping("/{id}")
+    @ResponseBody
+    public CommonResult<PmsBrand> brand(@PathVariable("id") @NotNull(message = "{notnull}") Long id) {
+        return CommonResult.success(pmsBrandService.getBrand(id));
+    }
 }

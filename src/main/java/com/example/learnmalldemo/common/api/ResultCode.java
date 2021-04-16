@@ -35,6 +35,10 @@ public enum ResultCode{
      * 删除操作失败
      */
     DELETE_FAILED(500, "删除更新失败"),
+    /**
+     * 查询失败
+     */
+    SELECT_FAILED(500, "查询失败"),
     /*
      * 参数校验失败
      */
