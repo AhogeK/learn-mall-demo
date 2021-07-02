@@ -26,11 +26,14 @@ public class JwtTokenUtils {
 
     private static final String CLAIM_KEY_CREATED = "created";
 
-    @Value("${jwt.secret}")
     private static String secret;
 
-    @Value("${jwt.expiration}")
     private static Long expiration;
+
+    public JwtTokenUtils(@Value("${jwt.secret}") String secret, @Value("${jwt.expiration}") Long expiration) {
+        JwtTokenUtils.secret = secret;
+        JwtTokenUtils.expiration = expiration;
+    }
 
     /**
      * 根据负责生成JWT的token
@@ -94,7 +97,7 @@ public class JwtTokenUtils {
      * 根据用户信息生成token
      */
     public static String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
+        Map<String, Object> claims = new HashMap<>(8);
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
         claims.put(CLAIM_KEY_CREATED, new Date());
         return generateToken(claims);
