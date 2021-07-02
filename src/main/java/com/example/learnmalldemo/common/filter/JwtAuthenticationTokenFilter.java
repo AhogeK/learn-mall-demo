@@ -39,7 +39,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String authHeader = request.getHeader(this.tokenHeader);
-        if (authHeader != null && authHeader.startsWith(this.tokenHeader)) {
+        if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
             // 截取 Bearer 之后的字符串
             String authToken = authHeader.substring(this.tokenHead.length());
             String username = JwtTokenUtils.getUserNameFromToken(authToken);
