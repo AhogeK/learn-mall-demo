@@ -2,6 +2,11 @@ package com.example.learnmalldemo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.learnmalldemo.entity.UmsAdmin;
+import com.example.learnmalldemo.entity.UmsPermission;
+import com.example.learnmalldemo.form.UmsAdminRegisterForm;
+import com.example.learnmalldemo.vo.UmsAdminDetailVo;
+
+import java.util.List;
 
 /**
  * 后台管理Service
@@ -10,4 +15,37 @@ import com.example.learnmalldemo.entity.UmsAdmin;
  * @date 2021-05-26 16:14
  */
 public interface UmsAdminService extends IService<UmsAdmin> {
+
+    /**
+     * 根据用户名获取后台管理员
+     *
+     * @param name 用户名
+     * @return 后台管理员实体
+     */
+    UmsAdmin getAdminByUsername(String name);
+
+    /**
+     * 注册功能
+     *
+     * @param umsAdminRegisterForm 用户注册表单实体
+     * @return 注册用户详细信息
+     */
+    UmsAdminDetailVo register(UmsAdminRegisterForm umsAdminRegisterForm);
+
+    /**
+     * 登录功能
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 生成的JWT的token
+     */
+    String login(String username, String password);
+
+    /**
+     * 获取用户所有权限(包括角色权限和+-权限)
+     *
+     * @param adminId 用户id
+     * @return 权限列表
+     */
+    List<UmsPermission> getPermissionList(Long adminId);
 }

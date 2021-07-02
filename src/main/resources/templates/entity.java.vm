@@ -4,6 +4,7 @@ package ${package.Entity};
 import ${pkg};
 #end
 #if(${swagger2})
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 #end
@@ -48,9 +49,14 @@ public class ${entity} extends Model<${entity}> {
 public class ${entity} {
 #end
 
+#foreach($idField in ${table.commonFields})
+    @TableId
+    @ApiModelProperty(value = "主键id")
+    private ${idField.columnType.type} ${idField.name};
+
+#end
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
-
 #if(${field.keyFlag})
     #set($keyPropertyName=${field.propertyName})
 #end
@@ -92,9 +98,9 @@ public class ${entity} {
     @TableLogic
     #end
 private ${field.propertyType} ${field.propertyName};
+
 #end
 ## ----------  END 字段循环遍历  ----------
-
 #if(!${entityLombokModel})
 #foreach($field in ${table.fields})
     #if(${field.propertyType.equals("boolean")})
@@ -102,11 +108,9 @@ private ${field.propertyType} ${field.propertyName};
     #else
         #set($getprefix="get")
     #end
-
     public ${field.propertyType} ${getprefix}${field.capitalName}(){
         return ${field.propertyName};
     }
-
     #if(${chainModel})
     public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}){
     #else
@@ -125,7 +129,6 @@ private ${field.propertyType} ${field.propertyName};
 #if(${entityColumnConstant})
     #foreach($field in ${table.fields})
     public static final String ${field.name.toUpperCase()} ="${field.name}";
-
     #end
 #end
 #if(${activeRecord})
@@ -137,7 +140,6 @@ protected Serializable pkVal(){
             return null;
     #end
         }
-
 #end
 #if(!${entityLombokModel})
 @Override

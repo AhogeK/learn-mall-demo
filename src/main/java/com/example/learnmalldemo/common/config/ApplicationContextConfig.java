@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.config;
+package com.example.learnmalldemo.common.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;

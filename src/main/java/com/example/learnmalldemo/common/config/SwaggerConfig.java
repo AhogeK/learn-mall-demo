@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.config;
+package com.example.learnmalldemo.common.config;
 
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;

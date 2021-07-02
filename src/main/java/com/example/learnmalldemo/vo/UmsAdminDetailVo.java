@@ -1,28 +1,30 @@
-package com.example.learnmalldemo.entity;
+package com.example.learnmalldemo.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 /**
- * 后台用户表实体
+ * 用户表详细信息VO
  *
  * @author AhogeK ahogek@gmail.com
- * @since 1.00 2021-06-08 14:07
+ * @version 1.00 | 2021-06-21 16:16
  */
 @Data
-public class UmsAdmin {
+@ApiModel("用户表详细信息VO")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class UmsAdminDetailVo {
 
-    @TableId(type = IdType.AUTO)
+    @ApiModelProperty(value = "主键id")
     private Long id;
 
+    @ApiModelProperty(value = "用户名")
     private String username;
 
+    @ApiModelProperty(value = "密码")
     private String password;
 
     @ApiModelProperty(value = "头像")
@@ -37,7 +39,6 @@ public class UmsAdmin {
     @ApiModelProperty(value = "备注信息")
     private String note;
 
-    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 

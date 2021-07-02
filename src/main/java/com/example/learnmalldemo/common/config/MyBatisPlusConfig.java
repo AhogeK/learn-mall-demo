@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.config;
+package com.example.learnmalldemo.common.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 1.00
  */
 @Configuration
-@MapperScan(basePackages = "com.example.learnmalldemo.mapper")
+@MapperScan("com.example.learnmalldemo.mapper")
 public class MyBatisPlusConfig {
 
     /**
