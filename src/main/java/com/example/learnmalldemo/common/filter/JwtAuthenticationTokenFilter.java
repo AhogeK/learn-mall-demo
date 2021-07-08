@@ -1,14 +1,16 @@
 package com.example.learnmalldemo.common.filter;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.learnmalldemo.common.util.JwtTokenUtils;
+import com.example.learnmalldemo.service.UmsAdminService;
+import com.example.learnmalldemo.vo.AdminUserDetails;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -16,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 
 /**
  * JWT登录授权过滤器
@@ -24,6 +27,7 @@ import java.io.IOException;
  * @version 1.00 | 2021-06-11 16:06
  */
 @Slf4j
+@Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Value("${jwt.tokenHeader}")
@@ -32,30 +36,32 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UmsAdminService umsAdminService;
+
+    public JwtAuthenticationTokenFilter(@Lazy UmsAdminService umsAdminService) {
+        this.umsAdminService = umsAdminService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        String authHeader = request.getHeader(this.tokenHeader);
-        if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
-            // 截取 Bearer 之后的字符串
-            String authToken = authHeader.substring(this.tokenHead.length());
-            String username = JwtTokenUtils.getUserNameFromToken(authToken);
-            log.info("checking username: {}", username);
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                if (JwtTokenUtils.validateToken(authToken, userDetails)) {
-                    UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(userDetails, null,
-                                    userDetails.getAuthorities());
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    log.info("authenticated user:{}", username);
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                }
-            }
+        final String header = request.getHeader(this.tokenHeader);
+        if (StringUtils.isBlank(header) || !header.startsWith(this.tokenHead)) {
+            filterChain.doFilter(request, response);
+            return;
         }
+        // 获取token并校验
+        final String token = header.split(" ")[1].trim();
+        if (!JwtTokenUtils.validate(token)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        AdminUserDetails adminUserDetails = umsAdminService
+                .getAdminByUsername(JwtTokenUtils.getUserNameFromToken(token)).orElse(null);
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(adminUserDetails,
+                null, adminUserDetails == null ? Collections.emptyList() : adminUserDetails.getAuthorities());
+        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }
 }

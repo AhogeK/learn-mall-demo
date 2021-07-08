@@ -12,19 +12,21 @@ import com.example.learnmalldemo.form.UmsAdminRegisterForm;
 import com.example.learnmalldemo.mapper.UmsAdminMapper;
 import com.example.learnmalldemo.mapper.UmsAdminRoleRelationMapper;
 import com.example.learnmalldemo.service.UmsAdminService;
+import com.example.learnmalldemo.vo.AdminUserDetails;
 import com.example.learnmalldemo.vo.UmsAdminDetailVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 后台管理Service层实现类
@@ -34,25 +36,26 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> implements UmsAdminService {
+public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> implements UmsAdminService,
+        UserDetailsService {
 
-    private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final UmsAdminRoleRelationMapper umsAdminRoleRelationMapper;
 
-    public UmsAdminServiceImpl(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder,
-                               UmsAdminRoleRelationMapper umsAdminRoleRelationMapper) {
-        this.userDetailsService = userDetailsService;
+    public UmsAdminServiceImpl(PasswordEncoder passwordEncoder, UmsAdminRoleRelationMapper umsAdminRoleRelationMapper) {
         this.passwordEncoder = passwordEncoder;
         this.umsAdminRoleRelationMapper = umsAdminRoleRelationMapper;
     }
 
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
-
     @Override
-    public UmsAdmin getAdminByUsername(String name) {
-        return getOne(Wrappers.<UmsAdmin>lambdaQuery().eq(StringUtils.isNotBlank(name), UmsAdmin::getUsername, name));
+    public Optional<AdminUserDetails> getAdminByUsername(String name) {
+        UmsAdmin umsAdmin =
+                getOne(Wrappers.<UmsAdmin>lambdaQuery().eq(StringUtils.isNotBlank(name), UmsAdmin::getUsername, name));
+        if (umsAdmin != null) {
+            List<UmsPermission> permissionList = getPermissionList(umsAdmin.getId());
+            return Optional.of(new AdminUserDetails(umsAdmin, permissionList));
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -79,7 +82,7 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     public String login(String username, String password) {
         String token;
         try {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = loadUserByUsername(username);
             if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new MallException(404002, "登录失败，帐号或密码错误");
             }
@@ -96,5 +99,13 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     @Override
     public List<UmsPermission> getPermissionList(Long adminId) {
         return umsAdminRoleRelationMapper.getPermissionList(adminId);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return getAdminByUsername(username)
+                .orElseThrow(
+                        () -> new UsernameNotFoundException(String.format("User with username - %s, not found", username))
+                );
     }
 }

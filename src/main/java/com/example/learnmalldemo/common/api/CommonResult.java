@@ -1,5 +1,6 @@
 package com.example.learnmalldemo.common.api;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
@@ -12,6 +13,7 @@ import lombok.Data;
  * @since 1.00
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CommonResult<T> {
 
     private Integer code;
@@ -50,11 +52,10 @@ public class CommonResult<T> {
      * 失败返回结果
      *
      * @param resultCode 错误码
-     * @param <T>        结果类型
      * @return 失败结果
      */
     public static <T> CommonResult<T> failed(ResultCode resultCode) {
-        return new CommonResult<>(resultCode.getCode(), resultCode.getMessage(), null);
+        return new CommonResult<>(resultCode.getCode(), resultCode.getMessage());
     }
 
     /**
@@ -73,30 +74,27 @@ public class CommonResult<T> {
      * 失败返回结果
      *
      * @param message 错误提示信息
-     * @param <T>     结果类型
      * @return 失败结果
      */
     public static <T> CommonResult<T> failed(String message) {
-        return new CommonResult<>(ResultCode.FAILED.getCode(), message, null);
+        return new CommonResult<>(ResultCode.FAILED.getCode(), message);
     }
 
     /**
      * 失败返回结果
      *
-     * @param <T> 结果类型
      * @return 失败结果
      */
-    public static <T> CommonResult<T> failed() {
+    public static CommonResult<Void> failed() {
         return failed(ResultCode.FAILED);
     }
 
     /**
      * 参数验证失败返回结果
      *
-     * @param <T> 结果类型
      * @return 失败结果
      */
-    public static <T> CommonResult<T> validateFailed() {
+    public static CommonResult<Void> validateFailed() {
         return failed(ResultCode.VALIDATE_FAILED);
     }
 
@@ -104,22 +102,19 @@ public class CommonResult<T> {
      * 参数验证失败返回结果
      *
      * @param message 提示信息
-     * @param <T>     验证类型
      * @return 失败结果
      */
     public static <T> CommonResult<T> validateFailed(String message) {
-        return new CommonResult<>(ResultCode.VALIDATE_FAILED.getCode(), message, null);
+        return new CommonResult<>(ResultCode.VALIDATE_FAILED.getCode(), message);
     }
 
     /**
      * 未登录返回结果
      *
-     * @param data 返回结果
-     * @param <T>  结果类型
      * @return 失败结果
      */
-    public static <T> CommonResult<T> unauthorized(T data) {
-        return new CommonResult<T>(ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage(), data);
+    public static <T> CommonResult<T> unauthorized() {
+        return new CommonResult<>(ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage());
     }
 
     public static <T> CommonResult<T> forbidden(T data) {

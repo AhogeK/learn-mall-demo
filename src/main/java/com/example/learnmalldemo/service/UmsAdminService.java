@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.UmsPermission;
 import com.example.learnmalldemo.form.UmsAdminRegisterForm;
+import com.example.learnmalldemo.vo.AdminUserDetails;
 import com.example.learnmalldemo.vo.UmsAdminDetailVo;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 后台管理Service
@@ -22,7 +24,7 @@ public interface UmsAdminService extends IService<UmsAdmin> {
      * @param name 用户名
      * @return 后台管理员实体
      */
-    UmsAdmin getAdminByUsername(String name);
+    Optional<AdminUserDetails> getAdminByUsername(String name);
 
     /**
      * 注册功能

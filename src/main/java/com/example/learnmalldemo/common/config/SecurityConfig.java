@@ -1,12 +1,9 @@
 package com.example.learnmalldemo.common.config;
 
+import cn.hutool.json.JSONUtil;
+import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.common.filter.JwtAuthenticationTokenFilter;
-import com.example.learnmalldemo.common.handler.RestAuthenticationEntryPointHandler;
-import com.example.learnmalldemo.common.handler.RestfulAccessDeniedHandler;
-import com.example.learnmalldemo.entity.UmsAdmin;
-import com.example.learnmalldemo.entity.UmsPermission;
 import com.example.learnmalldemo.service.UmsAdminService;
-import com.example.learnmalldemo.vo.AdminUserDetails;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -18,13 +15,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * SpringSecurity的配置
@@ -41,19 +41,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-resources/**", "/v2/api-docs/**", "/swagger-ui/**"};
 
     private final UmsAdminService adminService;
-    private final RestfulAccessDeniedHandler restfulAccessDeniedHandler;
-    private final RestAuthenticationEntryPointHandler restAuthenticationEntryPointHandler;
+    private final JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
-    public SecurityConfig(@Lazy UmsAdminService adminService, RestfulAccessDeniedHandler restfulAccessDeniedHandler,
-                          RestAuthenticationEntryPointHandler restAuthenticationEntryPointHandler) {
+    public SecurityConfig(@Lazy UmsAdminService adminService,
+                          JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter) {
         this.adminService = adminService;
-        this.restfulAccessDeniedHandler = restfulAccessDeniedHandler;
-        this.restAuthenticationEntryPointHandler = restAuthenticationEntryPointHandler;
+        this.jwtAuthenticationTokenFilter = jwtAuthenticationTokenFilter;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // 配置网络安全
         http
+                // 开启跨资源共享
+                .cors().and()
                 // 由于使用 JWT 所以禁用 CSRF
                 .csrf().disable()
                 // 基于 token 所以不需要 session
@@ -72,16 +73,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated();
         // 无缓存
         http.headers().cacheControl();
-        // 添加 JWT 拦截
-        http.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         //添加自定义未授权和未登录结果返回
-        http.exceptionHandling().accessDeniedHandler(restfulAccessDeniedHandler)
-                .authenticationEntryPoint(restAuthenticationEntryPointHandler);
+        http.exceptionHandling()
+                .accessDeniedHandler((request, response, ex) -> flushResponse(response))
+                .authenticationEntryPoint((request, response, ex) -> flushResponse(response));
+        // 添加 JWT 拦截
+        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    private void flushResponse(HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+        response.getWriter().println(JSONUtil.parse(CommonResult.unauthorized()));
+        response.getWriter().flush();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+        // 配置认证管理
+        auth.userDetailsService(username -> adminService
+                .getAdminByUsername(username)
+                .orElseThrow(
+                        () -> new UsernameNotFoundException(
+                                String.format("用户: %s, 未找到", username)
+                        )
+                ));
     }
 
     @Bean
@@ -91,26 +107,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @Override
-    protected UserDetailsService userDetailsService() {
-        // 获取登录用户信息
-        return username -> {
-            UmsAdmin admin = adminService.getAdminByUsername(username);
-            if (admin != null) {
-                List<UmsPermission> permissionList = adminService.getPermissionList(admin.getId());
-                return new AdminUserDetails(admin, permissionList);
-            }
-            throw new UsernameNotFoundException("用户名或密码错误");
-        };
-    }
-
-    @Bean
-    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
-        return new JwtAuthenticationTokenFilter();
-    }
-
-    @Bean
-    @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    /**
+     * Used by spring security if CORS is enabled.
+     *
+     * @return CORS拦截器
+     */
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
 }

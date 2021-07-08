@@ -3,8 +3,10 @@ package com.example.learnmalldemo.common.resolver;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.learnmalldemo.common.annotation.LoginUser;
+import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.common.util.JwtTokenUtils;
 import com.example.learnmalldemo.entity.UmsAdmin;
+import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.service.UmsAdminService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
@@ -47,16 +49,15 @@ public class UmsAdminArgumentResolver implements HandlerMethodArgumentResolver {
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         if (request != null) {
-            String authHeader = request.getHeader(tokenHeader);
-            if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
-                // 截取 Bearer 之后的字符串
-                String authToken = authHeader.substring(this.tokenHead.length());
-                String username = JwtTokenUtils.getUserNameFromToken(authToken);
+            final String header = request.getHeader(this.tokenHeader);
+            if (StringUtils.isNotBlank(header) && header.startsWith(this.tokenHead)) {
+                final String token = header.split(" ")[1].trim();
+                final String username = JwtTokenUtils.getUserNameFromToken(token);
                 if (StringUtils.isNotBlank(username)) {
                     return umsAdminService.getOne(Wrappers.<UmsAdmin>lambdaQuery().eq(UmsAdmin::getUsername, username));
                 }
             }
         }
-        return null;
+        throw new MallException(ResultCode.UNAUTHORIZED);
     }
 }

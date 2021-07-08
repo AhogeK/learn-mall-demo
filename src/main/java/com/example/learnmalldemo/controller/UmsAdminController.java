@@ -11,6 +11,7 @@ import com.example.learnmalldemo.vo.UmsAdminDetailVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -32,7 +33,7 @@ public class UmsAdminController {
 
     private final UmsAdminService umsAdminService;
 
-    public UmsAdminController(UmsAdminService umsAdminService) {
+    public UmsAdminController(@Lazy UmsAdminService umsAdminService) {
         this.umsAdminService = umsAdminService;
     }
 

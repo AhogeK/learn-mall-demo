@@ -81,6 +81,21 @@ public class JwtTokenUtils {
     }
 
     /**
+     * 校验token
+     *
+     * @param token 客户端传入的token
+     * @return token是否有效
+     */
+    public static boolean validate(String token) {
+        try {
+            getClaimsFromToken(token);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 判断token是否已经失效
      */
     private static boolean isTokenExpired(String token) {
