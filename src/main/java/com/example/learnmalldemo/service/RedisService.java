@@ -15,7 +15,7 @@ public interface RedisService {
     /**
      * 存储数据
      *
-     * @param key key
+     * @param key   key
      * @param value value
      */
     void set(String key, String value);
@@ -31,7 +31,7 @@ public interface RedisService {
     /**
      * 设置超期时间
      *
-     * @param key key
+     * @param key    key
      * @param expire expire time
      * @return is success
      */
@@ -47,7 +47,7 @@ public interface RedisService {
     /**
      * 自增操作
      *
-     * @param key key
+     * @param key   key
      * @param delta 自增步长
      * @return result value
      */

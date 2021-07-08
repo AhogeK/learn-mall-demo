@@ -14,7 +14,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ResultCode{
+public enum ResultCode {
     /*
      * 操作成功
      */
@@ -56,7 +56,7 @@ public enum ResultCode{
      */
     FORBIDDEN(403, "没有相关权限");
 
-    private final  Integer code;
+    private final Integer code;
 
     private final String message;
 }

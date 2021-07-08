@@ -55,11 +55,11 @@ public class SwaggerConfig {
 
     private SecurityContext securityContexts() {
         return SecurityContext.builder()
-                        .securityReferences(Collections.singletonList(defaultAuth()))
-                        .operationSelector(operationContext ->
-                                PathSelectors.regex("^(?!/admin/login|/admin/register).*$")
+                .securityReferences(Collections.singletonList(defaultAuth()))
+                .operationSelector(operationContext ->
+                        PathSelectors.regex("^(?!/admin/login|/admin/register).*$")
                                 .test(operationContext.requestMappingPattern()))
-                        .build();
+                .build();
     }
 
     private SecurityReference defaultAuth() {

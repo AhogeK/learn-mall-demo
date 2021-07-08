@@ -30,13 +30,11 @@ import java.util.Collections;
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
+    private final UmsAdminService umsAdminService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
-
     @Value("${jwt.tokenHead}")
     private String tokenHead;
-
-    private final UmsAdminService umsAdminService;
 
     public JwtAuthenticationTokenFilter(@Lazy UmsAdminService umsAdminService) {
         this.umsAdminService = umsAdminService;

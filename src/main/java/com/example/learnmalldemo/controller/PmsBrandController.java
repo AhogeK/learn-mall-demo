@@ -73,7 +73,7 @@ public class PmsBrandController {
     /**
      * 更新品牌
      *
-     * @param id 品牌id
+     * @param id        品牌id
      * @param brandForm 更新表单
      * @return 请求是否成功
      * @author AhogeK ahogek@gmail.com
@@ -121,7 +121,7 @@ public class PmsBrandController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "current", value = "分页当前页", dataType = "integer",
                     dataTypeClass = Integer.class, paramType = "query", example = "1"),
-            @ApiImplicitParam(name = "size", value = "分页每页条数", dataType= "integer",
+            @ApiImplicitParam(name = "size", value = "分页每页条数", dataType = "integer",
                     dataTypeClass = Integer.class, paramType = "query", example = "3")
     })
     public CommonResult<IPage<PmsBrandVo>> listBrand(@RequestParam(defaultValue = "1") Integer current,

@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class MallException extends RuntimeException{
+public class MallException extends RuntimeException {
 
     private Integer code;
 

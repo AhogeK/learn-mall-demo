@@ -24,16 +24,14 @@ import java.util.Random;
 public class UmsMemberServiceImpl implements UmsMemberService {
 
     private final RedisService redisService;
+    @Value("${spring.redis.key.prefix.authCode}")
+    private String redisKeyPrefixAuthCode;
+    @Value("${spring.redis.key.expire.authCode}")
+    private Long redisKeyExpireAuthCode;
 
     public UmsMemberServiceImpl(RedisService redisService) {
         this.redisService = redisService;
     }
-
-    @Value("${spring.redis.key.prefix.authCode}")
-    private String redisKeyPrefixAuthCode;
-
-    @Value("${spring.redis.key.expire.authCode}")
-    private Long redisKeyExpireAuthCode;
 
     @Override
     public String getAuthCode(String telephone) {

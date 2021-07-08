@@ -32,15 +32,14 @@ import java.util.Map;
 public class UmsAdminController {
 
     private final UmsAdminService umsAdminService;
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
 
     public UmsAdminController(@Lazy UmsAdminService umsAdminService) {
         this.umsAdminService = umsAdminService;
     }
 
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
-
-    @ApiOperation(value ="用户注册")
+    @ApiOperation(value = "用户注册")
     @PostMapping("/register")
     public CommonResult<UmsAdminDetailVo> register(@RequestBody @Valid UmsAdminRegisterForm umsAdminRegisterForm) {
         return CommonResult.success(umsAdminService.register(umsAdminRegisterForm));
