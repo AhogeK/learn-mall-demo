@@ -9,4 +9,6 @@
    注意官方文档的[2.1.3](https://springfox.github.io/springfox/docs/current/#migrating-from-existing-2-x-version) 新版本与老版本的不同
 3. 整合 redis 这个与学习项目相同暂未做更改
 4. 整合 Spring Security
-    * 在整合 Spring Security 前强烈推荐大家阅读 [码农小胖的关于SpingSecurity的个人电子书](https://felord.cn/)
+   * 在整合 Spring Security 前强烈推荐大家阅读 [码农小胖的关于SpingSecurity的个人电子书](https://felord.cn/)
+5. 添加定时任务
+   * 可以参考学习 [A Guide to the Spring Task Scheduler](https://www.baeldung.com/spring-task-scheduler)
