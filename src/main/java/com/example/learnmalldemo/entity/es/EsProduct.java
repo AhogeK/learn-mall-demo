@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.nosql.es.entity;
+package com.example.learnmalldemo.entity.es;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

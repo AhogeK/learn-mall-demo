@@ -1,6 +1,6 @@
-package com.example.learnmalldemo.nosql.es.repository;
+package com.example.learnmalldemo.repository.es;
 
-import com.example.learnmalldemo.nosql.es.entity.EsProduct;
+import com.example.learnmalldemo.entity.es.EsProduct;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;

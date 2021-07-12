@@ -26,11 +26,18 @@ spring:
   security:
     filter:
       order: 10
+  data:
+    mongodb:
+      authentication-database: admin
+      database: mall-port
+      host: 192.168.50.190
+      port: 27017
 
 logging:
   level:
     com.example.learnmalldemo.mapper: debug
     org.springframework.security: warn
+    org.springframework.data.convert.CustomConversions: error
   pattern:
     console: '[%d{dd/MM/yy hh:mm:ss:sss z}] %t %5p %c{2}: %m%n'
 

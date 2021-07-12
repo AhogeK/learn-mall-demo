@@ -1,13 +1,14 @@
 package com.example.learnmalldemo.controller.es;
 
 import com.example.learnmalldemo.common.api.CommonResult;
-import com.example.learnmalldemo.nosql.es.entity.EsProduct;
+import com.example.learnmalldemo.entity.es.EsProduct;
 import com.example.learnmalldemo.service.es.IEsProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ import javax.validation.constraints.NotNull;
  * @version 1.00 | 2021-07-09 12:17
  */
 @Api(tags = "搜索商品管理", value = "EsProductController")
+@Validated
 @RestController
 @RequestMapping("/es-products")
 public class EsProductController {
@@ -65,7 +67,8 @@ public class EsProductController {
 
     @ApiOperation("根据id创建商品")
     @PostMapping("/{id}")
-    @ApiImplicitParam(name = "id", value = "要创建的商品id", dataTypeClass = Long.class, paramType = "path", required = true)
+    @ApiImplicitParam(name = "id", value = "要创建的商品id", dataTypeClass = Long.class, paramType = "path",
+            example = "1", required = true)
     public CommonResult<Void> create(@PathVariable @NotNull(message = "{notnull}") Long id) {
         esProductService.create(id);
         return CommonResult.success();

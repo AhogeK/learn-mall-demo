@@ -17,7 +17,7 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  * @version 1.00 | 2021-07-09 13:41
  */
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.example.learnmalldemo.nosql.es.repository")
+@EnableElasticsearchRepositories(basePackages = "com.example.learnmalldemo.repository.es")
 @ComponentScan(basePackages = {"com.example.learnmalldemo.service.es"})
 public class ElasticsearchConfig {
 

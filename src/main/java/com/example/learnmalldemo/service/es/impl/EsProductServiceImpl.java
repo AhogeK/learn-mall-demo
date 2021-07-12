@@ -2,10 +2,10 @@ package com.example.learnmalldemo.service.es.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.example.learnmalldemo.common.api.ResultCode;
+import com.example.learnmalldemo.entity.es.EsProduct;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.mapper.PmsProductMapper;
-import com.example.learnmalldemo.nosql.es.entity.EsProduct;
-import com.example.learnmalldemo.nosql.es.repository.EsProductRepository;
+import com.example.learnmalldemo.repository.es.EsProductRepository;
 import com.example.learnmalldemo.service.es.IEsProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
