@@ -4,7 +4,7 @@ import com.example.learnmalldemo.common.annotation.LoginUser;
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.mongo.MemberReadHistory;
-import com.example.learnmalldemo.form.mongo.MemberReadHistoryAddForm;
+import com.example.learnmalldemo.form.MemberReadHistoryAddForm;
 import com.example.learnmalldemo.service.mongo.IMemberReadHistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

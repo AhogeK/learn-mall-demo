@@ -4,7 +4,7 @@ import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.mongo.MemberReadHistory;
 import com.example.learnmalldemo.exception.MallException;
-import com.example.learnmalldemo.form.mongo.MemberReadHistoryAddForm;
+import com.example.learnmalldemo.form.MemberReadHistoryAddForm;
 import com.example.learnmalldemo.repository.mongo.MemberReadHistoryRepository;
 import com.example.learnmalldemo.service.mongo.IMemberReadHistoryService;
 import org.springframework.beans.BeanUtils;

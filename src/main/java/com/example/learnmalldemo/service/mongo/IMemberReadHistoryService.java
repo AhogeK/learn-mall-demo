@@ -2,7 +2,7 @@ package com.example.learnmalldemo.service.mongo;
 
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.mongo.MemberReadHistory;
-import com.example.learnmalldemo.form.mongo.MemberReadHistoryAddForm;
+import com.example.learnmalldemo.form.MemberReadHistoryAddForm;
 import org.springframework.data.domain.Page;
 
 /**

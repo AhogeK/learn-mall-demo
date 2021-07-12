@@ -32,6 +32,12 @@ spring:
       database: mall-port
       host: 192.168.50.190
       port: 27017
+  rabbitmq:
+    host: 192.168.50.190
+    port: 5672
+    username: mall
+    password: mall
+    virtual-host: /mall
 
 logging:
   level:

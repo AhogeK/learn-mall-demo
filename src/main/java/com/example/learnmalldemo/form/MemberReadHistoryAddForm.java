@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.form.mongo;
+package com.example.learnmalldemo.form;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
