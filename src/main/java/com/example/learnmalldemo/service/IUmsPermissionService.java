@@ -11,6 +11,6 @@ import com.example.learnmalldemo.entity.UmsPermission;
  * @author AhogeK
  * @since 2021-06-21
  */
-public interface UmsPermissionService extends IService<UmsPermission> {
+public interface IUmsPermissionService extends IService<UmsPermission> {
 
 }

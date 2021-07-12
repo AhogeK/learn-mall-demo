@@ -10,7 +10,7 @@ import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.form.PmsBrandForm;
 import com.example.learnmalldemo.mapper.PmsBrandMapper;
-import com.example.learnmalldemo.service.PmsBrandService;
+import com.example.learnmalldemo.service.IPmsBrandService;
 import com.example.learnmalldemo.utils.BeanCopyUtil;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> implements PmsBrandService {
+public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> implements IPmsBrandService {
 
     @Override
     public List<PmsBrandVo> listAllBrand() {

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.form.PmsBrandForm;
-import com.example.learnmalldemo.service.PmsBrandService;
+import com.example.learnmalldemo.service.IPmsBrandService;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -34,10 +34,10 @@ import java.util.List;
 @RequestMapping("/brands")
 public class PmsBrandController {
 
-    private final PmsBrandService pmsBrandService;
+    private final IPmsBrandService IPmsBrandService;
 
-    public PmsBrandController(PmsBrandService pmsBrandService) {
-        this.pmsBrandService = pmsBrandService;
+    public PmsBrandController(IPmsBrandService IPmsBrandService) {
+        this.IPmsBrandService = IPmsBrandService;
     }
 
     /**
@@ -51,7 +51,7 @@ public class PmsBrandController {
     @ApiOperation("获取所有品牌列表")
     @GetMapping
     public CommonResult<List<PmsBrandVo>> getBrandList() {
-        return CommonResult.success(pmsBrandService.listAllBrand());
+        return CommonResult.success(IPmsBrandService.listAllBrand());
     }
 
     /**
@@ -66,7 +66,7 @@ public class PmsBrandController {
     @ApiOperation("添加品牌")
     @PostMapping
     public CommonResult<Void> createBrand(@RequestBody @Valid PmsBrandForm pmsBrandForm) {
-        pmsBrandService.createBrand(pmsBrandForm);
+        IPmsBrandService.createBrand(pmsBrandForm);
         return CommonResult.success();
     }
 
@@ -85,7 +85,7 @@ public class PmsBrandController {
     @ApiImplicitParam(name = "id", value = "品牌id", required = true, dataTypeClass = String.class, paramType = "path")
     public CommonResult<Void> updateBrand(@PathVariable("id") @NotNull(message = "{notnull}") Long id,
                                           @RequestBody @Valid PmsBrandForm brandForm) {
-        pmsBrandService.updateBrand(id, brandForm);
+        IPmsBrandService.updateBrand(id, brandForm);
         return CommonResult.success();
     }
 
@@ -102,7 +102,7 @@ public class PmsBrandController {
     @DeleteMapping("/{id}")
     @ApiImplicitParam(name = "id", value = "品牌id", required = true, dataTypeClass = String.class, paramType = "path")
     public CommonResult<Void> deleteBrand(@PathVariable("id") @NotNull(message = "{notnull}") Long id) {
-        pmsBrandService.deleteBrand(id);
+        IPmsBrandService.deleteBrand(id);
         return CommonResult.success();
     }
 
@@ -126,7 +126,7 @@ public class PmsBrandController {
     })
     public CommonResult<IPage<PmsBrandVo>> listBrand(@RequestParam(defaultValue = "1") Integer current,
                                                      @RequestParam(defaultValue = "3") Integer size) {
-        return CommonResult.success(pmsBrandService.getBrandPage(new Page<>(current, size)));
+        return CommonResult.success(IPmsBrandService.getBrandPage(new Page<>(current, size)));
     }
 
     /**
@@ -138,8 +138,7 @@ public class PmsBrandController {
     @PreAuthorize("hasAuthority('pms:brand:read')")
     @ApiOperation("获取指定id的品牌详情")
     @GetMapping("/{id}")
-    @ResponseBody
     public CommonResult<PmsBrand> brand(@PathVariable("id") @NotNull(message = "{notnull}") Long id) {
-        return CommonResult.success(pmsBrandService.getBrand(id));
+        return CommonResult.success(IPmsBrandService.getBrand(id));
     }
 }

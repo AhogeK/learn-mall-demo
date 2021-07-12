@@ -11,7 +11,7 @@ import com.example.learnmalldemo.form.VerifyAuthCodeForm;
  * @date 2021-04-11 16:21
  * @since 1.00
  */
-public interface UmsMemberService {
+public interface IUmsMemberService {
 
     /**
      * 生成验证码

@@ -18,7 +18,7 @@ import java.util.List;
  * @date 2021-03-31 16:55
  * @since 1.00
  */
-public interface PmsBrandService extends IService<PmsBrand> {
+public interface IPmsBrandService extends IService<PmsBrand> {
 
     /**
      * 获取品牌列表

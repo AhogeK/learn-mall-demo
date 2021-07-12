@@ -7,7 +7,7 @@ import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.common.util.JwtTokenUtils;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.exception.MallException;
-import com.example.learnmalldemo.service.UmsAdminService;
+import com.example.learnmalldemo.service.IUmsAdminService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class UmsAdminArgumentResolver implements HandlerMethodArgumentResolver {
 
-    private final UmsAdminService umsAdminService;
+    private final IUmsAdminService IUmsAdminService;
 
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
@@ -35,8 +35,8 @@ public class UmsAdminArgumentResolver implements HandlerMethodArgumentResolver {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    public UmsAdminArgumentResolver(UmsAdminService umsAdminService) {
-        this.umsAdminService = umsAdminService;
+    public UmsAdminArgumentResolver(IUmsAdminService IUmsAdminService) {
+        this.IUmsAdminService = IUmsAdminService;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class UmsAdminArgumentResolver implements HandlerMethodArgumentResolver {
                 final String token = header.split(" ")[1].trim();
                 final String username = JwtTokenUtils.getUserNameFromToken(token);
                 if (StringUtils.isNotBlank(username)) {
-                    return umsAdminService.getOne(Wrappers.<UmsAdmin>lambdaQuery().eq(UmsAdmin::getUsername, username));
+                    return IUmsAdminService.getOne(Wrappers.<UmsAdmin>lambdaQuery().eq(UmsAdmin::getUsername, username));
                 }
             }
         }

@@ -3,7 +3,7 @@ package com.example.learnmalldemo.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.entity.UmsAdminRoleRelation;
 import com.example.learnmalldemo.mapper.UmsAdminRoleRelationMapper;
-import com.example.learnmalldemo.service.UmsAdminRoleRelationService;
+import com.example.learnmalldemo.service.IUmsAdminRoleRelationService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-06-21
  */
 @Service
-public class UmsAdminRoleRelationServiceImpl extends ServiceImpl<UmsAdminRoleRelationMapper, UmsAdminRoleRelation> implements UmsAdminRoleRelationService {
+public class UmsAdminRoleRelationServiceImpl extends ServiceImpl<UmsAdminRoleRelationMapper, UmsAdminRoleRelation> implements IUmsAdminRoleRelationService {
 
 }

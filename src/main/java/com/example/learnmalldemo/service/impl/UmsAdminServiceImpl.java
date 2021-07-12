@@ -11,7 +11,7 @@ import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.form.UmsAdminRegisterForm;
 import com.example.learnmalldemo.mapper.UmsAdminMapper;
 import com.example.learnmalldemo.mapper.UmsAdminRoleRelationMapper;
-import com.example.learnmalldemo.service.UmsAdminService;
+import com.example.learnmalldemo.service.IUmsAdminService;
 import com.example.learnmalldemo.vo.AdminUserDetails;
 import com.example.learnmalldemo.vo.UmsAdminDetailVo;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ import java.util.Optional;
  */
 @Slf4j
 @Service
-public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> implements UmsAdminService,
+public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> implements IUmsAdminService,
         UserDetailsService {
 
     private final PasswordEncoder passwordEncoder;

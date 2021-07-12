@@ -2,7 +2,7 @@ package com.example.learnmalldemo.common.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.learnmalldemo.common.util.JwtTokenUtils;
-import com.example.learnmalldemo.service.UmsAdminService;
+import com.example.learnmalldemo.service.IUmsAdminService;
 import com.example.learnmalldemo.vo.AdminUserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,14 +30,14 @@ import java.util.Collections;
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
-    private final UmsAdminService umsAdminService;
+    private final IUmsAdminService IUmsAdminService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    public JwtAuthenticationTokenFilter(@Lazy UmsAdminService umsAdminService) {
-        this.umsAdminService = umsAdminService;
+    public JwtAuthenticationTokenFilter(@Lazy IUmsAdminService IUmsAdminService) {
+        this.IUmsAdminService = IUmsAdminService;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        AdminUserDetails adminUserDetails = umsAdminService
+        AdminUserDetails adminUserDetails = IUmsAdminService
                 .getAdminByUsername(JwtTokenUtils.getUserNameFromToken(token)).orElse(null);
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(adminUserDetails,
                 null, adminUserDetails == null ? Collections.emptyList() : adminUserDetails.getAuthorities());

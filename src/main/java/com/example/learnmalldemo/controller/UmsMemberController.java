@@ -2,7 +2,7 @@ package com.example.learnmalldemo.controller;
 
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.form.VerifyAuthCodeForm;
-import com.example.learnmalldemo.service.UmsMemberService;
+import com.example.learnmalldemo.service.IUmsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -27,10 +27,10 @@ import javax.validation.constraints.NotNull;
 @Validated
 public class UmsMemberController {
 
-    private final UmsMemberService umsMemberService;
+    private final IUmsMemberService IUmsMemberService;
 
-    public UmsMemberController(UmsMemberService umsMemberService) {
-        this.umsMemberService = umsMemberService;
+    public UmsMemberController(IUmsMemberService IUmsMemberService) {
+        this.IUmsMemberService = IUmsMemberService;
     }
 
     /**
@@ -43,7 +43,7 @@ public class UmsMemberController {
     @GetMapping("/get-auth-code")
     @ApiImplicitParam(name = "telephone", value = "用户手机号", dataTypeClass = String.class, paramType = "query")
     public CommonResult<String> getAuthCode(@NotNull(message = "{notnull}") String telephone) {
-        return CommonResult.success(umsMemberService.getAuthCode(telephone));
+        return CommonResult.success(IUmsMemberService.getAuthCode(telephone));
     }
 
     /**
@@ -55,7 +55,7 @@ public class UmsMemberController {
     @ApiOperation("校验验证码")
     @PostMapping("/verify-auth-code")
     public CommonResult<Void> verifyAuthCode(@RequestBody @Valid VerifyAuthCodeForm verifyAuthCodeForm) {
-        umsMemberService.verifyAuthCode(verifyAuthCodeForm);
+        IUmsMemberService.verifyAuthCode(verifyAuthCodeForm);
         return CommonResult.success();
     }
 }

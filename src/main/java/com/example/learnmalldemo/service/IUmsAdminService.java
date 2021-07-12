@@ -16,7 +16,7 @@ import java.util.Optional;
  * @author AhogeK ahogek@gmail.com
  * @date 2021-05-26 16:14
  */
-public interface UmsAdminService extends IService<UmsAdmin> {
+public interface IUmsAdminService extends IService<UmsAdmin> {
 
     /**
      * 根据用户名获取后台管理员

@@ -4,8 +4,8 @@ import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.common.constants.NumberConstants;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.form.VerifyAuthCodeForm;
-import com.example.learnmalldemo.service.RedisService;
-import com.example.learnmalldemo.service.UmsMemberService;
+import com.example.learnmalldemo.service.IRedisService;
+import com.example.learnmalldemo.service.IUmsMemberService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +21,15 @@ import java.util.Random;
  * @since 1.00
  */
 @Service
-public class UmsMemberServiceImpl implements UmsMemberService {
+public class UmsMemberServiceImpl implements IUmsMemberService {
 
-    private final RedisService redisService;
+    private final IRedisService redisService;
     @Value("${spring.redis.key.prefix.authCode}")
     private String redisKeyPrefixAuthCode;
     @Value("${spring.redis.key.expire.authCode}")
     private Long redisKeyExpireAuthCode;
 
-    public UmsMemberServiceImpl(RedisService redisService) {
+    public UmsMemberServiceImpl(IRedisService redisService) {
         this.redisService = redisService;
     }
 

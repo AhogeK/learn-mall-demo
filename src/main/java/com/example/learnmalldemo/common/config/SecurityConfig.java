@@ -3,7 +3,7 @@ package com.example.learnmalldemo.common.config;
 import cn.hutool.json.JSONUtil;
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.common.filter.JwtAuthenticationTokenFilter;
-import com.example.learnmalldemo.service.UmsAdminService;
+import com.example.learnmalldemo.service.IUmsAdminService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -40,10 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final static String[] GET_ANT_MATCHERS = {"/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js",
             "/swagger-resources/**", "/v2/api-docs/**", "/swagger-ui/**"};
 
-    private final UmsAdminService adminService;
+    private final IUmsAdminService adminService;
     private final JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
-    public SecurityConfig(@Lazy UmsAdminService adminService,
+    public SecurityConfig(@Lazy IUmsAdminService adminService,
                           JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter) {
         this.adminService = adminService;
         this.jwtAuthenticationTokenFilter = jwtAuthenticationTokenFilter;

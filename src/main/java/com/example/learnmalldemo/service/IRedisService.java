@@ -10,7 +10,7 @@ package com.example.learnmalldemo.service;
  * @date 2021-04-11 15:38
  * @since 1.00
  */
-public interface RedisService {
+public interface IRedisService {
 
     /**
      * 存储数据

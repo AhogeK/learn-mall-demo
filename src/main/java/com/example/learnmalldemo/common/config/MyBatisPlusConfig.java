@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 1.00
  */
 @Configuration
-@MapperScan("com.example.learnmalldemo.mapper")
+@MapperScan(basePackages = "com.example.learnmalldemo.mapper")
 public class MyBatisPlusConfig {
 
     /**

@@ -52,7 +52,7 @@ public class CodeGenerator {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("AhogeK");
+        gc.setAuthor("AhogeK ahogek@gmail.com");
         gc.setOpen(false);
         // 实体属性 Swagger2 注解
         gc.setSwagger2(true);

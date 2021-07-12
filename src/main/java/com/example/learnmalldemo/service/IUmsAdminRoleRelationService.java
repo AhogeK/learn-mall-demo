@@ -11,6 +11,6 @@ import com.example.learnmalldemo.entity.UmsAdminRoleRelation;
  * @author AhogeK
  * @since 2021-06-21
  */
-public interface UmsAdminRoleRelationService extends IService<UmsAdminRoleRelation> {
+public interface IUmsAdminRoleRelationService extends IService<UmsAdminRoleRelation> {
 
 }

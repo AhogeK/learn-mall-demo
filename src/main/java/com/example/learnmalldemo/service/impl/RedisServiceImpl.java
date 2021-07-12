@@ -1,6 +1,6 @@
 package com.example.learnmalldemo.service.impl;
 
-import com.example.learnmalldemo.service.RedisService;
+import com.example.learnmalldemo.service.IRedisService;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @since 1.00
  */
 @Service
-public class RedisServiceImpl implements RedisService {
+public class RedisServiceImpl implements IRedisService {
 
     /**
      * String-focused extension of RedisTemplate. Since most operations against Redis are String based,

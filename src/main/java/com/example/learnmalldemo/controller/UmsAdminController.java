@@ -6,7 +6,7 @@ import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.UmsPermission;
 import com.example.learnmalldemo.form.UmsAdminLoginForm;
 import com.example.learnmalldemo.form.UmsAdminRegisterForm;
-import com.example.learnmalldemo.service.UmsAdminService;
+import com.example.learnmalldemo.service.IUmsAdminService;
 import com.example.learnmalldemo.vo.UmsAdminDetailVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,24 +31,24 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class UmsAdminController {
 
-    private final UmsAdminService umsAdminService;
+    private final IUmsAdminService IUmsAdminService;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    public UmsAdminController(@Lazy UmsAdminService umsAdminService) {
-        this.umsAdminService = umsAdminService;
+    public UmsAdminController(@Lazy IUmsAdminService IUmsAdminService) {
+        this.IUmsAdminService = IUmsAdminService;
     }
 
     @ApiOperation(value = "用户注册")
     @PostMapping("/register")
     public CommonResult<UmsAdminDetailVo> register(@RequestBody @Valid UmsAdminRegisterForm umsAdminRegisterForm) {
-        return CommonResult.success(umsAdminService.register(umsAdminRegisterForm));
+        return CommonResult.success(IUmsAdminService.register(umsAdminRegisterForm));
     }
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
     public CommonResult<Map<String, String>> login(@RequestBody @Valid UmsAdminLoginForm umsAdminLoginForm) {
-        String token = umsAdminService.login(umsAdminLoginForm.getUsername(), umsAdminLoginForm.getPassword());
+        String token = IUmsAdminService.login(umsAdminLoginForm.getUsername(), umsAdminLoginForm.getPassword());
         Map<String, String> tokenMap = new HashMap<>(8);
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
@@ -58,6 +58,6 @@ public class UmsAdminController {
     @ApiOperation("获取用户权限")
     @GetMapping("/permission")
     public CommonResult<List<UmsPermission>> getPermissionList(@ApiIgnore @LoginUser UmsAdmin umsAdmin) {
-        return CommonResult.success(umsAdminService.getPermissionList(umsAdmin.getId()));
+        return CommonResult.success(IUmsAdminService.getPermissionList(umsAdmin.getId()));
     }
 }
