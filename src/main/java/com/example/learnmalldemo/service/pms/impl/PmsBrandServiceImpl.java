@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.service.impl;
+package com.example.learnmalldemo.service.pms.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
@@ -10,7 +10,7 @@ import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.form.PmsBrandForm;
 import com.example.learnmalldemo.mapper.PmsBrandMapper;
-import com.example.learnmalldemo.service.IPmsBrandService;
+import com.example.learnmalldemo.service.pms.IPmsBrandService;
 import com.example.learnmalldemo.utils.BeanCopyUtil;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 import lombok.extern.slf4j.Slf4j;

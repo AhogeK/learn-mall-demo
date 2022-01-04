@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.service;
+package com.example.learnmalldemo.service.pms;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

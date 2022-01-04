@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.form.PmsBrandForm;
-import com.example.learnmalldemo.service.IPmsBrandService;
+import com.example.learnmalldemo.service.pms.IPmsBrandService;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

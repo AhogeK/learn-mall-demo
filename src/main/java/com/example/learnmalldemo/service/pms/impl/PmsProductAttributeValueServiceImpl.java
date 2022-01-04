@@ -1,9 +1,9 @@
-package com.example.learnmalldemo.service.impl;
+package com.example.learnmalldemo.service.pms.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.entity.PmsProductAttributeValue;
 import com.example.learnmalldemo.mapper.PmsProductAttributeValueMapper;
-import com.example.learnmalldemo.service.IPmsProductAttributeValueService;
+import com.example.learnmalldemo.service.pms.IPmsProductAttributeValueService;
 import org.springframework.stereotype.Service;
 
 /**
