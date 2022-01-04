@@ -1,6 +1,6 @@
-package com.example.learnmalldemo.service.impl;
+package com.example.learnmalldemo.service.redis.impl;
 
-import com.example.learnmalldemo.service.IRedisService;
+import com.example.learnmalldemo.service.redis.IRedisService;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 

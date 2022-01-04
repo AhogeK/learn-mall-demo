@@ -4,8 +4,8 @@ import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.common.constants.NumberConstants;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.form.VerifyAuthCodeForm;
-import com.example.learnmalldemo.service.IRedisService;
 import com.example.learnmalldemo.service.IUmsMemberService;
+import com.example.learnmalldemo.service.redis.IRedisService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
