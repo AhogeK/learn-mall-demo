@@ -18,6 +18,13 @@ import java.util.List;
 public class BeanCopyUtil {
 
     /**
+     * 工具类禁止实例化
+     */
+    private BeanCopyUtil() {
+        throw new IllegalStateException("工具类");
+    }
+
+    /**
      * 创建属性拷贝后的集合
      *
      * @param source 源数据集合
