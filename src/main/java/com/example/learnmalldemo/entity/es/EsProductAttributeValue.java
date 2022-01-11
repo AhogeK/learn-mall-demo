@@ -1,6 +1,7 @@
 package com.example.learnmalldemo.entity.es;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
@@ -13,6 +14,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Data
 public class EsProductAttributeValue {
 
+    @Id
     private Long id;
 
     private Long productAttributeId;
