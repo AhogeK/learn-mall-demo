@@ -21,12 +21,12 @@
         <druid.version>1.2.8</druid.version>
         <mysql.version>8.0.27</mysql.version>
         <lombok.version>1.18.22</lombok.version>
-        <jedis.version>4.0.0</jedis.version>
+        <jedis.version>3.3.0</jedis.version>
         <mp.version>3.5.0</mp.version>
         <mpg.version>3.5.1</mpg.version>
         <velocity.version>2.3</velocity.version>
-        <hutool.version>5.6.5</hutool.version>
-        <jwt.version>3.16.0</jwt.version>
+        <hutool.version>5.7.18</hutool.version>
+        <jwt.version>3.18.2</jwt.version>
         <log4j2.version>2.17.1</log4j2.version>
     </properties>
 
@@ -146,6 +146,12 @@
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
+            <version>7.16.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
             <version>7.16.2</version>
         </dependency>
 

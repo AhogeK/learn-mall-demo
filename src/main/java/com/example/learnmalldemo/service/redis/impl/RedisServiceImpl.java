@@ -4,7 +4,6 @@ import com.example.learnmalldemo.service.redis.IRedisService;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -46,7 +45,7 @@ public class RedisServiceImpl implements IRedisService {
     @Override
     public boolean expire(String key, long expire) {
         Boolean expireBoolean = stringRedisTemplate.expire(key, expire, TimeUnit.SECONDS);
-        return !Objects.isNull(expireBoolean) ? expireBoolean : false;
+        return Boolean.TRUE.equals(expireBoolean);
     }
 
     @Override
