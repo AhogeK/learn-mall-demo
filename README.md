@@ -21,6 +21,73 @@
      [RabbitMQ官方文档上进行详细的了解](https://www.rabbitmq.com/documentation.html)
    * 简单入手可以参考 [Spring Boot RabbitMQ – Complete Guide For Beginners](https://springhow.com/spring-boot-rabbitmq/)
 
+## 准备内容
+
+### MySQL
+
+#### Dockfile
+
+```dockerfile
+FROM mysql:latest
+COPY mall.sql /mall.sql
+```
+
+[mall.sql 下载地址](https://github.com/macrozheng/mall/blob/master/document/sql/mall.sql)
+
+#### Docker compose
+
+```yaml
+version: "3.9"
+services:
+  # 指定服务器名称
+  mall-db:
+    build: .
+    # 指定服务使用的镜像
+    image: mysql_mall-db
+    # 指定容器的名称
+    container_name: mall-mysql
+    # 指定容器的环境变量
+    environment:
+      - MYSQL_DATABASE=mall
+      - MYSQL_ROOT_PASSWORD=123456
+    # 执行指令
+    # command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    command: mysqld --init-file="/mall.sql"
+    # 重启设定
+    restart: always
+    # 指定服务运行的端口
+    ports:
+      - "3306:3306"
+    # 指定容器中要挂载的文件
+    volumes:
+      - /data/docker/learn/mall/docker-compose/mysql/log:/var/log/mysql
+      - /data/docker/learn/mall/docker-compose/mysql/data:/var/lib/mysql
+      - /data/docker/learn/mall/docker-compose/mysql/conf:/etc/mysql/conf.d
+```
+
+该目录下 包含三个挂在目录:
+
+* conf
+* data
+* log
+
+以及三个文件
+
+* docker-compose.yml
+* Dockerfile
+* mall.sql
+
+容器的mysql
+
+``docker exec -it mall-mysql mysql -uroot``
+
+**生成的本地容器mysql只允许本地连且不含密码可直接进入**
+
+修改数据库连接密码
+
+``create user 'root'@'%' identified by '123456';grant all privileges on *.* to 'root'@'%';flush privileges;``
+
 ## Mybatis Plus
 
 > mp 版本 v3.5.0 mpg v3.5.1
