@@ -51,7 +51,6 @@ services:
       - MYSQL_DATABASE=mall
       - MYSQL_ROOT_PASSWORD=123456
     # 执行指令
-    # command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     command: mysqld --init-file="/mall.sql"
     # 重启设定
