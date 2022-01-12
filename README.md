@@ -49,7 +49,6 @@ services:
     # 指定容器的环境变量
     environment:
       - MYSQL_DATABASE=mall
-      - MYSQL_ROOT_PASSWORD=123456
     # 执行指令
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     command: mysqld --init-file="/mall.sql"
