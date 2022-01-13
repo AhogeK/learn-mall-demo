@@ -39,8 +39,8 @@ spring:
   elasticsearch:
     rest:
       uris: http://192.168.50.26:9200
-
-
+      password: 123456
+      username: elastic
 
 logging:
   level:
@@ -59,7 +59,7 @@ mybatis-plus:
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
 
 # 自定义jwt key
-  jwt:
+jwt:
   tokenHeader: Authorization #JWT存储的请求头
   secret: AhogeK7577259 #JWT加解密使用的密钥
   expiration: 604800 #JWT的超期限时间(60*60*24)
