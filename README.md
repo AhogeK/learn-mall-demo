@@ -792,7 +792,7 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
 
 **在 ``docker-compose.yml`` 目录下启动**
 
-``docker up --build -d``
+``docker-compose up --build -d``
 
 ## Mybatis Plus
 
