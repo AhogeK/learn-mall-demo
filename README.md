@@ -288,10 +288,9 @@ docker exec -it mall-rabbitmq /bin/bash
 rabbitmqctl add_user mall mall
 rabbitmqctl set_user_tags mall administrator
 rabbitmqctl set_permissions -p / mall ".*" ".*" ".*"
+rabbitmqctl add_vhost /mall 
+rabbitmqctl set_permissions -p /mall mall ".*" ".*" ".*"
 ```
-
-剩下就进入 mq 的管理页面进行[教程](http://www.macrozheng.com/#/deploy/mall_deploy_docker_compose?id=rabbitmq)里设置host的操作即可
-
 MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_docker_compose?id=rabbitmq)
 
 ### Elasticsearch
@@ -364,10 +363,12 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
             - node.name=mall-es
             - cluster.name=mall-es-docker-cluster
             - discovery.type=single-node #以单一节点模式启动
-          # - discovery.seed_hosts=es02,es03
-          # - cluster.initial_master_nodes=mall-es
+            # - discovery.seed_hosts=es02,es03
+            # - cluster.initial_master_nodes=mall-es
             - bootstrap.memory_lock=true
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+            - ELASTIC_PASSWORD=123456
+            - xpack.security.enabled=true
           ulimits:
             memlock:
               soft: -1
@@ -525,10 +526,12 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
          - node.name=mall-es
          - cluster.name=mall-es-docker-cluster
          - discovery.type=single-node #以单一节点模式启动
-       # - discovery.seed_hosts=es02,es03
-       # - cluster.initial_master_nodes=mall-es
+         # - discovery.seed_hosts=es02,es03
+         # - cluster.initial_master_nodes=mall-es
          - bootstrap.memory_lock=true
          - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+         - ELASTIC_PASSWORD=123456
+         - xpack.security.enabled=true
        ulimits:
          memlock:
            soft: -1
@@ -543,6 +546,8 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
        container_name: mall-log
        environment:
          - TZ=Asia/Shanghai
+         - ELASTICSEARCH_USERNAME=elastic
+         - ELASTICSEARCH_PASSWORD=123456
        volumes:
          - /data/docker/learn/mall/docker-compose/logstash/pipeline:/usr/share/logstash/pipeline #挂载 logstash 的配置文件目录
          - /data/docker/learn/mall/docker-compose/logstash/config:/usr/share/logstash/config #挂载 logstash yml 配置文件目录
@@ -627,6 +632,7 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
        ports:
          - 5672:5672
          - 15672:15672
+     ##########################################################################################################################
      mall-es:
        image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
        container_name: mall-es
@@ -634,10 +640,12 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
          - node.name=mall-es
          - cluster.name=mall-es-docker-cluster
          - discovery.type=single-node #以单一节点模式启动
-       # - discovery.seed_hosts=es02,es03
-       # - cluster.initial_master_nodes=mall-es
+         # - discovery.seed_hosts=es02,es03
+         # - cluster.initial_master_nodes=mall-es
          - bootstrap.memory_lock=true
          - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+         - ELASTIC_PASSWORD=123456
+         - xpack.security.enabled=true
        ulimits:
          memlock:
            soft: -1
@@ -653,6 +661,8 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
        container_name: mall-log
        environment:
          - TZ=Asia/Shanghai
+         - ELASTICSEARCH_USERNAME=elastic
+         - ELASTICSEARCH_PASSWORD=123456
        volumes:
          - /data/docker/learn/mall/docker-compose/logstash/pipeline:/usr/share/logstash/pipeline #挂载 logstash 的配置文件目录
          - /data/docker/learn/mall/docker-compose/logstash/config:/usr/share/logstash/config #挂载 logstash yml 配置文件目录
@@ -675,6 +685,8 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
          - mall-es #kibana在elasticsearch启动之后再启动
        environment:
          - "elasticsearch.hosts=http://es:9200" #设置访问elasticsearch的地址
+         - ELASTICSEARCH_USERNAME=elastic
+         - ELASTICSEARCH_PASSWORD=123456
        volumes:
          - /data/docker/learn/mall/docker-compose/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
        ports:
@@ -747,6 +759,7 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
        ports:
          - 5672:5672
          - 15672:15672
+     ##########################################################################################################################
      mall-es:
        image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
        container_name: mall-es
@@ -754,10 +767,12 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
          - node.name=mall-es
          - cluster.name=mall-es-docker-cluster
          - discovery.type=single-node #以单一节点模式启动
-       # - discovery.seed_hosts=es02,es03
-       # - cluster.initial_master_nodes=mall-es
+         # - discovery.seed_hosts=es02,es03
+         # - cluster.initial_master_nodes=mall-es
          - bootstrap.memory_lock=true
          - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+         - ELASTIC_PASSWORD=123456
+         - xpack.security.enabled=true
        ulimits:
          memlock:
            soft: -1
@@ -773,6 +788,8 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
        container_name: mall-log
        environment:
          - TZ=Asia/Shanghai
+         - ELASTICSEARCH_USERNAME=elastic
+         - ELASTICSEARCH_PASSWORD=123456
        volumes:
          - /data/docker/learn/mall/docker-compose/logstash/pipeline:/usr/share/logstash/pipeline #挂载 logstash 的配置文件目录
          - /data/docker/learn/mall/docker-compose/logstash/config:/usr/share/logstash/config #挂载 logstash yml 配置文件目录
@@ -795,6 +812,8 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
          - mall-es #kibana在elasticsearch启动之后再启动
        environment:
          - "elasticsearch.hosts=http://es:9200" #设置访问elasticsearch的地址
+         - ELASTICSEARCH_USERNAME=elastic
+         - ELASTICSEARCH_PASSWORD=123456
        volumes:
          - /data/docker/learn/mall/docker-compose/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
        ports:
