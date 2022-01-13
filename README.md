@@ -54,7 +54,6 @@ services:
       # 指定容器的环境变量
       environment:
          - MYSQL_DATABASE=mall
-         - MYSQL_ROOT_PASSWORD=123456
       # 执行指令
       command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
       command: mysqld --init-file="/mall.sql"
@@ -62,7 +61,7 @@ services:
       restart: always
       # 指定服务运行的端口
       ports:
-         - "3306:3306"
+         - 3306:3306
       # 指定容器中要挂载的文件
       volumes:
          - /data/docker/learn/mall/docker-compose/mysql/log:/var/log/mysql
@@ -99,7 +98,7 @@ services:
       FROM redis
       COPY redis.conf /usr/local/etc/redis/redis.conf
       CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
-      CMD ["redis-server", "--appendonly", "yes"]
+      CMD [ "redis-server", "--appendonly", "yes" ]
       ```
 3. 创建空文件 ``redis.conf`` 用于后续可自定义配置
 4. 在 ``docker-compose.yml`` 添加redis容器相关内容
@@ -116,7 +115,6 @@ services:
         # 指定容器的环境变量
         environment:
           - MYSQL_DATABASE=mall
-          - MYSQL_ROOT_PASSWORD=123456
         # 执行指令
         command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
         command: mysqld --init-file="/mall.sql"
@@ -124,7 +122,7 @@ services:
         restart: always
         # 指定服务运行的端口
         ports:
-          - "3306:3306"
+          - 3306:3306
         # 指定容器中要挂载的文件
         volumes:
           - /data/docker/learn/mall/docker-compose/mysql/log:/var/log/mysql
@@ -139,6 +137,69 @@ services:
           - /data/docker/learn/mall/docker-compose/redis/redis.conf:/usr/local/etc/redis/redis.conf
         ports:
           - 6379:6379
+      ```
+
+### Nginx
+
+1. 创建 ``nginx`` 文件夹
+2. 创建 ``Dockerfile``
+   1. ```dockerfile
+      FROM nginx
+      COPY nginx.conf /etc/nginx/nginx.conf
+      ADD conf.d /etc/nginx/
+      ```
+3. 下载 [nginx.conf](https://github.com/macrozheng/mall/blob/master/document/docker/nginx.conf) 并在 **http
+   大括号中下方添加 ``include conf.d/*.conf;``**
+4. 创建 ``conf.d`` 文件夹
+5. 创建 ``html`` 文件夹
+6. 创建 ``log`` 文件夹
+7. 编辑 ``docker-compose.yml``
+   1. ```yaml
+      version: "3.9"
+      services:
+        # 指定服务器名称
+        mall-db:
+          build: mysql/.
+          # 指定服务使用的镜像
+          image: mysql_mall-db
+          # 指定容器的名称
+          container_name: mall-mysql
+          # 指定容器的环境变量
+          environment:
+            - MYSQL_DATABASE=mall
+          # 执行指令
+          command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+          command: mysqld --init-file="/mall.sql"
+          # 重启设定
+          restart: always
+          # 指定服务运行的端口
+          ports:
+            - 3306:3306
+          # 指定容器中要挂载的文件
+          volumes:
+            - /data/docker/learn/mall/docker-compose/mysql/log:/var/log/mysql
+            - /data/docker/learn/mall/docker-compose/mysql/data:/var/lib/mysql
+            - /data/docker/learn/mall/docker-compose/mysql/conf:/etc/mysql/conf.d
+        mall-redis:
+          build: redis/.
+          image: redis_mall-redis
+          container_name: mall-redis
+          volumes:
+            - /data/docker/learn/mall/docker-compose/redis/data:/data #数据文件挂载
+            - /data/docker/learn/mall/docker-compose/redis/redis.conf:/usr/local/etc/redis/redis.conf
+          ports:
+           - 6379:6379
+        mall-nginx:
+          build: nginx/.
+          image: nginx_mall-nginx
+          container_name: mall-nginx
+          volumes:
+            - /data/docker/learn/mall/docker-compose/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - /data/docker/learn/mall/docker-compose/nginx/conf.d:/etc/nginx/conf.d
+            - /data/docker/learn/mall/docker-compose/nginx/html:/usr/share/nginx/html #静态资源根目录挂载
+            - /data/docker/learn/mall/docker-compose/nginx/log:/var/log/nginx #日志文件挂载
+          ports:
+            - 80:80
       ```
 
 ## Mybatis Plus
