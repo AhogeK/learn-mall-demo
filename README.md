@@ -204,11 +204,12 @@ services:
 
 ### Rabbitmq
 
-1. 创建 ``data`` 目录
-2. 创建 ``log`` 目录
-3. 创建 ``rabbitmq.conf`` 文件用于后续自定义配置
-4. 创建 ``enabled_plugins`` 文件用于设置需要的插件
-5. 编辑 ``docker-compose.yml``
+1. 创建 ``rabbitmq`` 目录
+2. 创建 ``data`` 目录
+3. 创建 ``log`` 目录
+4. 创建 ``rabbitmq.conf`` 文件用于后续自定义配置
+5. 创建 ``enabled_plugins`` 文件用于设置需要的插件
+6. 编辑 ``docker-compose.yml``
    1. ```yaml
       version: "3.9"
       services:
@@ -272,9 +273,10 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
 
 ### Elasticsearch
 
-1. 创建文件夹 ``data`` 并设置 777 权限
-2. 创建文件夹 ``plugins``
-3. 编辑 ``docker-compose.yml``
+1. 创建 ``es`` 目录
+2. 创建文件夹 ``data`` 并设置 777 权限
+3. 创建文件夹 ``plugins``
+4. 编辑 ``docker-compose.yml``
    1. ```yaml
       version: "3.9"
       services:
