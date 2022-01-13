@@ -202,6 +202,74 @@ services:
             - 80:80
       ```
 
+### Rabbitmq
+
+1. 创建 ``data`` 目录
+2. 创建 ``log`` 目录
+3. 创建 ``rabbitmq.conf`` 文件用于后续自定义配置
+4. 创建 ``enabled_plugins`` 文件用于设置需要的插件
+5. 编辑 ``docker-compose.yml``
+   1. ```yaml
+      version: "3.9"
+      services:
+        # 指定服务器名称
+        mall-db:
+          build: mysql/.
+          # 指定服务使用的镜像
+          image: mysql_mall-db
+          # 指定容器的名称
+          container_name: mall-mysql
+          # 指定容器的环境变量
+          environment:
+            - MYSQL_DATABASE=mall
+          # 执行指令
+          command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+          command: mysqld --init-file="/mall.sql"
+          # 重启设定
+          restart: always
+          # 指定服务运行的端口
+          ports:
+            - 3306:3306
+          # 指定容器中要挂载的文件
+          volumes:
+            - /data/docker/learn/mall/docker-compose/mysql/log:/var/log/mysql
+            - /data/docker/learn/mall/docker-compose/mysql/data:/var/lib/mysql
+            - /data/docker/learn/mall/docker-compose/mysql/conf:/etc/mysql/conf.d
+        mall-redis:
+          build: redis/.
+          image: redis_mall-redis
+          container_name: mall-redis
+          volumes:
+            - /data/docker/learn/mall/docker-compose/redis/data:/data #数据文件挂载
+            - /data/docker/learn/mall/docker-compose/redis/redis.conf:/usr/local/etc/redis/redis.conf
+          ports:
+            - 6379:6379
+        mall-nginx:
+          build: nginx/.
+          image: nginx_mall-nginx
+          container_name: mall-nginx
+          volumes:
+            - /data/docker/learn/mall/docker-compose/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - /data/docker/learn/mall/docker-compose/nginx/conf.d:/etc/nginx/conf.d
+            - /data/docker/learn/mall/docker-compose/nginx/html:/usr/share/nginx/html #静态资源根目录挂载
+            - /data/docker/learn/mall/docker-compose/nginx/log:/var/log/nginx #日志文件挂载
+          ports:
+            - 80:80
+        mall-rabbitmq:
+          image: rabbitmq:3.8-management
+          container_name: mall-rabbitmq
+          volumes:
+            - /data/docker/learn/mall/docker-compose/rabbitmq/data:/var/lib/rabbitmq #数据文件挂载
+            - /data/docker/learn/mall/docker-compose/rabbitmq/log:/var/log/rabbitmq #日志文件挂载
+            - /data/docker/learn/mall/docker-compose/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins #启用插件文件挂载
+            - /data/docker/learn/mall/docker-compose/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf #配置文件挂载
+          ports:
+            - 5672:5672
+            - 15672:15672
+      ```
+
+MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_docker_compose?id=rabbitmq)
+
 ## Mybatis Plus
 
 > mp 版本 v3.5.0 mpg v3.5.1
