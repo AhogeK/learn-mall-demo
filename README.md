@@ -356,6 +356,176 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
             - 9200:9200
       ```
 
+### Logstash
+
+1. 创建目录 ``logstash``
+2. 创建 ``Dockerfile``
+   1. ```dockerfile
+      FROM docker.elastic.co/logstash/logstash:7.16.2
+      RUN rm -f /usr/share/logstash/pipeline/logstash.conf
+      ADD pipeline/ /usr/share/logstash/pipeline/
+      ADD config/ /usr/share/logstash/config/
+      ```
+3. 创建 ``config`` 目录
+   1. 创建 ``config/logstash.yml`` 配置文件
+   2. 创建 ``config/pipelines.yml`` 配置文件
+      1. ```yaml
+         - pipeline.id: mall
+           pipeline.workers: 2 # 实际CPU核心数
+           path.config: "/usr/share/logstash/pipeline/*.conf"
+         ```
+4. 创建 ``pipeline`` 目录
+   1. 创建 ``pipeline/logstash.conf`` 配置文件
+      1.
+      ```text
+      input {
+        tcp {
+          mode => "server"
+          host => "0.0.0.0"
+          port => 4560
+          codec => json_lines
+          type => "debug"
+        }
+        tcp {
+          mode => "server"
+          host => "0.0.0.0"
+          port => 4561
+          codec => json_lines
+          type => "error"
+        }
+        tcp {
+          mode => "server"
+          host => "0.0.0.0"
+          port => 4562
+          codec => json_lines
+          type => "business"
+        }
+        tcp {
+          mode => "server"
+          host => "0.0.0.0"
+          port => 4563
+          codec => json_lines
+          type => "record"
+        }
+      }
+      filter{
+        if [type] == "record" {
+          mutate {
+            remove_field => "port"
+            remove_field => "host"
+            remove_field => "@version"
+          }
+          json {
+            source => "message"
+            remove_field => ["message"]
+          }
+        }
+      }
+      output {
+        elasticsearch {
+          hosts => "es:9200"
+          index => "mall-%{type}-%{+YYYY.MM.dd}"
+        }
+      }
+      ```
+5. 编辑 ``docker-compose.yml``
+   1.
+   ```yaml
+   version: "3.9"
+   services:
+     # 指定服务器名称
+     mall-db:
+       build: mysql/.
+       # 指定服务使用的镜像
+       image: mysql_mall-db
+       # 指定容器的名称
+       container_name: mall-mysql
+       # 指定容器的环境变量
+       environment:
+         - MYSQL_DATABASE=mall
+       # 执行指令
+       command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+       command: mysqld --init-file="/mall.sql"
+       # 重启设定
+       restart: always
+       # 指定服务运行的端口
+       ports:
+         - 3306:3306
+       # 指定容器中要挂载的文件
+       volumes:
+         - /data/docker/learn/mall/docker-compose/mysql/log:/var/log/mysql
+         - /data/docker/learn/mall/docker-compose/mysql/data:/var/lib/mysql
+         - /data/docker/learn/mall/docker-compose/mysql/conf:/etc/mysql/conf.d
+     mall-redis:
+       build: redis/.
+       image: redis_mall-redis
+       container_name: mall-redis
+       volumes:
+         - /data/docker/learn/mall/docker-compose/redis/data:/data #数据文件挂载
+         - /data/docker/learn/mall/docker-compose/redis/redis.conf:/usr/local/etc/redis/redis.conf
+       ports:
+         - 6379:6379
+     mall-nginx:
+       build: nginx/.
+       image: nginx_mall-nginx
+       container_name: mall-nginx
+       volumes:
+         - /data/docker/learn/mall/docker-compose/nginx/nginx.conf:/etc/nginx/nginx.conf
+         - /data/docker/learn/mall/docker-compose/nginx/conf.d:/etc/nginx/conf.d
+         - /data/docker/learn/mall/docker-compose/nginx/html:/usr/share/nginx/html #静态资源根目录挂载
+         - /data/docker/learn/mall/docker-compose/nginx/log:/var/log/nginx #日志文件挂载
+       ports:
+         - 80:80
+     mall-rabbitmq:
+       image: rabbitmq:3.8-management
+       container_name: mall-rabbitmq
+       volumes:
+         - /data/docker/learn/mall/docker-compose/rabbitmq/data:/var/lib/rabbitmq #数据文件挂载
+         - /data/docker/learn/mall/docker-compose/rabbitmq/log:/var/log/rabbitmq #日志文件挂载
+         - /data/docker/learn/mall/docker-compose/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins #启用插件文件挂载
+         - /data/docker/learn/mall/docker-compose/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf #配置文件挂载
+       ports:
+         - 5672:5672
+         - 15672:15672
+     mall-es:
+       image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
+       container_name: mall-es
+       environment:
+         - node.name=mall-es
+         - cluster.name=mall-es-docker-cluster
+         - discovery.type=single-node #以单一节点模式启动
+       # - discovery.seed_hosts=es02,es03
+       # - cluster.initial_master_nodes=mall-es
+         - bootstrap.memory_lock=true
+         - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+       ulimits:
+         memlock:
+           soft: -1
+           hard: -1
+       volumes:
+         - /data/docker/learn/mall/docker-compose/es/data:/usr/share/elasticsearch/data
+         - /data/docker/learn/mall/docker-compose/es/plugins:/usr/share/elasticsearch/plugins #插件文件挂载
+       ports:
+         - 9200:9200
+     mall-log:
+       build: logstash/.
+       container_name: mall-log
+       environment:
+         - TZ=Asia/Shanghai
+       volumes:
+         - /data/docker/learn/mall/docker-compose/logstash/pipeline:/usr/share/logstash/pipeline #挂载 logstash 的配置文件目录
+         - /data/docker/learn/mall/docker-compose/logstash/config:/usr/share/logstash/config #挂载 logstash yml 配置文件目录
+       depends_on:
+         - mall-es #logstash 在 elasticsearch 启动之后再启动
+       links:
+         - mall-es:es #可以用es这个域名访问elasticsearch服务
+       ports:
+         - 4560:4560
+         - 4561:4561
+         - 4562:4562
+         - 4563:4563
+   ```
+
 ## Mybatis Plus
 
 > mp 版本 v3.5.0 mpg v3.5.1
