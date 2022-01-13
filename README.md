@@ -281,6 +281,17 @@ services:
             - 15672:15672
       ```
 
+**创建连接的账户**
+
+```shell
+docker exec -it mall-rabbitmq /bin/bash
+rabbitmqctl add_user mall mall
+rabbitmqctl set_user_tags mall administrator
+rabbitmqctl set_permissions -p / mall ".*" ".*" ".*"
+```
+
+剩下就进入 mq 的管理页面进行[教程](http://www.macrozheng.com/#/deploy/mall_deploy_docker_compose?id=rabbitmq)里设置host的操作即可
+
 MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_docker_compose?id=rabbitmq)
 
 ### Elasticsearch
@@ -368,6 +379,10 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
             - 9200:9200
       ```
 
+**安装中文分词插件**
+
+``docker exec -it mall-es elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.16.2/elasticsearch-analysis-ik-7.16.2.zip``
+
 ### Logstash
 
 1. 创建目录 ``logstash``
@@ -385,6 +400,10 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
          - pipeline.id: mall
            pipeline.workers: 2 # 实际CPU核心数
            path.config: "/usr/share/logstash/pipeline/*.conf"
+         ```
+   3. 创建 ``config/jvm.options`` 配置文件
+      1. ```yaml
+         -Xmx512m
          ```
 4. 创建 ``pipeline`` 目录
    1. 创建 ``pipeline/logstash.conf`` 配置文件
@@ -537,6 +556,10 @@ MQ相关设置 [参考这里](http://www.macrozheng.com/#/deploy/mall_deploy_doc
          - 4562:4562
          - 4563:4563
    ```
+
+**安装 json_lines 插件**
+
+``docker exec -it mall-log logstash-plugin install logstash-codec-json_lines``
 
 ### Kibana
 
