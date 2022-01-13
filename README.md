@@ -38,43 +38,46 @@ COPY mall.sql /mall.sql
 
 #### Docker compose
 
+* docker-compose.yml
+   * 该文件在 mysql 文件夹同级
+
 ```yaml
 version: "3.9"
 services:
-  # 指定服务器名称
-  mall-db:
-    build: .
-    # 指定服务使用的镜像
-    image: mysql_mall-db
-    # 指定容器的名称
-    container_name: mall-mysql
-    # 指定容器的环境变量
-    environment:
-      - MYSQL_DATABASE=mall
-    # 执行指令
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    command: mysqld --init-file="/mall.sql"
-    # 重启设定
-    restart: always
-    # 指定服务运行的端口
-    ports:
-      - "3306:3306"
-    # 指定容器中要挂载的文件
-    volumes:
-      - /data/docker/learn/mall/docker-compose/mysql/log:/var/log/mysql
-      - /data/docker/learn/mall/docker-compose/mysql/data:/var/lib/mysql
-      - /data/docker/learn/mall/docker-compose/mysql/conf:/etc/mysql/conf.d
+   # 指定服务器名称
+   mall-db:
+      build: mysql/.
+      # 指定服务使用的镜像
+      image: mysql_mall-db
+      # 指定容器的名称
+      container_name: mall-mysql
+      # 指定容器的环境变量
+      environment:
+         - MYSQL_DATABASE=mall
+         - MYSQL_ROOT_PASSWORD=123456
+      # 执行指令
+      command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      command: mysqld --init-file="/mall.sql"
+      # 重启设定
+      restart: always
+      # 指定服务运行的端口
+      ports:
+         - "3306:3306"
+      # 指定容器中要挂载的文件
+      volumes:
+         - /data/docker/learn/mall/docker-compose/mysql/log:/var/log/mysql
+         - /data/docker/learn/mall/docker-compose/mysql/data:/var/lib/mysql
+         - /data/docker/learn/mall/docker-compose/mysql/conf:/etc/mysql/conf.d
 ```
 
 该目录下 包含三个挂在目录:
 
-* conf
-* data
-* log
+* conf/
+* data/
+* log/
 
-以及三个文件
+以及两个个文件
 
-* docker-compose.yml
 * Dockerfile
 * mall.sql
 
@@ -87,6 +90,56 @@ services:
 修改数据库连接密码
 
 ``create user 'root'@'%' identified by '123456';grant all privileges on *.* to 'root'@'%';flush privileges;``
+
+### redis
+
+1. 创建文件夹 ``redis``
+2. 创建 ``Dockerfile``
+   1. ```dockerfile
+      FROM redis
+      COPY redis.conf /usr/local/etc/redis/redis.conf
+      CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+      CMD ["redis-server", "--appendonly", "yes"]
+      ```
+3. 创建空文件 ``redis.conf`` 用于后续可自定义配置
+4. 在 ``docker-compose.yml`` 添加redis容器相关内容
+   1. ```yaml
+      version: "3.9"
+      services:
+      # 指定服务器名称
+      mall-db:
+        build: mysql/.
+        # 指定服务使用的镜像
+        image: mysql_mall-db
+        # 指定容器的名称
+        container_name: mall-mysql
+        # 指定容器的环境变量
+        environment:
+          - MYSQL_DATABASE=mall
+          - MYSQL_ROOT_PASSWORD=123456
+        # 执行指令
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        command: mysqld --init-file="/mall.sql"
+        # 重启设定
+        restart: always
+        # 指定服务运行的端口
+        ports:
+          - "3306:3306"
+        # 指定容器中要挂载的文件
+        volumes:
+          - /data/docker/learn/mall/docker-compose/mysql/log:/var/log/mysql
+          - /data/docker/learn/mall/docker-compose/mysql/data:/var/lib/mysql
+          - /data/docker/learn/mall/docker-compose/mysql/conf:/etc/mysql/conf.d
+      mall-redis:
+        build: redis/.
+        image: redis_mall-redis
+        container_name: mall-redis
+        volumes:
+          - /data/docker/learn/mall/docker-compose/redis/data:/data #数据文件挂载
+          - /data/docker/learn/mall/docker-compose/redis/redis.conf:/usr/local/etc/redis/redis.conf
+        ports:
+          - 6379:6379
+      ```
 
 ## Mybatis Plus
 
