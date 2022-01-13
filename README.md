@@ -34,6 +34,8 @@ COPY mall.sql /mall.sql
 
 [mall.sql 下载地址](https://github.com/macrozheng/mall/blob/master/document/sql/mall.sql)
 
+**下载完的 .sql 文件在最上面添加 一条 ``USE mall;``**
+
 #### Docker compose
 
 ```yaml
