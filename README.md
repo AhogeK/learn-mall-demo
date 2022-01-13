@@ -843,8 +843,8 @@ public class CodeGenerator {
      * 数据源配置
      */
     private static final DataSourceConfig.Builder DATA_SOURCE_CONFIG = new DataSourceConfig
-            .Builder("jdbc:mysql://192.168.50.190:3406/mall?useUnicode=true&useSSL=false&characterEncoding=utf8",
-            "ahogek", "123456");
+            .Builder("jdbc:mysql://192.168.50.26:3306/mall?useUnicode=true&useSSL=false&characterEncoding=utf8",
+            "root", "123456");
 
     public static void main(String[] args) {
         /* 代码生成器
