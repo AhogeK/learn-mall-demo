@@ -81,13 +81,13 @@ services:
          - /data/docker/learn/mall/docker-compose/mysql/conf:/etc/mysql/conf.d
 ```
 
-该目录下 包含三个挂在目录:
+该目录下 包含三个挂载目录:
 
 * conf/
 * data/
 * log/
 
-以及两个个文件
+以及两个文件
 
 * Dockerfile
 * mall.sql
