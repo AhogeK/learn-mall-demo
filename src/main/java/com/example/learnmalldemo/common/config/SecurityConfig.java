@@ -37,10 +37,11 @@ import java.io.IOException;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final static String[] GET_ANT_MATCHERS = {"/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js",
-            "/swagger-resources/**", "/v2/api-docs/**", "/swagger-ui/**"};
+    private static final String[] GET_ANT_MATCHERS = {"/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js",
+            "/swagger-resources/**", "/v2/api-docs/**", "/swagger-ui/**", "/v3/api-docs/**"};
 
     private final IUmsAdminService adminService;
+
     private final JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
     public SecurityConfig(@Lazy IUmsAdminService adminService,

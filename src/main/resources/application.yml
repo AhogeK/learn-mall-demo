@@ -37,10 +37,9 @@ spring:
     password: mall
     virtual-host: /mall
   elasticsearch:
-    rest:
-      uris: http://192.168.50.26:9200
-      password: 123456
-      username: elastic
+    uris: http://192.168.50.26:9200
+    password: 123456
+    username: elastic
 
 logging:
   level:
@@ -64,3 +63,11 @@ jwt:
   secret: AhogeK7577259 #JWT加解密使用的密钥
   expiration: 604800 #JWT的超期限时间(60*60*24)
   tokenHead: Bearer  #JWT负载中拿到开头
+
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+  api-docs:
+    groups:
+      enabled: true
+    enabled: true

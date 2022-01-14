@@ -7,10 +7,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * 启动类
  *
- * @author AhogeK
+ * @author AhogeK ahogek@gmail.com
  */
-@SpringBootApplication
 @EnableScheduling
+@SpringBootApplication
 public class LearnMallDemoApplication {
 
     public static void main(String[] args) {

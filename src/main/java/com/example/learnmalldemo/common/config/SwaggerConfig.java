@@ -1,20 +1,14 @@
 package com.example.learnmalldemo.common.config;
 
-import com.fasterxml.classmate.TypeResolver;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.oas.annotations.EnableOpenApi;
-import springfox.documentation.service.*;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
-import springfox.documentation.spring.web.plugins.Docket;
-
-import java.util.Collections;
 
 /**
  * <p>
@@ -26,55 +20,28 @@ import java.util.Collections;
  * @since 1.00
  */
 @Configuration
-@EnableOpenApi
 public class SwaggerConfig {
 
-    private final TypeResolver typeResolver;
-
-    public SwaggerConfig(TypeResolver typeResolver) {
-        this.typeResolver = typeResolver;
+    @Bean
+    public GroupedOpenApi createRestApi() {
+        return GroupedOpenApi.builder()
+                .group("demo-api")
+                .pathsToMatch("/**/**")
+                .packagesToScan("com.example.learnmalldemo.controller")
+                .build();
     }
 
     @Bean
-    public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("demo-api")
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.learnmalldemo.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .securitySchemes(Collections.singletonList(apiKey()))
-                .securityContexts(Collections.singletonList(securityContexts()))
-                .additionalModels(typeResolver.resolve(Void.class));
-    }
-
-    private ApiKey apiKey() {
-        return new ApiKey("Bearer", HttpHeaders.AUTHORIZATION, SecurityScheme.In.HEADER.name());
-    }
-
-    private SecurityContext securityContexts() {
-        return SecurityContext.builder()
-                .securityReferences(Collections.singletonList(defaultAuth()))
-                .operationSelector(operationContext ->
-                        PathSelectors.regex("^(?!/admin/login|/admin/register).*$")
-                                .test(operationContext.requestMappingPattern()))
-                .build();
-    }
-
-    private SecurityReference defaultAuth() {
-        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-        authorizationScopes[0] = authorizationScope;
-        return new SecurityReference("Bearer", authorizationScopes);
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("商城架构demo")
-                .description("mall-demo")
-                .contact(new Contact("AhogeK", "https://github.com/AhogeK", "ahogek@gmail.com"))
-                .version("1.0")
-                .build();
+    public OpenAPI apiInfo() {
+        return new OpenAPI()
+                .info(new Info().title("商城架构demo")
+                        .description("自主商城项目底层框架学习")
+                        .version("v0.0.1")
+                        .license(new License().name("GPL-3.0").url("https://github.com/AhogeK/learn-mall-demo/blob/master/LICENSE")))
+                .externalDocs(new ExternalDocumentation()
+                        .description("Github地址")
+                        .url("https://github.com/AhogeK/learn-mall-demo"))
+                .components(new Components().addSecuritySchemes("mall-key", new SecurityScheme()
+                        .type(SecurityScheme.Type.HTTP).scheme("Bearer").bearerFormat("JWT")));
     }
 }

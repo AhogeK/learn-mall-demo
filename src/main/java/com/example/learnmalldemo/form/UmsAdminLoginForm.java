@@ -1,7 +1,6 @@
 package com.example.learnmalldemo.form;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -13,14 +12,14 @@ import javax.validation.constraints.NotBlank;
  * @version 1.00 | 2021-07-02 16:21
  */
 @Data
-@ApiModel("后台用户登录表单")
+@Schema(description = "后台用户登录表单")
 public class UmsAdminLoginForm {
 
     @NotBlank(message = "{notnull}")
-    @ApiModelProperty(value = "用户名", required = true, example = "AhogeK")
+    @Schema(description = "用户名", required = true, example = "AhogeK")
     private String username;
 
     @NotBlank(message = "{notnull}")
-    @ApiModelProperty(value = "密码", required = true, example = "123456")
+    @Schema(description = "密码", required = true, example = "123456")
     private String password;
 }

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -16,34 +16,38 @@ import java.time.LocalDateTime;
  * @since 1.00 2021-06-08 14:07
  */
 @Data
+@Schema(description = "后台用户表实体")
 public class UmsAdmin {
 
+    @Schema(description = "后台用户表id")
     @TableId(type = IdType.AUTO)
     private Long id;
 
+    @Schema(description = "用户名")
     private String username;
 
+    @Schema(description = "密码")
     private String password;
 
-    @ApiModelProperty(value = "头像")
+    @Schema(description = "头像")
     private String icon;
 
-    @ApiModelProperty(value = "邮箱")
+    @Schema(description = "邮箱")
     private String email;
 
-    @ApiModelProperty(value = "昵称")
+    @Schema(description = "昵称")
     private String nickName;
 
-    @ApiModelProperty(value = "备注信息")
+    @Schema(description = "备注信息")
     private String note;
 
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "最后登录时间")
+    @Schema(description = "最后登录时间")
     private LocalDateTime loginTime;
 
-    @ApiModelProperty(value = "帐号启用状态: 0 -> 禁用; 1 -> 启用")
+    @Schema(description = "帐号启用状态: 0 -> 禁用; 1 -> 启用")
     private Integer status;
 }

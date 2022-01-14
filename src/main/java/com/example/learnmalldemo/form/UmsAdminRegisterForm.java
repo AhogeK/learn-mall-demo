@@ -1,7 +1,6 @@
 package com.example.learnmalldemo.form;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -13,26 +12,26 @@ import javax.validation.constraints.NotBlank;
  * @version 1.00 | 2021-06-21 16:12
  */
 @Data
-@ApiModel("用户注册表单实体")
+@Schema(description = "用户注册表单实体")
 public class UmsAdminRegisterForm {
 
-    @ApiModelProperty(value = "用户名", example = "AhogeK")
+    @Schema(description = "用户名", example = "AhogeK")
     @NotBlank(message = "{notnull}")
     private String username;
 
-    @ApiModelProperty(value = "密码", example = "123456")
+    @Schema(description = "密码", example = "123456")
     @NotBlank(message = "{notnull}")
     private String password;
 
-    @ApiModelProperty(value = "头像", example = "https://twitter.com/szmallow_xx/status/1407474494642421761/photo/1")
+    @Schema(description = "头像", example = "https://twitter.com/szmallow_xx/status/1407474494642421761/photo/1")
     private String icon;
 
-    @ApiModelProperty(value = "邮箱", example = "ahogek@gmail.com")
+    @Schema(description = "邮箱", example = "ahogek@gmail.com")
     private String email;
 
-    @ApiModelProperty(value = "昵称", example = "AhogeK")
+    @Schema(description = "昵称", example = "AhogeK")
     private String nickName;
 
-    @ApiModelProperty(value = "备注信息", example = "example")
+    @Schema(description = "备注信息", example = "example")
     private String note;
 }

@@ -1,6 +1,7 @@
 package com.example.learnmalldemo.common.api;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -10,14 +11,16 @@ import lombok.Data;
  *
  * @author AhogeK ahogek@gmail.com
  * @date 2021-03-25 22:58
- * @since 1.00
  */
+@Schema(description = "通用返回对象")
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CommonResult<T> {
 
+    @Schema(description = "code值")
     private Integer code;
 
+    @Schema(description = "请求结果描述")
     private String message;
 
     private T data;

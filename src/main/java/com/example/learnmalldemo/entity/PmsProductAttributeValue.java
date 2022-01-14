@@ -1,8 +1,7 @@
 package com.example.learnmalldemo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,18 +15,18 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "PmsProductAttributeValue对象", description = "存储产品参数信息的表")
+@Schema(description = "存储产品参数信息的表")
 public class PmsProductAttributeValue {
 
     @TableId
-    @ApiModelProperty(value = "主键id")
+    @Schema(description = "主键id")
     private Long id;
 
     private Long productId;
 
     private Long productAttributeId;
 
-    @ApiModelProperty(value = "手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开")
+    @Schema(description = "手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开")
     private String value;
 
 

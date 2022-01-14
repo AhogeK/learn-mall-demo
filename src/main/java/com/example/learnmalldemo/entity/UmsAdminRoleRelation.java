@@ -2,8 +2,7 @@ package com.example.learnmalldemo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,14 +16,16 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "UmsAdminRoleRelation对象", description = "后台用户和角色关系表")
+@Schema(description = "后台用户和角色关系表")
 public class UmsAdminRoleRelation {
 
     @TableId(type = IdType.AUTO)
-    @ApiModelProperty(value = "主键id")
+    @Schema(description = "主键id")
     private Long id;
 
+    @Schema(description = "后台用户表id")
     private Long adminId;
 
+    @Schema(description = "角色表id")
     private Long roleId;
 }

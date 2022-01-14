@@ -1,7 +1,6 @@
 package com.example.learnmalldemo.form;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -16,14 +15,14 @@ import javax.validation.constraints.NotBlank;
  * @since 1.00
  */
 @Data
-@ApiModel("校验验证码表单参数实体")
+@Schema(description = "校验验证码表单参数实体")
 public class VerifyAuthCodeForm {
 
     @NotBlank(message = "{notnull}")
-    @ApiModelProperty("手机号")
+    @Schema(description = "手机号")
     private String telephone;
 
     @NotBlank(message = "{notnull}")
-    @ApiModelProperty("验证码")
+    @Schema(description = "验证码")
     private String authCode;
 }

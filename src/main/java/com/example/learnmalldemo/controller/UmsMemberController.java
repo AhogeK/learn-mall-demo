@@ -3,9 +3,11 @@ package com.example.learnmalldemo.controller;
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.form.VerifyAuthCodeForm;
 import com.example.learnmalldemo.service.IUmsMemberService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,15 +24,16 @@ import javax.validation.constraints.NotNull;
  * @since 1.00
  */
 @RestController
-@Api(tags = "会员登录注册管理")
+@Tag(name = "会员登录注册管理")
 @RequestMapping("/sso")
 @Validated
+@SecurityRequirement(name = "mall-key")
 public class UmsMemberController {
 
-    private final IUmsMemberService IUmsMemberService;
+    private final IUmsMemberService umsMemberService;
 
-    public UmsMemberController(IUmsMemberService IUmsMemberService) {
-        this.IUmsMemberService = IUmsMemberService;
+    public UmsMemberController(IUmsMemberService umsMemberService) {
+        this.umsMemberService = umsMemberService;
     }
 
     /**
@@ -39,11 +42,11 @@ public class UmsMemberController {
      * @param telephone 用户手机号
      * @return 验证码
      */
-    @ApiOperation("获取验证码")
+    @Operation(summary = "获取验证码")
     @GetMapping("/get-auth-code")
-    @ApiImplicitParam(name = "telephone", value = "用户手机号", dataTypeClass = String.class, paramType = "query")
+    @Parameter(name = "telephone", description = "用户手机号", in = ParameterIn.PATH)
     public CommonResult<String> getAuthCode(@NotNull(message = "{notnull}") String telephone) {
-        return CommonResult.success(IUmsMemberService.getAuthCode(telephone));
+        return CommonResult.success(umsMemberService.getAuthCode(telephone));
     }
 
     /**
@@ -52,10 +55,10 @@ public class UmsMemberController {
      * @param verifyAuthCodeForm 校验验证码请求表单
      * @return 验证是否成功
      */
-    @ApiOperation("校验验证码")
+    @Operation(summary = "校验验证码")
     @PostMapping("/verify-auth-code")
     public CommonResult<Void> verifyAuthCode(@RequestBody @Valid VerifyAuthCodeForm verifyAuthCodeForm) {
-        IUmsMemberService.verifyAuthCode(verifyAuthCodeForm);
+        umsMemberService.verifyAuthCode(verifyAuthCodeForm);
         return CommonResult.success();
     }
 }
