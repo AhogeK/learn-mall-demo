@@ -70,7 +70,6 @@ services:
          - MYSQL_DATABASE=mall
       # 执行指令
       command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-      command: mysqld --init-file="/mall.sql"
       # 重启设定
       restart: always
       # 指定服务运行的端口
@@ -103,6 +102,13 @@ services:
 修改数据库连接密码
 
 ``create user 'root'@'%' identified by '123456';grant all privileges on *.* to 'root'@'%';flush privileges;``
+
+初始化数据库数据
+
+* 使用mall数据库
+  ``use mall;``
+* 导入mall.sql脚本
+  ``source /mall.sql;``
 
 ### redis
 
