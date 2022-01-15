@@ -7,7 +7,7 @@ import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.common.util.JwtTokenUtils;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.exception.MallException;
-import com.example.learnmalldemo.service.IUmsAdminService;
+import com.example.learnmalldemo.service.admin.IUmsAdminService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.MethodParameter;

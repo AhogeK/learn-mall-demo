@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.service;
+package com.example.learnmalldemo.service.admin;
 
 import com.example.learnmalldemo.form.VerifyAuthCodeForm;
 

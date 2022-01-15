@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.controller;
+package com.example.learnmalldemo.controller.admin;
 
 import com.example.learnmalldemo.common.annotation.LoginUser;
 import com.example.learnmalldemo.common.api.CommonResult;
@@ -6,7 +6,7 @@ import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.UmsPermission;
 import com.example.learnmalldemo.form.UmsAdminLoginForm;
 import com.example.learnmalldemo.form.UmsAdminRegisterForm;
-import com.example.learnmalldemo.service.IUmsAdminService;
+import com.example.learnmalldemo.service.admin.IUmsAdminService;
 import com.example.learnmalldemo.vo.LoginVo;
 import com.example.learnmalldemo.vo.UmsAdminDetailVo;
 import io.swagger.v3.oas.annotations.Operation;

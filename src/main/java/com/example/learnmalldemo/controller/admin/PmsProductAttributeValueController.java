@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.controller;
+package com.example.learnmalldemo.controller.admin;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;

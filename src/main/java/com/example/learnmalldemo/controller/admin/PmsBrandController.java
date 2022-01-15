@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.controller;
+package com.example.learnmalldemo.controller.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

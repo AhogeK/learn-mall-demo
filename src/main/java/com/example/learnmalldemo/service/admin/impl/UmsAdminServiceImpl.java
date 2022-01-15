@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.service.impl;
+package com.example.learnmalldemo.service.admin.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -11,7 +11,7 @@ import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.form.UmsAdminRegisterForm;
 import com.example.learnmalldemo.mapper.UmsAdminMapper;
 import com.example.learnmalldemo.mapper.UmsAdminRoleRelationMapper;
-import com.example.learnmalldemo.service.IUmsAdminService;
+import com.example.learnmalldemo.service.admin.IUmsAdminService;
 import com.example.learnmalldemo.vo.AdminUserDetails;
 import com.example.learnmalldemo.vo.UmsAdminDetailVo;
 import lombok.extern.slf4j.Slf4j;

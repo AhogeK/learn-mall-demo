@@ -1,8 +1,8 @@
-package com.example.learnmalldemo.controller;
+package com.example.learnmalldemo.controller.admin;
 
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.form.VerifyAuthCodeForm;
-import com.example.learnmalldemo.service.IUmsMemberService;
+import com.example.learnmalldemo.service.admin.IUmsMemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

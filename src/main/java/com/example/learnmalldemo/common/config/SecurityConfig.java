@@ -3,7 +3,7 @@ package com.example.learnmalldemo.common.config;
 import cn.hutool.json.JSONUtil;
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.common.filter.JwtAuthenticationTokenFilter;
-import com.example.learnmalldemo.service.IUmsAdminService;
+import com.example.learnmalldemo.service.admin.IUmsAdminService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;

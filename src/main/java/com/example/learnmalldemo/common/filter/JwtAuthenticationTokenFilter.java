@@ -2,7 +2,7 @@ package com.example.learnmalldemo.common.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.learnmalldemo.common.util.JwtTokenUtils;
-import com.example.learnmalldemo.service.IUmsAdminService;
+import com.example.learnmalldemo.service.admin.IUmsAdminService;
 import com.example.learnmalldemo.vo.AdminUserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
