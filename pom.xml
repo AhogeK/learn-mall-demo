@@ -32,6 +32,7 @@
         <spring-data-es.version>4.3.0</spring-data-es.version>
         <es.version>7.16.2</es.version>
         <netty.version>4.1.72.Final</netty.version>
+        <hikari.version>4.0.3</hikari.version>
     </properties>
 
     <dependencies>
@@ -57,11 +58,11 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- 集成 druid 连接池 -->
+        <!-- 集成 HikariCP 连接池 -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>${hikari.version}</version>
         </dependency>
 
         <!-- MySQL 数据库驱动 -->
