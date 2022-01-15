@@ -28,6 +28,10 @@
         <jwt.version>3.18.2</jwt.version>
         <!-- fix Log4J2 Vulnerability -->
         <log4j2.version>2.17.1</log4j2.version>
+        <springdoc.version>1.6.4</springdoc.version>
+        <spring-data-es.version>4.3.0</spring-data-es.version>
+        <es.version>7.16.2</es.version>
+        <netty.version>4.1.72.Final</netty.version>
     </properties>
 
     <dependencies>
@@ -77,13 +81,13 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.4</version>
+            <version>${springdoc.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-security</artifactId>
-            <version>1.6.4</version>
+            <version>${springdoc.version}</version>
         </dependency>
 
         <dependency>
@@ -141,7 +145,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-            <version>2.6.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.elasticsearch.plugin</groupId>
@@ -161,7 +164,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-elasticsearch</artifactId>
-            <version>4.3.0</version>
+            <version>${spring-data-es.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.elasticsearch.client</groupId>
@@ -177,13 +180,13 @@
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-            <version>7.16.2</version>
+            <version>${es.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>7.16.2</version>
+            <version>${es.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.elasticsearch</groupId>
@@ -199,19 +202,19 @@
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-client</artifactId>
-            <version>7.16.2</version>
+            <version>${es.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-codec</artifactId>
-            <version>4.1.72.Final</version>
+            <version>${netty.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-codec-http</artifactId>
-            <version>4.1.72.Final</version>
+            <version>${netty.version}</version>
         </dependency>
 
         <!-- MongoDB -->
