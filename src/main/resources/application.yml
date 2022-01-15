@@ -1,5 +1,7 @@
 server:
   port: 8080
+  servlet:
+    context-path:
 
 spring:
   datasource:
@@ -70,6 +72,7 @@ jwt:
 springdoc:
   swagger-ui:
     disable-swagger-default-url: true
+    path: /swagger-ui/index.html
   api-docs:
     groups:
       enabled: true

@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,10 +30,11 @@ import java.util.List;
  * @date 2021-03-25 22:28
  * @since 1.00
  */
-@Tag(name = "商品品牌管理", description = "PmsBrandController")
 @Log4j2
 @RestController
 @RequestMapping("/brands")
+@SecurityRequirement(name = "mall-key")
+@Tag(name = "商品品牌管理", description = "PmsBrandController")
 public class PmsBrandController {
 
     private final IPmsBrandService pmsBrandService;
