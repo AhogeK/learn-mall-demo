@@ -9,6 +9,7 @@
 2. 整合 springfox swagger
    * 不再使用原项目基于 2.x版本的swagger的 springfox (3.0版本以于2020年停止更新)
    * 将 springfox swagger 替换为了 3.x版本的 ``springdoc-openapi3`` 总体更替了注解的使用
+   * 接口按 [REST API](https://www.geeksforgeeks.org/rest-api-architectural-constraints/?ref=lbp) 风格配置
 3. 整合 redis 这个与学习项目相同暂未做更改
 4. 整合 Spring Security
    * 在整合 Spring Security 前强烈推荐大家阅读 [码农小胖的关于SpingSecurity的个人电子书](https://felord.cn/)
