@@ -3,6 +3,8 @@ package com.example.learnmalldemo.service.pms.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.common.api.ResultCode;
@@ -10,6 +12,7 @@ import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.form.PmsBrandForm;
 import com.example.learnmalldemo.mapper.PmsBrandMapper;
+import com.example.learnmalldemo.mapstruct.BrandStructMapper;
 import com.example.learnmalldemo.service.pms.IPmsBrandService;
 import com.example.learnmalldemo.utils.BeanCopyUtil;
 import com.example.learnmalldemo.vo.PmsBrandVo;
@@ -70,16 +73,17 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
     }
 
     @Override
-    public IPage<PmsBrandVo> getBrandPage(Page<PmsBrand> pmsBrandPage) {
-        Page<PmsBrand> brandPage = page(pmsBrandPage);
+    public IPage<PmsBrandVo> getBrandPage(Page<PmsBrand> pmsBrandPage, String keywords) {
+        Page<PmsBrand> brandPage = page(pmsBrandPage, Wrappers.<PmsBrand>lambdaQuery()
+                .like(StringUtils.isNotEmpty(keywords), PmsBrand::getName, keywords));
         IPage<PmsBrandVo> resultPage = new Page<>();
         BeanUtils.copyProperties(brandPage, resultPage);
         if (CollectionUtils.isEmpty(brandPage.getRecords())) {
             log.debug("brand has no page");
             return resultPage;
         }
-        resultPage.setRecords(BeanCopyUtil.createCopyBeanPropCollection(brandPage.getRecords(), PmsBrandVo.class));
-        log.debug("brand page data:{}", brandPage);
+        resultPage.setRecords(BrandStructMapper.INSTANCE.pmsBrandListToPmsBrandVoList(brandPage.getRecords()));
+        log.debug("brand page data:{}", resultPage);
         return resultPage;
     }
 

@@ -61,11 +61,12 @@ public interface IPmsBrandService extends IService<PmsBrand> {
      * 查询品牌分页
      *
      * @param pmsBrandPage 品牌分页参数
+     * @param keywords     品牌名称
      * @return 品牌分页列表
      * @author AhogeK ahogek@gmail.com
      * @date 2021-04-15 22:32
      */
-    IPage<PmsBrandVo> getBrandPage(Page<PmsBrand> pmsBrandPage);
+    IPage<PmsBrandVo> getBrandPage(Page<PmsBrand> pmsBrandPage, String keywords);
 
     /**
      * 获取指定id品牌

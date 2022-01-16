@@ -118,16 +118,17 @@ public class PmsBrandController {
      * @author AhogeK ahogek@gmail.com
      * @date 2021-04-15 22:30
      */
-    @PreAuthorize("hasAuthority('pms:brand:read')")
     @Operation(summary = "分页查询品牌列表")
     @GetMapping("/page")
     @Parameters({
+            @Parameter(name = "keyword", description = "品牌名称", in = ParameterIn.QUERY),
             @Parameter(name = "current", description = "分页当前页", in = ParameterIn.QUERY, example = "1"),
             @Parameter(name = "size", description = "分页每页条数", in = ParameterIn.QUERY, example = "3")
     })
-    public CommonResult<IPage<PmsBrandVo>> listBrand(@RequestParam(defaultValue = "1") Integer current,
+    public CommonResult<IPage<PmsBrandVo>> listBrand(@RequestParam(required = false) String keyword,
+                                                     @RequestParam(defaultValue = "1") Integer current,
                                                      @RequestParam(defaultValue = "3") Integer size) {
-        return CommonResult.success(pmsBrandService.getBrandPage(new Page<>(current, size)));
+        return CommonResult.success(pmsBrandService.getBrandPage(new Page<>(current, size), keyword));
     }
 
     /**
