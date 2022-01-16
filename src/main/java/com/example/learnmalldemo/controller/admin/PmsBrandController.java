@@ -9,7 +9,6 @@ import com.example.learnmalldemo.service.pms.IPmsBrandService;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -50,7 +49,6 @@ public class PmsBrandController {
      * @author AhogeK ahgoek@gmail.com
      * @date 2021-04-14 21:37
      */
-    @PreAuthorize("hasAuthority('not')")
     @Operation(summary = "获取所有品牌列表")
     @GetMapping
     public CommonResult<List<PmsBrandVo>> getBrandList() {
@@ -120,11 +118,9 @@ public class PmsBrandController {
      */
     @Operation(summary = "分页查询品牌列表")
     @GetMapping("/page")
-    @Parameters({
-            @Parameter(name = "keyword", description = "品牌名称", in = ParameterIn.QUERY),
-            @Parameter(name = "current", description = "分页当前页", in = ParameterIn.QUERY, example = "1"),
-            @Parameter(name = "size", description = "分页每页条数", in = ParameterIn.QUERY, example = "3")
-    })
+    @Parameter(name = "keyword", description = "品牌名称", in = ParameterIn.QUERY)
+    @Parameter(name = "current", description = "分页当前页", in = ParameterIn.QUERY, example = "1")
+    @Parameter(name = "size", description = "分页每页条数", in = ParameterIn.QUERY, example = "3")
     public CommonResult<IPage<PmsBrandVo>> listBrand(@RequestParam(required = false) String keyword,
                                                      @RequestParam(defaultValue = "1") Integer current,
                                                      @RequestParam(defaultValue = "3") Integer size) {
