@@ -2,6 +2,19 @@
 
 > 个人学习 [macrozheng/mall](https://github.com/macrozheng/mall) 项目，学习商场项目搭建并改造
 
+## 关于近期计划
+
+> 因为该项目近期开始重新学习升级与维护，我会重新阅读 [macrozhen](https://github.com/macrozheng) 大佬的 ``mall``
+> 项目并进行修改与各工具的升级，之前仅为简单的学习尝试，这次会持续完善好所有的内容，作为一个完整的项目 **现在的 README 还很杂乱无章**
+> **, 如果有运行上的问题，BUG可以联系我，或者提 issues。**
+
+## 联系方式
+
+- 邮箱 ahogek@gmail.com
+- 微信 AhogeK
+
+## 内容
+
 1. [提前部署准备](doc/提前准备.md)
 2. 整合 Spring Boot / Mybatis 同时重构持久框架使用 [Mybatis Plus](https://baomidou.com/guide/)
    * 将通过mbg生成的类改用MP代码生成
