@@ -63,4 +63,10 @@ public class RuntimeExceptionHandler {
         e.printStackTrace();
         return CommonResult.unauthorized();
     }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public CommonResult<Void> illegalStateExceptionHandle(IllegalStateException e) {
+        e.printStackTrace();
+        return CommonResult.forbidden();
+    }
 }

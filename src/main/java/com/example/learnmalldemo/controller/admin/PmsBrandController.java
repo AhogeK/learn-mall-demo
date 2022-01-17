@@ -14,9 +14,11 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -30,6 +32,7 @@ import java.util.List;
  * @since 1.00
  */
 @Log4j2
+@Validated
 @RestController
 @RequestMapping("/brands")
 @SecurityRequirement(name = "mall-key")
@@ -138,5 +141,22 @@ public class PmsBrandController {
     @GetMapping("/{id}")
     public CommonResult<PmsBrand> brand(@PathVariable("id") @NotNull(message = "{notnull}") Long id) {
         return CommonResult.success(pmsBrandService.getBrand(id));
+    }
+
+    /**
+     * 通过id进行批量删除品牌
+     *
+     * @param ids 品牌id列表
+     * @return 接口请求是否成功
+     * @author AhogeK ahogek@gmail.com
+     * @date 2021-01-17 10:36
+     */
+    @PreAuthorize("hasAuthority('pms:brand:delete')")
+    @Operation(summary = "通过id进行批量删除品牌")
+    @DeleteMapping
+    @Parameter(name = "ids", description = "品牌id列表", in = ParameterIn.QUERY, example = "1, 2, 3")
+    public CommonResult<Void> deleteBatch(@RequestParam(name = "ids") @NotEmpty(message = "品牌id列表不能为空") List<Long> ids) {
+        pmsBrandService.deleteBatch(ids);
+        return CommonResult.success();
     }
 }

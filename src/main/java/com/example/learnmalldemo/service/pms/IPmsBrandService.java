@@ -75,4 +75,13 @@ public interface IPmsBrandService extends IService<PmsBrand> {
      * @return 品牌
      */
     PmsBrand getBrand(Long id);
+
+    /**
+     * 批量删除品牌
+     *
+     * @param ids 品牌id列表
+     * @author AhogeK ahogek@gmail.com
+     * @date 2021-01-17 10:37
+     */
+    void deleteBatch(List<Long> ids);
 }

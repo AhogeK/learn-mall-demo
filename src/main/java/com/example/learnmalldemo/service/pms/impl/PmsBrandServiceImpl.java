@@ -19,6 +19,7 @@ import com.example.learnmalldemo.vo.PmsBrandVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,8 +32,8 @@ import java.util.List;
  * @date 2021-03-31 17:09
  * @since 1.00
  */
-@Service
 @Slf4j
+@Service
 public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> implements IPmsBrandService {
 
     @Override
@@ -96,5 +97,15 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
         }
         log.debug("get a brand:{}", brand);
         return brand;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteBatch(List<Long> ids) {
+        if (!removeBatchByIds(ids)) {
+            log.warn("delete batch brands by ids failed!");
+            throw new MallException(ResultCode.DELETE_FAILED);
+        }
+        log.debug("delete batch brands success");
     }
 }
