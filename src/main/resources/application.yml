@@ -45,6 +45,9 @@ spring:
     uris: http://192.168.50.26:9200
     password: 123456
     username: elastic
+  output:
+    ansi:
+      enabled: always
 
 logging:
   level:
@@ -52,7 +55,7 @@ logging:
     org.springframework.security: warn
     org.springframework.data.convert.CustomConversions: error
   pattern:
-    console: '[%d{dd/MM/yy hh:mm:ss:sss z}] %t %5p %c{2}: %m%n'
+    console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(---){faint} %clr(%-80.80logger{79}){cyan} %clr(:){faint} %m%n'
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
