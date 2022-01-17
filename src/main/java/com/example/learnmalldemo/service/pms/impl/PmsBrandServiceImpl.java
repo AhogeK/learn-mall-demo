@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.common.api.ResultCode;
+import com.example.learnmalldemo.dto.PmsBrandDto;
 import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.exception.MallException;
-import com.example.learnmalldemo.form.PmsBrandForm;
 import com.example.learnmalldemo.mapper.PmsBrandMapper;
 import com.example.learnmalldemo.mapstruct.BrandStructMapper;
 import com.example.learnmalldemo.service.pms.IPmsBrandService;
@@ -42,7 +42,7 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
     }
 
     @Override
-    public void createBrand(PmsBrandForm brand) {
+    public void createBrand(PmsBrandDto brand) {
         PmsBrand pmsBrand = new PmsBrand();
         BeanUtils.copyProperties(brand, pmsBrand);
         if (!save(pmsBrand)) {
@@ -53,7 +53,7 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
     }
 
     @Override
-    public void updateBrand(Long id, PmsBrandForm brand) {
+    public void updateBrand(Long id, PmsBrandDto brand) {
         PmsBrand pmsBrand = new PmsBrand();
         BeanUtils.copyProperties(brand, pmsBrand);
         pmsBrand.setId(id);

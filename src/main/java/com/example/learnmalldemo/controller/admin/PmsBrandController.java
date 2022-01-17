@@ -3,8 +3,8 @@ package com.example.learnmalldemo.controller.admin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.learnmalldemo.common.api.CommonResult;
+import com.example.learnmalldemo.dto.PmsBrandDto;
 import com.example.learnmalldemo.entity.PmsBrand;
-import com.example.learnmalldemo.form.PmsBrandForm;
 import com.example.learnmalldemo.service.pms.IPmsBrandService;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -61,7 +61,7 @@ public class PmsBrandController {
     /**
      * 添加品牌
      *
-     * @param pmsBrandForm 品牌实体
+     * @param pmsBrandDto 品牌实体
      * @return 新增成功的品牌实体
      * @author AhogeK ahogek@gmail.com
      * @date 2021-04-14 21:38
@@ -69,8 +69,8 @@ public class PmsBrandController {
     @PreAuthorize("hasAuthority('pms:brand:create')")
     @Operation(summary = "添加品牌")
     @PostMapping
-    public CommonResult<Void> createBrand(@RequestBody @Valid PmsBrandForm pmsBrandForm) {
-        pmsBrandService.createBrand(pmsBrandForm);
+    public CommonResult<Void> createBrand(@RequestBody @Valid PmsBrandDto pmsBrandDto) {
+        pmsBrandService.createBrand(pmsBrandDto);
         return CommonResult.success();
     }
 
@@ -88,7 +88,7 @@ public class PmsBrandController {
     @PutMapping("/{id}")
     @Parameter(name = "id", description = "品牌id", required = true, in = ParameterIn.PATH)
     public CommonResult<Void> updateBrand(@PathVariable("id") @NotNull(message = "{notnull}") Long id,
-                                          @RequestBody @Valid PmsBrandForm brandForm) {
+                                          @RequestBody @Valid PmsBrandDto brandForm) {
         pmsBrandService.updateBrand(id, brandForm);
         return CommonResult.success();
     }

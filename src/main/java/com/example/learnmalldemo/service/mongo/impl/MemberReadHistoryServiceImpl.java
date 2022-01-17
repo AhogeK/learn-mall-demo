@@ -1,10 +1,10 @@
 package com.example.learnmalldemo.service.mongo.impl;
 
 import com.example.learnmalldemo.common.api.ResultCode;
+import com.example.learnmalldemo.dto.MemberReadHistoryAddDto;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.mongo.MemberReadHistory;
 import com.example.learnmalldemo.exception.MallException;
-import com.example.learnmalldemo.form.MemberReadHistoryAddForm;
 import com.example.learnmalldemo.repository.mongo.MemberReadHistoryRepository;
 import com.example.learnmalldemo.service.mongo.IMemberReadHistoryService;
 import org.springframework.beans.BeanUtils;
@@ -31,9 +31,9 @@ public class MemberReadHistoryServiceImpl implements IMemberReadHistoryService {
     }
 
     @Override
-    public void add(MemberReadHistoryAddForm memberReadHistoryAddForm, UmsAdmin umsAdmin) {
+    public void add(MemberReadHistoryAddDto memberReadHistoryAddDto, UmsAdmin umsAdmin) {
         MemberReadHistory memberReadHistory = new MemberReadHistory();
-        BeanUtils.copyProperties(memberReadHistoryAddForm, memberReadHistory);
+        BeanUtils.copyProperties(memberReadHistoryAddDto, memberReadHistory);
         memberReadHistory.setMemberId(umsAdmin.getId());
         memberReadHistory.setMemberIcon(umsAdmin.getIcon());
         memberReadHistory.setMemberNickname(umsAdmin.getNickName());

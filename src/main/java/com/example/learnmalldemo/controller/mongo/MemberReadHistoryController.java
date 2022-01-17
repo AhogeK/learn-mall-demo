@@ -2,9 +2,9 @@ package com.example.learnmalldemo.controller.mongo;
 
 import com.example.learnmalldemo.common.annotation.LoginUser;
 import com.example.learnmalldemo.common.api.CommonResult;
+import com.example.learnmalldemo.dto.MemberReadHistoryAddDto;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.mongo.MemberReadHistory;
-import com.example.learnmalldemo.form.MemberReadHistoryAddForm;
 import com.example.learnmalldemo.service.mongo.IMemberReadHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,9 +39,9 @@ public class MemberReadHistoryController {
 
     @Operation(summary = "创建浏览记录")
     @PostMapping
-    public CommonResult<Void> add(@RequestBody @Valid MemberReadHistoryAddForm memberReadHistoryAddForm,
+    public CommonResult<Void> add(@RequestBody @Valid MemberReadHistoryAddDto memberReadHistoryAddDto,
                                   @Parameter(hidden = true) @LoginUser UmsAdmin umsAdmin) {
-        memberReadHistoryService.add(memberReadHistoryAddForm, umsAdmin);
+        memberReadHistoryService.add(memberReadHistoryAddDto, umsAdmin);
         return CommonResult.success();
     }
 

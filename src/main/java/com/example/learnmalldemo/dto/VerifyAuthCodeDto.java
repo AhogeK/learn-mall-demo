@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.form;
+package com.example.learnmalldemo.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @Schema(description = "校验验证码表单参数实体")
-public class VerifyAuthCodeForm {
+public class VerifyAuthCodeDto {
 
     @NotBlank(message = "{notnull}")
     @Schema(description = "手机号")

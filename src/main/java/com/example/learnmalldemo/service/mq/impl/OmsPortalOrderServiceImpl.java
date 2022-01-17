@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.service.mq.impl;
 
 import com.example.learnmalldemo.common.mq.sender.CancelOrderSender;
-import com.example.learnmalldemo.form.OrderForm;
+import com.example.learnmalldemo.dto.OrderDto;
 import com.example.learnmalldemo.service.mq.IOmsPortalOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class OmsPortalOrderServiceImpl implements IOmsPortalOrderService {
     }
 
     @Override
-    public Long generateOrder(OrderForm orderForm) {
+    public Long generateOrder(OrderDto orderDto) {
         // TODO 执行一系列生成订单的操作
         log.info("执行订单生成");
         // 成功下了一个订单后开启一个延迟消息，用户用户没有付款时取消订单，orderId在下单后生成

@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.form;
+package com.example.learnmalldemo.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @Schema(description = "用户注册表单实体")
-public class UmsAdminRegisterForm {
+public class UmsAdminRegisterDto {
 
     @Schema(description = "用户名", example = "AhogeK")
     @NotBlank(message = "{notnull}")

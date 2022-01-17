@@ -1,9 +1,9 @@
 package com.example.learnmalldemo.service.admin;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.learnmalldemo.dto.UmsAdminRegisterDto;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.UmsPermission;
-import com.example.learnmalldemo.form.UmsAdminRegisterForm;
 import com.example.learnmalldemo.vo.AdminUserDetails;
 import com.example.learnmalldemo.vo.UmsAdminDetailVo;
 
@@ -29,10 +29,10 @@ public interface IUmsAdminService extends IService<UmsAdmin> {
     /**
      * 注册功能
      *
-     * @param umsAdminRegisterForm 用户注册表单实体
+     * @param umsAdminRegisterDto 用户注册表单实体
      * @return 注册用户详细信息
      */
-    UmsAdminDetailVo register(UmsAdminRegisterForm umsAdminRegisterForm);
+    UmsAdminDetailVo register(UmsAdminRegisterDto umsAdminRegisterDto);
 
     /**
      * 登录功能

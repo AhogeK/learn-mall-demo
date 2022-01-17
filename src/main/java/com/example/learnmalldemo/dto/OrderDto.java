@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.form;
+package com.example.learnmalldemo.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 @Schema(description = "生成订单所需要的参数")
-public class OrderForm {
+public class OrderDto {
 
     /**
      * 收获地址id

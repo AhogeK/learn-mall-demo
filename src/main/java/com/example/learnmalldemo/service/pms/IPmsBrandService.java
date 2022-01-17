@@ -3,8 +3,8 @@ package com.example.learnmalldemo.service.pms;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.learnmalldemo.dto.PmsBrandDto;
 import com.example.learnmalldemo.entity.PmsBrand;
-import com.example.learnmalldemo.form.PmsBrandForm;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public interface IPmsBrandService extends IService<PmsBrand> {
      * @author AhogeK ahogek@gmail.com
      * @date 2021-04-14 21:21
      */
-    void createBrand(PmsBrandForm brand);
+    void createBrand(PmsBrandDto brand);
 
     /**
      * 更新品牌
@@ -46,7 +46,7 @@ public interface IPmsBrandService extends IService<PmsBrand> {
      * @author AhogeK ahogek@gmail.com
      * @date 2021-04-14 23:07
      */
-    void updateBrand(Long id, PmsBrandForm brand);
+    void updateBrand(Long id, PmsBrandDto brand);
 
     /**
      * 删除品牌

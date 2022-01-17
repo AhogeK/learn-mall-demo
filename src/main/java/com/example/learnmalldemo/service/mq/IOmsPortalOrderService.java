@@ -1,6 +1,6 @@
 package com.example.learnmalldemo.service.mq;
 
-import com.example.learnmalldemo.form.OrderForm;
+import com.example.learnmalldemo.dto.OrderDto;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -14,10 +14,10 @@ public interface IOmsPortalOrderService {
     /**
      * 根据提交信息生成订单
      *
-     * @param orderForm 订单生成参数
+     * @param orderDto 订单生成参数
      */
     @Transactional(rollbackFor = Exception.class)
-    Long generateOrder(OrderForm orderForm);
+    Long generateOrder(OrderDto orderDto);
 
     /**
      * 取消单个超时订单

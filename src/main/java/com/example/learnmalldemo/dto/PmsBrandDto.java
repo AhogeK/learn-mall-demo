@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.form;
+package com.example.learnmalldemo.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @Schema(description = "品牌表单")
-public class PmsBrandForm {
+public class PmsBrandDto {
 
     @Schema(description = "品牌名")
     @NotNull(message = "{notnull}")

@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.controller.admin;
 
 import com.example.learnmalldemo.common.api.CommonResult;
-import com.example.learnmalldemo.form.VerifyAuthCodeForm;
+import com.example.learnmalldemo.dto.VerifyAuthCodeDto;
 import com.example.learnmalldemo.service.admin.IUmsMemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -52,13 +52,13 @@ public class UmsMemberController {
     /**
      * 校验验证码
      *
-     * @param verifyAuthCodeForm 校验验证码请求表单
+     * @param verifyAuthCodeDto 校验验证码请求表单
      * @return 验证是否成功
      */
     @Operation(summary = "校验验证码")
     @PostMapping("/verify-auth-code")
-    public CommonResult<Void> verifyAuthCode(@RequestBody @Valid VerifyAuthCodeForm verifyAuthCodeForm) {
-        umsMemberService.verifyAuthCode(verifyAuthCodeForm);
+    public CommonResult<Void> verifyAuthCode(@RequestBody @Valid VerifyAuthCodeDto verifyAuthCodeDto) {
+        umsMemberService.verifyAuthCode(verifyAuthCodeDto);
         return CommonResult.success();
     }
 }

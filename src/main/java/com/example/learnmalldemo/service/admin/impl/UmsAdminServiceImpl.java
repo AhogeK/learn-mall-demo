@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.common.util.JwtTokenUtils;
+import com.example.learnmalldemo.dto.UmsAdminRegisterDto;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.UmsPermission;
 import com.example.learnmalldemo.exception.MallException;
-import com.example.learnmalldemo.form.UmsAdminRegisterForm;
 import com.example.learnmalldemo.mapper.UmsAdminMapper;
 import com.example.learnmalldemo.mapper.UmsAdminRoleRelationMapper;
 import com.example.learnmalldemo.service.admin.IUmsAdminService;
@@ -59,12 +59,12 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     }
 
     @Override
-    public UmsAdminDetailVo register(UmsAdminRegisterForm umsAdminRegisterForm) {
+    public UmsAdminDetailVo register(UmsAdminRegisterDto umsAdminRegisterDto) {
         UmsAdmin umsAdmin = new UmsAdmin();
-        BeanUtils.copyProperties(umsAdminRegisterForm, umsAdmin);
+        BeanUtils.copyProperties(umsAdminRegisterDto, umsAdmin);
         umsAdmin.setStatus(1);
         // 查询用户名是否重复
-        if (count(Wrappers.<UmsAdmin>lambdaQuery().eq(UmsAdmin::getUsername, umsAdminRegisterForm.getUsername())) > 0) {
+        if (count(Wrappers.<UmsAdmin>lambdaQuery().eq(UmsAdmin::getUsername, umsAdminRegisterDto.getUsername())) > 0) {
             throw new MallException(404001, "注册用户名已存在");
         }
         // 将密码进行加密操作

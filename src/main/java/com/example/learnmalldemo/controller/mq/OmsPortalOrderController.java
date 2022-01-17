@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.controller.mq;
 
 import com.example.learnmalldemo.common.api.CommonResult;
-import com.example.learnmalldemo.form.OrderForm;
+import com.example.learnmalldemo.dto.OrderDto;
 import com.example.learnmalldemo.service.mq.IOmsPortalOrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,7 +34,7 @@ public class OmsPortalOrderController {
 
     @Operation(summary = "根据购物车信息生成订单")
     @PostMapping
-    public CommonResult<Long> create(@RequestBody @Valid OrderForm orderForm) {
-        return CommonResult.success(omsPortalOrderService.generateOrder(orderForm));
+    public CommonResult<Long> create(@RequestBody @Valid OrderDto orderDto) {
+        return CommonResult.success(omsPortalOrderService.generateOrder(orderDto));
     }
 }

@@ -1,8 +1,8 @@
 package com.example.learnmalldemo.service.mongo;
 
+import com.example.learnmalldemo.dto.MemberReadHistoryAddDto;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.mongo.MemberReadHistory;
-import com.example.learnmalldemo.form.MemberReadHistoryAddForm;
 import org.springframework.data.domain.Page;
 
 /**
@@ -16,10 +16,10 @@ public interface IMemberReadHistoryService {
     /**
      * 新增会员浏览记录
      *
-     * @param memberReadHistoryAddForm 会员浏览记录新增表单
-     * @param umsAdmin                 浏览用户
+     * @param memberReadHistoryAddDto 会员浏览记录新增表单
+     * @param umsAdmin                浏览用户
      */
-    void add(MemberReadHistoryAddForm memberReadHistoryAddForm, UmsAdmin umsAdmin);
+    void add(MemberReadHistoryAddDto memberReadHistoryAddDto, UmsAdmin umsAdmin);
 
     /**
      * 批量上出会员浏览记录

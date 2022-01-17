@@ -2,8 +2,8 @@ package com.example.learnmalldemo.service.admin.impl;
 
 import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.common.constants.NumberConstants;
+import com.example.learnmalldemo.dto.VerifyAuthCodeDto;
 import com.example.learnmalldemo.exception.MallException;
-import com.example.learnmalldemo.form.VerifyAuthCodeForm;
 import com.example.learnmalldemo.service.admin.IUmsMemberService;
 import com.example.learnmalldemo.service.redis.IRedisService;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,9 +47,9 @@ public class UmsMemberServiceImpl implements IUmsMemberService {
     }
 
     @Override
-    public void verifyAuthCode(VerifyAuthCodeForm verifyAuthCodeForm) {
-        String realAuthCode = redisService.get(redisKeyPrefixAuthCode + verifyAuthCodeForm.getTelephone());
-        if (!verifyAuthCodeForm.getAuthCode().equals(realAuthCode)) {
+    public void verifyAuthCode(VerifyAuthCodeDto verifyAuthCodeDto) {
+        String realAuthCode = redisService.get(redisKeyPrefixAuthCode + verifyAuthCodeDto.getTelephone());
+        if (!verifyAuthCodeDto.getAuthCode().equals(realAuthCode)) {
             throw new MallException(ResultCode.AUTH_CODE_VALIDATE_FAILED);
         }
     }

@@ -2,10 +2,10 @@ package com.example.learnmalldemo.controller.admin;
 
 import com.example.learnmalldemo.common.annotation.LoginUser;
 import com.example.learnmalldemo.common.api.CommonResult;
+import com.example.learnmalldemo.dto.UmsAdminLoginDto;
+import com.example.learnmalldemo.dto.UmsAdminRegisterDto;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.UmsPermission;
-import com.example.learnmalldemo.form.UmsAdminLoginForm;
-import com.example.learnmalldemo.form.UmsAdminRegisterForm;
 import com.example.learnmalldemo.service.admin.IUmsAdminService;
 import com.example.learnmalldemo.vo.LoginVo;
 import com.example.learnmalldemo.vo.UmsAdminDetailVo;
@@ -41,14 +41,14 @@ public class UmsAdminController {
 
     @Operation(summary = "用户注册")
     @PostMapping("/register")
-    public CommonResult<UmsAdminDetailVo> register(@RequestBody @Valid UmsAdminRegisterForm umsAdminRegisterForm) {
-        return CommonResult.success(umsAdminService.register(umsAdminRegisterForm));
+    public CommonResult<UmsAdminDetailVo> register(@RequestBody @Valid UmsAdminRegisterDto umsAdminRegisterDto) {
+        return CommonResult.success(umsAdminService.register(umsAdminRegisterDto));
     }
 
     @Operation(summary = "用户登录")
     @PostMapping("/login")
-    public CommonResult<LoginVo> login(@RequestBody @Valid UmsAdminLoginForm umsAdminLoginForm) {
-        String token = umsAdminService.login(umsAdminLoginForm.getUsername(), umsAdminLoginForm.getPassword());
+    public CommonResult<LoginVo> login(@RequestBody @Valid UmsAdminLoginDto umsAdminLoginDto) {
+        String token = umsAdminService.login(umsAdminLoginDto.getUsername(), umsAdminLoginDto.getPassword());
         LoginVo result = new LoginVo();
         result.setToken(token);
         result.setTokenHead(tokenHead);

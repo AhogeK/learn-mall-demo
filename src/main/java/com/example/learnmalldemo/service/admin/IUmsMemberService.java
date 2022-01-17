@@ -1,6 +1,6 @@
 package com.example.learnmalldemo.service.admin;
 
-import com.example.learnmalldemo.form.VerifyAuthCodeForm;
+import com.example.learnmalldemo.dto.VerifyAuthCodeDto;
 
 /**
  * <p>
@@ -24,7 +24,7 @@ public interface IUmsMemberService {
     /**
      * 校验验证码
      *
-     * @param verifyAuthCodeForm 校验验证码请求表单
+     * @param verifyAuthCodeDto 校验验证码请求表单
      */
-    void verifyAuthCode(VerifyAuthCodeForm verifyAuthCodeForm);
+    void verifyAuthCode(VerifyAuthCodeDto verifyAuthCodeDto);
 }

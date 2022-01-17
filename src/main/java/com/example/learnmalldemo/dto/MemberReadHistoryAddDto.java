@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.form;
+package com.example.learnmalldemo.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
  */
 @Data
 @Schema(description = "会员浏览记录请求表单")
-public class MemberReadHistoryAddForm {
+public class MemberReadHistoryAddDto {
 
     @Indexed
     @Schema(description = "产品id", example = "1")
