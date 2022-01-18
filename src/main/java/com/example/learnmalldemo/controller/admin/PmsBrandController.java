@@ -162,7 +162,7 @@ public class PmsBrandController {
     }
 
     /**
-     * 更新品牌属性是否为制造商
+     * 批量更新品牌属性是否为制造商
      *
      * @param updateFactoryStatusDto {@link UpdateFactoryStatusDto}
      * @return 接口请求是否成功
@@ -170,7 +170,7 @@ public class PmsBrandController {
      * @date 2021-01-18 13:44
      */
     @PreAuthorize("hasAuthority('pms:brand:update')")
-    @Operation(summary = "更新品牌属性是否为制造商")
+    @Operation(summary = "批量更新品牌属性是否为制造商")
     @PutMapping("/factory-status")
     public CommonResult<Void> updateFactoryStatus(@Valid @RequestBody UpdateFactoryStatusDto updateFactoryStatusDto) {
         pmsBrandService.updateFactoryStatus(updateFactoryStatusDto);
