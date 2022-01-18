@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.learnmalldemo.dto.PmsBrandDto;
+import com.example.learnmalldemo.dto.UpdateFactoryStatusDto;
 import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 
@@ -84,4 +85,13 @@ public interface IPmsBrandService extends IService<PmsBrand> {
      * @date 2021-01-17 10:37
      */
     void deleteBatch(List<Long> ids);
+
+    /**
+     * 更新品牌属性是否为制造商
+     *
+     * @param updateFactoryStatusDto {@link UpdateFactoryStatusDto}
+     * @author AhogeK ahogek@gmail.com
+     * @date 2021-01-18 13:44
+     */
+    void updateFactoryStatus(UpdateFactoryStatusDto updateFactoryStatusDto);
 }

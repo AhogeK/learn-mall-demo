@@ -1,7 +1,9 @@
 package com.example.learnmalldemo.exception;
 
 import com.example.learnmalldemo.common.api.CommonResult;
+import com.example.learnmalldemo.common.api.ResultCode;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
@@ -64,9 +66,9 @@ public class RuntimeExceptionHandler {
         return CommonResult.unauthorized();
     }
 
-    @ExceptionHandler(IllegalStateException.class)
-    public CommonResult<Void> illegalStateExceptionHandle(IllegalStateException e) {
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public CommonResult<Void> handle(HttpMessageNotReadableException e) {
         e.printStackTrace();
-        return CommonResult.forbidden();
+        return CommonResult.failed(ResultCode.MESSAGE_NOT_READABLE_FAILED.getCode(), ResultCode.MESSAGE_NOT_READABLE_FAILED.getMessage());
     }
 }

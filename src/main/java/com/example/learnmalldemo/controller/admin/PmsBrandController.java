@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.dto.PmsBrandDto;
+import com.example.learnmalldemo.dto.UpdateFactoryStatusDto;
 import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.service.pms.IPmsBrandService;
 import com.example.learnmalldemo.vo.PmsBrandVo;
@@ -157,6 +158,22 @@ public class PmsBrandController {
     @Parameter(name = "ids", description = "品牌id列表", in = ParameterIn.QUERY, example = "1, 2, 3")
     public CommonResult<Void> deleteBatch(@RequestParam(name = "ids") @NotEmpty(message = "品牌id列表不能为空") List<Long> ids) {
         pmsBrandService.deleteBatch(ids);
+        return CommonResult.success();
+    }
+
+    /**
+     * 更新品牌属性是否为制造商
+     *
+     * @param updateFactoryStatusDto {@link UpdateFactoryStatusDto}
+     * @return 接口请求是否成功
+     * @author AhogeK ahogek@gmail.com
+     * @date 2021-01-18 13:44
+     */
+    @PreAuthorize("hasAuthority('pms:brand:update')")
+    @Operation(summary = "更新品牌属性是否为制造商")
+    @PutMapping("/factory-status")
+    public CommonResult<Void> updateFactoryStatus(@Valid @RequestBody UpdateFactoryStatusDto updateFactoryStatusDto) {
+        pmsBrandService.updateFactoryStatus(updateFactoryStatusDto);
         return CommonResult.success();
     }
 }

@@ -39,6 +39,10 @@ public enum ResultCode {
      * 查询失败
      */
     SELECT_FAILED(500, "查询失败"),
+    /**
+     * HTTP请求参数不可读
+     */
+    MESSAGE_NOT_READABLE_FAILED(500, "HTTP请求参数不可读"),
     /*
      * 参数校验失败
      */

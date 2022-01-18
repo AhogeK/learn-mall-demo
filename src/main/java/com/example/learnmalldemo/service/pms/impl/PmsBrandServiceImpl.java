@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.dto.PmsBrandDto;
+import com.example.learnmalldemo.dto.UpdateFactoryStatusDto;
 import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.mapper.PmsBrandMapper;
@@ -107,5 +108,14 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
             throw new MallException(ResultCode.DELETE_FAILED);
         }
         log.debug("delete batch brands success");
+    }
+
+    @Override
+    public void updateFactoryStatus(UpdateFactoryStatusDto updateFactoryStatusDto) {
+        if (!update(Wrappers.<PmsBrand>lambdaUpdate().in(PmsBrand::getId,
+                updateFactoryStatusDto.getIds()).set(PmsBrand::getFactoryStatus,
+                updateFactoryStatusDto.getFactoryStatus()))) {
+            throw new MallException(ResultCode.UPDATE_FAILED);
+        }
     }
 }
