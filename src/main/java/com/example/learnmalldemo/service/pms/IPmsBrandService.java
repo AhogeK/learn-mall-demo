@@ -3,8 +3,9 @@ package com.example.learnmalldemo.service.pms;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.learnmalldemo.dto.PmsBrandDto;
-import com.example.learnmalldemo.dto.UpdateFactoryStatusDto;
+import com.example.learnmalldemo.dto.admin.PmsBrandDto;
+import com.example.learnmalldemo.dto.admin.UpdateFactoryStatusDto;
+import com.example.learnmalldemo.dto.admin.UpdateShowStatusDto;
 import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 
@@ -82,7 +83,7 @@ public interface IPmsBrandService extends IService<PmsBrand> {
      *
      * @param ids 品牌id列表
      * @author AhogeK ahogek@gmail.com
-     * @date 2021-01-17 10:37
+     * @date 2022-01-17 10:37
      */
     void deleteBatch(List<Long> ids);
 
@@ -91,7 +92,16 @@ public interface IPmsBrandService extends IService<PmsBrand> {
      *
      * @param updateFactoryStatusDto {@link UpdateFactoryStatusDto}
      * @author AhogeK ahogek@gmail.com
-     * @date 2021-01-18 13:44
+     * @date 2022-01-18 13:44
      */
     void updateFactoryStatus(UpdateFactoryStatusDto updateFactoryStatusDto);
+
+    /**
+     * 批量更新品牌是否展示属性
+     *
+     * @param updateShowStatusDto {@link UpdateShowStatusDto}
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-18 14:50
+     */
+    void updateShowStatus(UpdateShowStatusDto updateShowStatusDto);
 }

@@ -1,6 +1,6 @@
 package com.example.learnmalldemo.service.mq;
 
-import com.example.learnmalldemo.dto.OrderDto;
+import com.example.learnmalldemo.dto.admin.OrderDto;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

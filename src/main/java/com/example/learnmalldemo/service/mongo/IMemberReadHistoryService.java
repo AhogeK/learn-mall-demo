@@ -1,6 +1,6 @@
 package com.example.learnmalldemo.service.mongo;
 
-import com.example.learnmalldemo.dto.MemberReadHistoryAddDto;
+import com.example.learnmalldemo.dto.admin.MemberReadHistoryAddDto;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.mongo.MemberReadHistory;
 import org.springframework.data.domain.Page;

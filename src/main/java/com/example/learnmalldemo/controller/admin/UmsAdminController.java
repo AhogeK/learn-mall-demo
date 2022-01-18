@@ -2,8 +2,8 @@ package com.example.learnmalldemo.controller.admin;
 
 import com.example.learnmalldemo.common.annotation.LoginUser;
 import com.example.learnmalldemo.common.api.CommonResult;
-import com.example.learnmalldemo.dto.UmsAdminLoginDto;
-import com.example.learnmalldemo.dto.UmsAdminRegisterDto;
+import com.example.learnmalldemo.dto.admin.UmsAdminLoginDto;
+import com.example.learnmalldemo.dto.admin.UmsAdminRegisterDto;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.UmsPermission;
 import com.example.learnmalldemo.service.admin.IUmsAdminService;

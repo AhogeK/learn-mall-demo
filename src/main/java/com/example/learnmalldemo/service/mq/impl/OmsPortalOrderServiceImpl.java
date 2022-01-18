@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.service.mq.impl;
 
 import com.example.learnmalldemo.common.mq.sender.CancelOrderSender;
-import com.example.learnmalldemo.dto.OrderDto;
+import com.example.learnmalldemo.dto.admin.OrderDto;
 import com.example.learnmalldemo.service.mq.IOmsPortalOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

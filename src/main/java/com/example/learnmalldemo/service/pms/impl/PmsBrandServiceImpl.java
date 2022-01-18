@@ -8,8 +8,9 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.common.api.ResultCode;
-import com.example.learnmalldemo.dto.PmsBrandDto;
-import com.example.learnmalldemo.dto.UpdateFactoryStatusDto;
+import com.example.learnmalldemo.dto.admin.PmsBrandDto;
+import com.example.learnmalldemo.dto.admin.UpdateFactoryStatusDto;
+import com.example.learnmalldemo.dto.admin.UpdateShowStatusDto;
 import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.mapper.PmsBrandMapper;
@@ -117,5 +118,16 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
                 updateFactoryStatusDto.getFactoryStatus()))) {
             throw new MallException(ResultCode.UPDATE_FAILED);
         }
+        log.debug("update batch brands factory status success");
+    }
+
+    @Override
+    public void updateShowStatus(UpdateShowStatusDto updateShowStatusDto) {
+        if (!update(Wrappers.<PmsBrand>lambdaUpdate().in(PmsBrand::getId,
+                updateShowStatusDto.getIds()).set(PmsBrand::getShowStatus,
+                updateShowStatusDto.getShowStatus()))) {
+            throw new MallException(ResultCode.UPDATE_FAILED);
+        }
+        log.debug("update batch brands show status success");
     }
 }

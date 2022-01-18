@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.common.util.JwtTokenUtils;
-import com.example.learnmalldemo.dto.UmsAdminRegisterDto;
+import com.example.learnmalldemo.dto.admin.UmsAdminRegisterDto;
 import com.example.learnmalldemo.entity.UmsAdmin;
 import com.example.learnmalldemo.entity.UmsPermission;
 import com.example.learnmalldemo.exception.MallException;

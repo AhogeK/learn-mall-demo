@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.controller.mq;
 
 import com.example.learnmalldemo.common.api.CommonResult;
-import com.example.learnmalldemo.dto.OrderDto;
+import com.example.learnmalldemo.dto.admin.OrderDto;
 import com.example.learnmalldemo.service.mq.IOmsPortalOrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

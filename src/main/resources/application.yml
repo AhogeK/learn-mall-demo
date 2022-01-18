@@ -51,6 +51,7 @@ spring:
 
 logging:
   level:
+    com.example.learnmalldemo: debug
     com.example.learnmalldemo.mapper: debug
     org.springframework.security: warn
     org.springframework.data.convert.CustomConversions: error

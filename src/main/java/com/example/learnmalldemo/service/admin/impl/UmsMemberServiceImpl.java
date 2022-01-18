@@ -2,7 +2,7 @@ package com.example.learnmalldemo.service.admin.impl;
 
 import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.common.constants.NumberConstants;
-import com.example.learnmalldemo.dto.VerifyAuthCodeDto;
+import com.example.learnmalldemo.dto.admin.VerifyAuthCodeDto;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.service.admin.IUmsMemberService;
 import com.example.learnmalldemo.service.redis.IRedisService;

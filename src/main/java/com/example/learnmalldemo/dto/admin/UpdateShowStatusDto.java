@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.dto;
+package com.example.learnmalldemo.dto.admin;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -10,14 +10,13 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * 状态更新 DTO
+ * 显示状态更新DTO
  *
  * @author AhogeK ahogek@gmail.com
- * @date 2022-01-18 13:24
+ * @date 2022-01-18 14:43
  */
 @Data
-@Schema(description = "状态更新DTO")
-public class UpdateFactoryStatusDto {
+public class UpdateShowStatusDto {
 
     @Schema(description = "品牌id列表")
     @NotEmpty(message = "{notnull}")
@@ -27,5 +26,5 @@ public class UpdateFactoryStatusDto {
     @NotNull(message = "{notnull}")
     @Min(value = 0, message = "{out-range}")
     @Max(value = 1, message = "{out-range}")
-    private Integer factoryStatus;
+    private Integer showStatus;
 }

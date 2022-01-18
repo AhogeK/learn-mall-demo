@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.dto;
+package com.example.learnmalldemo.dto.admin;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.example.learnmalldemo.service.admin;
 
-import com.example.learnmalldemo.dto.VerifyAuthCodeDto;
+import com.example.learnmalldemo.dto.admin.VerifyAuthCodeDto;
 
 /**
  * <p>

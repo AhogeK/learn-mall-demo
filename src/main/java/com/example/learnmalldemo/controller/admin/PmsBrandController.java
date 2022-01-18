@@ -3,8 +3,9 @@ package com.example.learnmalldemo.controller.admin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.learnmalldemo.common.api.CommonResult;
-import com.example.learnmalldemo.dto.PmsBrandDto;
-import com.example.learnmalldemo.dto.UpdateFactoryStatusDto;
+import com.example.learnmalldemo.dto.admin.PmsBrandDto;
+import com.example.learnmalldemo.dto.admin.UpdateFactoryStatusDto;
+import com.example.learnmalldemo.dto.admin.UpdateShowStatusDto;
 import com.example.learnmalldemo.entity.PmsBrand;
 import com.example.learnmalldemo.service.pms.IPmsBrandService;
 import com.example.learnmalldemo.vo.PmsBrandVo;
@@ -150,7 +151,7 @@ public class PmsBrandController {
      * @param ids 品牌id列表
      * @return 接口请求是否成功
      * @author AhogeK ahogek@gmail.com
-     * @date 2021-01-17 10:36
+     * @date 2022-01-17 10:36
      */
     @PreAuthorize("hasAuthority('pms:brand:delete')")
     @Operation(summary = "通过id进行批量删除品牌")
@@ -167,13 +168,29 @@ public class PmsBrandController {
      * @param updateFactoryStatusDto {@link UpdateFactoryStatusDto}
      * @return 接口请求是否成功
      * @author AhogeK ahogek@gmail.com
-     * @date 2021-01-18 13:44
+     * @date 2022-01-18 13:44
      */
     @PreAuthorize("hasAuthority('pms:brand:update')")
     @Operation(summary = "批量更新品牌属性是否为制造商")
     @PutMapping("/factory-status")
     public CommonResult<Void> updateFactoryStatus(@Valid @RequestBody UpdateFactoryStatusDto updateFactoryStatusDto) {
         pmsBrandService.updateFactoryStatus(updateFactoryStatusDto);
+        return CommonResult.success();
+    }
+
+    /**
+     * 批量更新品牌是否展示属性
+     *
+     * @param updateShowStatusDto {@link UpdateShowStatusDto}
+     * @return 接口请求是否成功
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-18 14:49
+     */
+    @PreAuthorize("hasAuthority('pms:brand:update')")
+    @Operation(summary = "批量更新品牌是否展示属性")
+    @PutMapping("/show-status")
+    public CommonResult<Void> updateShowStatus(@Valid @RequestBody UpdateShowStatusDto updateShowStatusDto) {
+        pmsBrandService.updateShowStatus(updateShowStatusDto);
         return CommonResult.success();
     }
 }
