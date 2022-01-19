@@ -9,6 +9,8 @@ import com.example.learnmalldemo.service.redis.IRedisService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -24,21 +26,32 @@ import java.util.Random;
 public class UmsMemberServiceImpl implements IUmsMemberService {
 
     private final IRedisService redisService;
+
     @Value("${spring.redis.key.prefix.authCode}")
     private String redisKeyPrefixAuthCode;
+
     @Value("${spring.redis.key.expire.authCode}")
     private Long redisKeyExpireAuthCode;
 
+    /**
+     * SecureRandom is preferred to Random
+     */
+    private Random rand;
+
     public UmsMemberServiceImpl(IRedisService redisService) {
         this.redisService = redisService;
+        try {
+            this.rand = SecureRandom.getInstanceStrong();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public String getAuthCode(String telephone) {
         StringBuilder sb = new StringBuilder();
-        Random random = new Random();
         for (int i = NumberConstants.ZERO; i < NumberConstants.SIX; i++) {
-            sb.append(random.nextInt(NumberConstants.TEN));
+            sb.append(this.rand.nextInt(NumberConstants.TEN));
         }
         //验证码绑定手机号并存储到redis
         redisService.set(redisKeyPrefixAuthCode + telephone, sb.toString());
@@ -48,7 +61,7 @@ public class UmsMemberServiceImpl implements IUmsMemberService {
 
     @Override
     public void verifyAuthCode(VerifyAuthCodeDto verifyAuthCodeDto) {
-        String realAuthCode = redisService.get(redisKeyPrefixAuthCode + verifyAuthCodeDto.getTelephone());
+        String realAuthCode = redisService.get(redisKeyPrefixAuthCode + verifyAuthCodeDto.getTelephone(), String.class);
         if (!verifyAuthCodeDto.getAuthCode().equals(realAuthCode)) {
             throw new MallException(ResultCode.AUTH_CODE_VALIDATE_FAILED);
         }
