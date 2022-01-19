@@ -1,7 +1,8 @@
 package com.example.learnmalldemo.service.redis.impl;
 
 import com.example.learnmalldemo.service.redis.IRedisService;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
@@ -16,45 +17,42 @@ import java.util.concurrent.TimeUnit;
  * @since 1.00
  */
 @Service
+@RequiredArgsConstructor
 public class RedisServiceImpl implements IRedisService {
 
-    /**
-     * String-focused extension of RedisTemplate. Since most operations against Redis are String based,
-     * this class provides a dedicated class that minimizes configuration of its more generic template
-     * especially in terms of serializers.
-     */
-    private final StringRedisTemplate stringRedisTemplate;
-
-    public RedisServiceImpl(StringRedisTemplate stringRedisTemplate) {
-        this.stringRedisTemplate = stringRedisTemplate;
-    }
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
-    public void set(String key, String value) {
+    public <T> void set(String key, T value) {
         /*
          * 'opsForValue' Returns the operations performed on simple values (or Strings in Redis terminology).
          */
-        stringRedisTemplate.opsForValue().set(key, value);
+        redisTemplate.opsForValue().set(key, value);
     }
 
     @Override
     public String get(String key) {
-        return stringRedisTemplate.opsForValue().get(key);
+        return (String) redisTemplate.opsForValue().get(key);
+    }
+
+    @Override
+    public <T> T get(String key, Class<T> clazz) {
+        return clazz.cast(redisTemplate.opsForValue().get(key));
     }
 
     @Override
     public boolean expire(String key, long expire) {
-        Boolean expireBoolean = stringRedisTemplate.expire(key, expire, TimeUnit.SECONDS);
+        Boolean expireBoolean = redisTemplate.expire(key, expire, TimeUnit.SECONDS);
         return Boolean.TRUE.equals(expireBoolean);
     }
 
     @Override
     public void remove(String key) {
-        stringRedisTemplate.delete(key);
+        redisTemplate.delete(key);
     }
 
     @Override
     public Long increment(String key, long delta) {
-        return stringRedisTemplate.opsForValue().increment(key, delta);
+        return redisTemplate.opsForValue().increment(key, delta);
     }
 }

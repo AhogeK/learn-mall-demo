@@ -18,15 +18,26 @@ public interface IRedisService {
      * @param key   key
      * @param value value
      */
-    void set(String key, String value);
+    <T> void set(String key, T value);
+
+    /**
+     * 默认获取方法 返回 String 类型
+     *
+     * @param key 键名
+     * @return String值
+     */
+    String get(String key);
 
     /**
      * 获取数据
      *
-     * @param key key
-     * @return value
+     * @param key   redis 键名
+     * @param clazz 获取数据类型
+     * @param <T>   返回的类型
+     * @return 获取到的数据 T
      */
-    String get(String key);
+    <T> T get(String key, Class<T> clazz);
+
 
     /**
      * 设置超期时间

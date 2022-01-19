@@ -15,12 +15,20 @@
     <name>learn-mall-demo</name>
     <description>Demo project for Spring Boot</description>
 
+    <repositories>
+        <repository>
+            <id>spring-milestone</id>
+            <name>Spring Maven MILESTONE Repository</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+        </repository>
+    </repositories>
+
     <properties>
         <java.version>1.8</java.version>
         <druid.version>1.2.8</druid.version>
         <mysql.version>8.0.27</mysql.version>
         <lombok.version>1.18.22</lombok.version>
-        <jedis.version>3.7.0</jedis.version>
+        <jedis.version>3.7.1</jedis.version>
         <mp.version>3.5.0</mp.version>
         <mpg.version>3.5.1</mpg.version>
         <velocity.version>2.3</velocity.version>
@@ -34,6 +42,7 @@
         <netty.version>4.1.72.Final</netty.version>
         <hikari.version>4.0.3</hikari.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <spring.framework.version>5.3.15</spring.framework.version>
     </properties>
 
     <dependencies>
@@ -248,6 +257,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
