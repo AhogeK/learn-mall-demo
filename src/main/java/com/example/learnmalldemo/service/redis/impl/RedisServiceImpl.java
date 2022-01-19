@@ -1,10 +1,10 @@
 package com.example.learnmalldemo.service.redis.impl;
 
 import com.example.learnmalldemo.service.redis.IRedisService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -17,10 +17,10 @@ import java.util.concurrent.TimeUnit;
  * @since 1.00
  */
 @Service
-@RequiredArgsConstructor
 public class RedisServiceImpl implements IRedisService {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public <T> void set(String key, T value) {
