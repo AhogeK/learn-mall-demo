@@ -2,6 +2,8 @@ package com.example.learnmalldemo;
 
 import com.example.learnmalldemo.service.admin.PmsBrandTestService;
 import com.example.learnmalldemo.service.pms.IPmsBrandService;
+import com.example.learnmalldemo.service.redis.IRedisService;
+import com.example.learnmalldemo.service.redis.RedisTestService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +19,9 @@ class LearnMallDemoApplicationTests {
 
     @Autowired
     private IPmsBrandService brandService;
+
+    @Autowired
+    private IRedisService redisService;
 
     @BeforeAll
     static void start() {
@@ -44,5 +49,12 @@ class LearnMallDemoApplicationTests {
         brandTest.deleteBrandTest();
         brandTest.getBrandPageTest();
         brandTest.deleteBatchTest();
+    }
+
+    @Test
+    @DisplayName("redis服务接口单元测试")
+    void redisServiceTest() {
+        RedisTestService redisTest = new RedisTestService(redisService);
+        redisTest.setTest();
     }
 }

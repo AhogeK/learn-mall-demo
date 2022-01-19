@@ -32,7 +32,7 @@
       # 进入redis容器
       docker exec -it mall-redis redis-cli
       # 设置账号
-      ACL SETUSER ahogek on +@all >123456
+      ACL SETUSER ahogek on allkeys +@all >123456
       # 验证
       AUTH ahogek 123456
       ```
