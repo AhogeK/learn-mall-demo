@@ -22,10 +22,20 @@
    * Spring Boot 更新为了最新的 2.6.x版本
    * [使用 Mapstruct 来实现 Bean 拷贝](doc/Bean拷贝.md)
 3. 整合 springfox swagger
-   * 不再使用原项目基于 2.x版本的swagger的 springfox (3.0版本以于2020年停止更新)
+   * 不再使用原项目基于 2.x 版本的swagger的 springfox (3.0版本以于2020年停止更新)
    * 将 springfox swagger 替换为了 3.x版本的 ``springdoc-openapi3`` 总体更替了注解的使用
    * 接口按 [REST API](https://www.geeksforgeeks.org/rest-api-architectural-constraints/?ref=lbp) 风格配置
 4. 整合 redis 这个与学习项目相同暂未做更改
+   1. [添加 redis 用户的方式](https://redis.io/commands/acl-setuser)
+      1.
+      ```shell
+      # 进入redis容器
+      docker exec -it mall-redis redis-cli
+      # 设置账号
+      ACL SETUSER ahogek on +@all >123456
+      # 验证
+      AUTH ahogek 123456
+      ```
 5. 整合 Spring Security
    * 在整合 Spring Security 前强烈推荐大家阅读 [码农小胖的关于SpingSecurity的个人电子书](https://felord.cn/)
 6. 添加定时任务
