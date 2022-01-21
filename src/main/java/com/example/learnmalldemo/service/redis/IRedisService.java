@@ -21,6 +21,18 @@ public interface IRedisService {
     <T> void set(String key, T value);
 
     /**
+     * 存储数据
+     *
+     * @param key   redis 键名
+     * @param value 值
+     * @param time  存储时间 （秒）
+     * @param <T>   值类型
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-21 19:37
+     */
+    <T> void set(String key, T value, Long time);
+
+    /**
      * 默认获取方法 返回 String 类型
      *
      * @param key 键名

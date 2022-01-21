@@ -31,6 +31,11 @@ public class RedisServiceImpl implements IRedisService {
     }
 
     @Override
+    public <T> void set(String key, T value, Long time) {
+        redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+    }
+
+    @Override
     public String get(String key) {
         return (String) redisTemplate.opsForValue().get(key);
     }
