@@ -24,9 +24,6 @@ public class RedisServiceImpl implements IRedisService {
 
     @Override
     public <T> void set(String key, T value) {
-        /*
-         * 'opsForValue' Returns the operations performed on simple values (or Strings in Redis terminology).
-         */
         redisTemplate.opsForValue().set(key, value);
     }
 
@@ -46,14 +43,14 @@ public class RedisServiceImpl implements IRedisService {
     }
 
     @Override
-    public boolean expire(String key, long expire) {
-        Boolean expireBoolean = redisTemplate.expire(key, expire, TimeUnit.SECONDS);
-        return Boolean.TRUE.equals(expireBoolean);
+    public Boolean del(String key) {
+        return redisTemplate.delete(key);
     }
 
     @Override
-    public void remove(String key) {
-        redisTemplate.delete(key);
+    public boolean expire(String key, long expire) {
+        Boolean expireBoolean = redisTemplate.expire(key, expire, TimeUnit.SECONDS);
+        return Boolean.TRUE.equals(expireBoolean);
     }
 
     @Override

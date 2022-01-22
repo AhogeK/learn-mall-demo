@@ -50,6 +50,16 @@ public interface IRedisService {
      */
     <T> T get(String key, Class<T> clazz);
 
+    /**
+     * 删除指定 key
+     *
+     * @param key redis 键名
+     * @return 是否删除成功
+     * @author JiaqiShi ahogek@gmail.com
+     * @date 2022-01-22 ahogek@gmail.com
+     */
+    Boolean del(String key);
+
 
     /**
      * 设置超期时间
@@ -60,12 +70,6 @@ public interface IRedisService {
      */
     boolean expire(String key, long expire);
 
-    /**
-     * 删除数据
-     *
-     * @param key key
-     */
-    void remove(String key);
 
     /**
      * 自增操作
