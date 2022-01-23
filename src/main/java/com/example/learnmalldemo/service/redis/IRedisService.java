@@ -66,9 +66,8 @@ public interface IRedisService {
      *
      * @param key    key
      * @param expire expire time
-     * @return is success
      */
-    boolean expire(String key, long expire);
+    void expire(String key, long expire);
 
 
     /**
