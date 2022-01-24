@@ -1,5 +1,7 @@
 package com.example.learnmalldemo.service.redis;
 
+import java.util.List;
+
 /**
  * <p>
  * redis操作Service,
@@ -55,10 +57,20 @@ public interface IRedisService {
      *
      * @param key redis 键名
      * @return 是否删除成功
-     * @author JiaqiShi ahogek@gmail.com
-     * @date 2022-01-22 ahogek@gmail.com
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-22
      */
     Boolean del(String key);
+
+    /**
+     * 批量删除 key
+     *
+     * @param keys redis 键名 list
+     * @return 成功删除的数量
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-24 23:07
+     */
+    Long del(List<String> keys);
 
 
     /**
