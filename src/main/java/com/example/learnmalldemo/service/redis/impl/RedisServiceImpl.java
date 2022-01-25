@@ -77,4 +77,9 @@ public class RedisServiceImpl implements IRedisService {
     public Long decrement(String key, long delta) {
         return redisTemplate.opsForValue().decrement(key, delta);
     }
+
+    @Override
+    public Object hashGet(String key, String hashKey) {
+        return redisTemplate.opsForHash().get(key, hashKey);
+    }
 }

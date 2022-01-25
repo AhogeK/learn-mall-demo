@@ -121,4 +121,15 @@ public interface IRedisService {
      * @date 2022-01-25 19:30
      */
     Long decrement(String key, long delta);
+
+    /**
+     * 获取 hash 结构中的属性
+     *
+     * @param key     redis 键
+     * @param hashKey hash 键
+     * @return hash结构属性
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-25 19:35
+     */
+    Object hashGet(String key, String hashKey);
 }
