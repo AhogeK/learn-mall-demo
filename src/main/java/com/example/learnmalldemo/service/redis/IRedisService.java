@@ -74,12 +74,22 @@ public interface IRedisService {
 
 
     /**
-     * 设置超期时间
+     * 设置超时时间
      *
      * @param key    key
      * @param expire expire time
      */
     void expire(String key, long expire);
+
+    /**
+     * 获取过期时间
+     *
+     * @param key 被获取过期时间的key
+     * @return 过期时间 (s)
+     * @author JiaqiShi ahogek@gmail.com
+     * @date 2022-01-25 19:17
+     */
+    Long getExpire(String key);
 
 
     /**
