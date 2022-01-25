@@ -110,4 +110,15 @@ public interface IRedisService {
      * @return result value
      */
     Long increment(String key, long delta);
+
+    /**
+     * 按 delta 递减
+     *
+     * @param key   redis 键
+     * @param delta 步长
+     * @return 结果值
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-25 19:30
+     */
+    Long decrement(String key, long delta);
 }

@@ -72,4 +72,9 @@ public class RedisServiceImpl implements IRedisService {
     public Long increment(String key, long delta) {
         return redisTemplate.opsForValue().increment(key, delta);
     }
+
+    @Override
+    public Long decrement(String key, long delta) {
+        return redisTemplate.opsForValue().decrement(key, delta);
+    }
 }
