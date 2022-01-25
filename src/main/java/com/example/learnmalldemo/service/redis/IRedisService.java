@@ -86,10 +86,20 @@ public interface IRedisService {
      *
      * @param key 被获取过期时间的key
      * @return 过期时间 (s)
-     * @author JiaqiShi ahogek@gmail.com
+     * @author AhogeK ahogek@gmail.com
      * @date 2022-01-25 19:17
      */
     Long getExpire(String key);
+
+    /**
+     * 判断是否有 key
+     *
+     * @param key redis 键名
+     * @return 是否有该键
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-25 19:23
+     */
+    Boolean hasKey(String key);
 
 
     /**
