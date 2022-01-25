@@ -54,8 +54,8 @@ public class RedisServiceImpl implements IRedisService {
     }
 
     @Override
-    public void expire(String key, long expire) {
-        redisTemplate.expire(key, expire, TimeUnit.SECONDS);
+    public Boolean expire(String key, long expire) {
+        return redisTemplate.expire(key, expire, TimeUnit.SECONDS);
     }
 
     @Override
@@ -81,5 +81,11 @@ public class RedisServiceImpl implements IRedisService {
     @Override
     public Object hashGet(String key, String hashKey) {
         return redisTemplate.opsForHash().get(key, hashKey);
+    }
+
+    @Override
+    public Boolean hashSet(String key, String hashKey, Object value, Long time) {
+        redisTemplate.opsForHash().put(key, hashKey, value);
+        return expire(key, time);
     }
 }

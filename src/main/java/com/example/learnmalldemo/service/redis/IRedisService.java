@@ -77,9 +77,10 @@ public interface IRedisService {
      * 设置超时时间
      *
      * @param key    key
-     * @param expire expire time
+     * @param expire expire time (seconds)
+     * @return 设置是否成功
      */
-    void expire(String key, long expire);
+    Boolean expire(String key, long expire);
 
     /**
      * 获取过期时间
@@ -132,4 +133,15 @@ public interface IRedisService {
      * @date 2022-01-25 19:35
      */
     Object hashGet(String key, String hashKey);
+
+    /**
+     * 设置 hash 结构中的属性
+     *
+     * @param key     hash键
+     * @param hashKey hash结构属性键
+     * @param value   值
+     * @param time    存储时间
+     * @return 是否成功
+     */
+    Boolean hashSet(String key, String hashKey, Object value, Long time);
 }
