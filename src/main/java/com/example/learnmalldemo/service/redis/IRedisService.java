@@ -135,7 +135,7 @@ public interface IRedisService {
     Object hashGet(String key, String hashKey);
 
     /**
-     * 设置 hash 结构中的属性
+     * 设置 hash 结构中的属性 (带有效时间)
      *
      * @param key     hash键
      * @param hashKey hash结构属性键
@@ -144,4 +144,15 @@ public interface IRedisService {
      * @return 是否成功
      */
     Boolean hashSet(String key, String hashKey, Object value, Long time);
+
+    /**
+     * hash 结构属性设置
+     *
+     * @param key     hash结构键
+     * @param hashKey hash结构属性键
+     * @param value   值
+     * @author JiaqiShi ahogek@gmail.com
+     * @date 2022-01-26 23:22
+     */
+    void hashSet(String key, String hashKey, Object value);
 }

@@ -88,4 +88,9 @@ public class RedisServiceImpl implements IRedisService {
         redisTemplate.opsForHash().put(key, hashKey, value);
         return expire(key, time);
     }
+
+    @Override
+    public void hashSet(String key, String hashKey, Object value) {
+        redisTemplate.opsForHash().put(key, hashKey, value);
+    }
 }
