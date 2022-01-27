@@ -1,6 +1,7 @@
 package com.example.learnmalldemo.service.redis;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -151,8 +152,18 @@ public interface IRedisService {
      * @param key     hash结构键
      * @param hashKey hash结构属性键
      * @param value   值
-     * @author JiaqiShi ahogek@gmail.com
+     * @author AhogeK ahogek@gmail.com
      * @date 2022-01-26 23:22
      */
     void hashSet(String key, String hashKey, Object value);
+
+    /**
+     * 获取指定键的 hash 结构
+     *
+     * @param key hash结构键值
+     * @return 指定键的 hash 结构
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-27 12:23
+     */
+    Map<Object, Object> hashGetAll(String key);
 }

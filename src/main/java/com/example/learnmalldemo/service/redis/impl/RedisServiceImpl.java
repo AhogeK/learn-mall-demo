@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -92,5 +93,10 @@ public class RedisServiceImpl implements IRedisService {
     @Override
     public void hashSet(String key, String hashKey, Object value) {
         redisTemplate.opsForHash().put(key, hashKey, value);
+    }
+
+    @Override
+    public Map<Object, Object> hashGetAll(String key) {
+        return redisTemplate.opsForHash().entries(key);
     }
 }
