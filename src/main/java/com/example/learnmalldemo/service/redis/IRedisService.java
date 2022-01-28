@@ -255,4 +255,15 @@ public interface IRedisService {
      * @date 2022-01-28 16:41
      */
     Long setAdd(String key, Object... values);
+
+    /**
+     * 确认是否是 set 结构属性
+     *
+     * @param key redis 键
+     * @param value 结构属性值
+     * @return 是否是 set 结构属性
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-28 16:57
+     */
+    Boolean setIsMember(String key, Object value);
 }

@@ -141,4 +141,9 @@ public class RedisServiceImpl implements IRedisService {
     public Long setAdd(String key, Object... values) {
         return redisTemplate.opsForSet().add(key, values);
     }
+
+    @Override
+    public Boolean setIsMember(String key, Object value) {
+        return redisTemplate.opsForSet().isMember(key, value);
+    }
 }
