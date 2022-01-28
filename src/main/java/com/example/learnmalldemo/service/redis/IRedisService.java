@@ -209,4 +209,16 @@ public interface IRedisService {
      * @date 2022-01-28 16:10
      */
     Boolean hashHasKey(String key, Object hashKey);
+
+    /**
+     * hash结构中属性自增
+     *
+     * @param key redis 键
+     * @param hashKey hash 结构属性键
+     * @param delta 自增步长
+     * @return null 或 处理数
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-28 16:25
+     */
+    Long hashIncrement(String key, Object hashKey, Long delta);
 }
