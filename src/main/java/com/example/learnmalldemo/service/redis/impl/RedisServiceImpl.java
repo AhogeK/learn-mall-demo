@@ -101,8 +101,13 @@ public class RedisServiceImpl implements IRedisService {
     }
 
     @Override
-    public Boolean hashSetAll(String key, Map<Object, Object> struct, Long time) {
+    public Boolean hashSetAll(String key, Map<String, Object> struct, Long time) {
         redisTemplate.opsForHash().putAll(key, struct);
         return expire(key, time);
+    }
+
+    @Override
+    public void hashSetAll(String key, Map<Object, ?> struct) {
+        redisTemplate.opsForHash().putAll(key, struct);
     }
 }
