@@ -177,7 +177,7 @@ public interface IRedisService {
      * @author AhogeK ahogek@gmail.com
      * @date 2022-01-28 11:41
      */
-    Boolean hashSetAll(String key, Map<String, Object> struct, Long time);
+    Boolean hashSetAll(String key, Map<Object, Object> struct, Long time);
 
     /**
      * 设置完整 hash 结构不带时间
@@ -188,4 +188,14 @@ public interface IRedisService {
      * @date 2022-01-28 16:03
      */
     void hashSetAll(String key, Map<Object, ?> struct);
+
+    /**
+     * 删除 hash 结构 key
+     *
+     * @param key redis 键
+     * @param hashKey hash 结构键
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-28 16:06
+     */
+    void hashDel(String key, Object... hashKey);
 }
