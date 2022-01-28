@@ -2,6 +2,7 @@ package com.example.learnmalldemo.service.redis;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -233,4 +234,14 @@ public interface IRedisService {
      * @date 2022-01-28 16:32
      */
     Long hashDecrement(String key, Object hashKey, Long delta);
+
+    /**
+     * 获取 set 结构
+     *
+     * @param key redis 键
+     * @return set 结构集合
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-28 16:37
+     */
+    Set<Object> setMembers(String key);
 }

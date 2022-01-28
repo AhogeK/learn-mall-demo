@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -129,5 +130,10 @@ public class RedisServiceImpl implements IRedisService {
     @Override
     public Long hashDecrement(String key, Object hashKey, Long delta) {
         return redisTemplate.opsForHash().increment(key, hashKey, -delta);
+    }
+
+    @Override
+    public Set<Object> setMembers(String key) {
+        return redisTemplate.opsForSet().members(key);
     }
 }
