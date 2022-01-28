@@ -244,4 +244,15 @@ public interface IRedisService {
      * @date 2022-01-28 16:37
      */
     Set<Object> setMembers(String key);
+
+    /**
+     * 向 set 结构中添加属性
+     *
+     * @param key redis 键
+     * @param values 结构属性值数组
+     * @return null 或 处理数
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-28 16:41
+     */
+    Long setAdd(String key, Object... values);
 }
