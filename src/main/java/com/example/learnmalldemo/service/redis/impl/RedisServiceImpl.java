@@ -115,4 +115,9 @@ public class RedisServiceImpl implements IRedisService {
     public void hashDel(String key, Object... hashKey) {
         redisTemplate.opsForHash().delete(key, hashKey);
     }
+
+    @Override
+    public Boolean hashHasKey(String key, Object hashKey) {
+        return redisTemplate.opsForHash().hasKey(key, hashKey);
+    }
 }

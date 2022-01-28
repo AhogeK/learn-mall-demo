@@ -198,4 +198,15 @@ public interface IRedisService {
      * @date 2022-01-28 16:06
      */
     void hashDel(String key, Object... hashKey);
+
+    /**
+     * 判断hash结构中是否有该属性
+     *
+     * @param key redis 键
+     * @param hashKey redis hash 结构属性键
+     * @return 是否拥有
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-28 16:10
+     */
+    Boolean hashHasKey(String key, Object hashKey);
 }
