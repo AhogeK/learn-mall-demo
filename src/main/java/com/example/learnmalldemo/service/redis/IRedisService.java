@@ -141,7 +141,7 @@ public interface IRedisService {
      * @param key     hash键
      * @param hashKey hash结构属性键
      * @param value   值
-     * @param time    存储时间
+     * @param time    存储时间 (秒）
      * @return 是否成功
      */
     Boolean hashSet(String key, String hashKey, Object value, Long time);
@@ -166,4 +166,16 @@ public interface IRedisService {
      * @date 2022-01-27 12:23
      */
     Map<Object, Object> hashGetAll(String key);
+
+    /**
+     * 设置完整 hash 结构
+     *
+     * @param key    redis 键
+     * @param struct hash完整结构
+     * @param time   存储有效时间 (秒)
+     * @return 设置是否成功
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-28 11:41
+     */
+    Boolean hashSetAll(String key, Map<Object, Object> struct, Long time);
 }

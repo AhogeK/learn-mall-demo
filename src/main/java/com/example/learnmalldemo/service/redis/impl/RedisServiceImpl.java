@@ -99,4 +99,10 @@ public class RedisServiceImpl implements IRedisService {
     public Map<Object, Object> hashGetAll(String key) {
         return redisTemplate.opsForHash().entries(key);
     }
+
+    @Override
+    public Boolean hashSetAll(String key, Map<Object, Object> struct, Long time) {
+        redisTemplate.opsForHash().putAll(key, struct);
+        return expire(key, time);
+    }
 }
