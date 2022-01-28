@@ -125,4 +125,9 @@ public class RedisServiceImpl implements IRedisService {
     public Long hashIncrement(String key, Object hashKey, Long delta) {
         return redisTemplate.opsForHash().increment(key, hashKey, delta);
     }
+
+    @Override
+    public Long hashDecrement(String key, Object hashKey, Long delta) {
+        return redisTemplate.opsForHash().increment(key, hashKey, -delta);
+    }
 }

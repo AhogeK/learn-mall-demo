@@ -182,7 +182,7 @@ public interface IRedisService {
     /**
      * 设置完整 hash 结构不带时间
      *
-     * @param key redis 键
+     * @param key    redis 键
      * @param struct hash 结构体
      * @author AhogeK ahogek@gmail.com
      * @date 2022-01-28 16:03
@@ -192,7 +192,7 @@ public interface IRedisService {
     /**
      * 删除 hash 结构 key
      *
-     * @param key redis 键
+     * @param key     redis 键
      * @param hashKey hash 结构键
      * @author AhogeK ahogek@gmail.com
      * @date 2022-01-28 16:06
@@ -202,7 +202,7 @@ public interface IRedisService {
     /**
      * 判断hash结构中是否有该属性
      *
-     * @param key redis 键
+     * @param key     redis 键
      * @param hashKey redis hash 结构属性键
      * @return 是否拥有
      * @author AhogeK ahogek@gmail.com
@@ -213,12 +213,24 @@ public interface IRedisService {
     /**
      * hash结构中属性自增
      *
-     * @param key redis 键
+     * @param key     redis 键
      * @param hashKey hash 结构属性键
-     * @param delta 自增步长
+     * @param delta   自增步长
      * @return null 或 处理数
      * @author AhogeK ahogek@gmail.com
      * @date 2022-01-28 16:25
      */
     Long hashIncrement(String key, Object hashKey, Long delta);
+
+    /**
+     * hash 结构中属性自减
+     *
+     * @param key     redis键
+     * @param hashKey hash 结构属性键
+     * @param delta   自减步长
+     * @return null 或 处理数
+     * @author AhogeK ahgoek@gmail.com
+     * @date 2022-01-28 16:32
+     */
+    Long hashDecrement(String key, Object hashKey, Long delta);
 }
