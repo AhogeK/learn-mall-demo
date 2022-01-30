@@ -331,4 +331,16 @@ public interface IRedisService {
      * @date 2022-01-30 15:52
      */
     Long listPush(String key, Object value);
+
+    /**
+     * 向 list 结构末尾推入元素，含持续时间 (持续时间代表整个 redis list key 而非单个 value)
+     *
+     * @param key   redis list 键
+     * @param value 元素
+     * @param time  持续时间 (秒)
+     * @return 是否成功
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-30 15:56
+     */
+    Boolean listPush(String key, Object value, Long time);
 }

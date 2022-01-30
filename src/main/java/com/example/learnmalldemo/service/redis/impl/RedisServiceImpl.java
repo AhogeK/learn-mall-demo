@@ -176,4 +176,10 @@ public class RedisServiceImpl implements IRedisService {
     public Long listPush(String key, Object value) {
         return redisTemplate.opsForList().rightPush(key, value);
     }
+
+    @Override
+    public Boolean listPush(String key, Object value, Long time) {
+        redisTemplate.opsForList().rightPush(key, value);
+        return expire(key, time);
+    }
 }
