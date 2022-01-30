@@ -320,4 +320,15 @@ public interface IRedisService {
      * @date 2022-01-30 15:39
      */
     Object listIndex(String key, Long index);
+
+    /**
+     * 向 list 结构中末尾推入元素
+     *
+     * @param key   redis list 键
+     * @param value 元素
+     * @return null 或 处理数
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-30 15:52
+     */
+    Long listPush(String key, Object value);
 }

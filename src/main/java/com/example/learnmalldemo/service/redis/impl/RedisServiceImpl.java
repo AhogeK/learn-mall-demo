@@ -171,4 +171,9 @@ public class RedisServiceImpl implements IRedisService {
     public Object listIndex(String key, Long index) {
         return redisTemplate.opsForList().index(key, index);
     }
+
+    @Override
+    public Long listPush(String key, Object value) {
+        return redisTemplate.opsForList().rightPush(key, value);
+    }
 }
