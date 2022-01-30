@@ -266,4 +266,13 @@ public interface IRedisService {
      * @date 2022-01-28 16:57
      */
     Boolean setIsMember(String key, Object value);
+
+    /**
+     * 获取指定键下 set 结构的长度
+     * @param key redis 键
+     * @return set 结构长度
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-30
+     */
+    Long setSize(String key);
 }

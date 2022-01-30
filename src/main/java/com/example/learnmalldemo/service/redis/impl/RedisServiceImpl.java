@@ -146,4 +146,9 @@ public class RedisServiceImpl implements IRedisService {
     public Boolean setIsMember(String key, Object value) {
         return redisTemplate.opsForSet().isMember(key, value);
     }
+
+    @Override
+    public Long setSize(String key) {
+        return redisTemplate.opsForSet().size(key);
+    }
 }
