@@ -287,4 +287,16 @@ public interface IRedisService {
      * @date 2022-01-30 15:35
      */
     Long setRemove(String key, Object... values);
+
+    /**
+     * 获取指定范围 list 结构属性
+     *
+     * @param key   redis list 键
+     * @param start 开始位置
+     * @param end   结束位置
+     * @return 指定范围下的 list 结构属性
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-30 15:39
+     */
+    List<Object> listRange(String key, Long start, Long end);
 }

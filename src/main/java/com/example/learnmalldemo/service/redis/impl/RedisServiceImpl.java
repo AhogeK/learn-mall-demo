@@ -156,4 +156,9 @@ public class RedisServiceImpl implements IRedisService {
     public Long setRemove(String key, Object... values) {
         return redisTemplate.opsForSet().remove(key, values);
     }
+
+    @Override
+    public List<Object> listRange(String key, Long start, Long end) {
+        return redisTemplate.opsForList().range(key, start, end);
+    }
 }
