@@ -151,4 +151,9 @@ public class RedisServiceImpl implements IRedisService {
     public Long setSize(String key) {
         return redisTemplate.opsForSet().size(key);
     }
+
+    @Override
+    public Long setRemove(String key, Object... values) {
+        return redisTemplate.opsForSet().remove(key, values);
+    }
 }

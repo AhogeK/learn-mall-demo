@@ -248,7 +248,7 @@ public interface IRedisService {
     /**
      * 向 set 结构中添加属性
      *
-     * @param key redis 键
+     * @param key    redis 键
      * @param values 结构属性值数组
      * @return null 或 处理数
      * @author AhogeK ahogek@gmail.com
@@ -259,7 +259,7 @@ public interface IRedisService {
     /**
      * 确认是否是 set 结构属性
      *
-     * @param key redis 键
+     * @param key   redis 键
      * @param value 结构属性值
      * @return 是否是 set 结构属性
      * @author AhogeK ahogek@gmail.com
@@ -269,10 +269,22 @@ public interface IRedisService {
 
     /**
      * 获取指定键下 set 结构的长度
+     *
      * @param key redis 键
      * @return set 结构长度
      * @author AhogeK ahogek@gmail.com
      * @date 2022-01-30
      */
     Long setSize(String key);
+
+    /**
+     * 删除 set 结构中的元素
+     *
+     * @param key    redis set 键
+     * @param values set 结构元素
+     * @return null 或 处理数
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-30 15:35
+     */
+    Long setRemove(String key, Object... values);
 }
