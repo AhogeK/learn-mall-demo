@@ -299,4 +299,14 @@ public interface IRedisService {
      * @date 2022-01-30 15:39
      */
     List<Object> listRange(String key, Long start, Long end);
+
+    /**
+     * 获取 list 结构长度
+     *
+     * @param key redis list 键
+     * @return list 结构长度
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-30 15:46
+     */
+    Long listSize(String key);
 }
