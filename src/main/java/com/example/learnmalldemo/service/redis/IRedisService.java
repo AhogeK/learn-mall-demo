@@ -367,4 +367,16 @@ public interface IRedisService {
      * @date 2022-01-30 16:06
      */
     Boolean listPushAll(String key, Long time, Object... values);
+
+    /**
+     * 删除 list 结构中 最早出现的 count 次数 value
+     *
+     * @param key   redis list 键
+     * @param count 删除 value 的数量
+     * @param value 需要删除的属性
+     * @return null 或 处理数
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-30 16:11
+     */
+    Long listRemove(String key, Long count, Object value);
 }

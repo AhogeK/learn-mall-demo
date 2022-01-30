@@ -193,4 +193,9 @@ public class RedisServiceImpl implements IRedisService {
         redisTemplate.opsForList().rightPushAll(key, values);
         return expire(key, time);
     }
+
+    @Override
+    public Long listRemove(String key, Long count, Object value) {
+        return redisTemplate.opsForList().remove(key, count, value);
+    }
 }
