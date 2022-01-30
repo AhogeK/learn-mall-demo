@@ -309,4 +309,15 @@ public interface IRedisService {
      * @date 2022-01-30 15:46
      */
     Long listSize(String key);
+
+    /**
+     * 获取 list 结构指定索引下的属性
+     *
+     * @param key   redis list 键
+     * @param index 下标
+     * @return 指定索引下的属性
+     * @author AhogeK ahogek@gmail.com
+     * @date 2022-01-30 15:39
+     */
+    Object listIndex(String key, Long index);
 }
