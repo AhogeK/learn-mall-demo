@@ -2,8 +2,6 @@
 
 > 个人学习 [macrozheng/mall](https://github.com/macrozheng/mall) 项目，学习商场项目搭建并改造
 
-**注: 近期工作忙碌, 暂停更新 2022-01-20 - 2022-01-26**
-
 ## 关于近期计划
 
 > 因为该项目近期开始重新学习升级与维护，我会重新阅读 [macrozhen](https://github.com/macrozheng) 大佬的 ``mall``
