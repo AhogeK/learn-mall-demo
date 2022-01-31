@@ -25,4 +25,12 @@ public class VerifyAuthCodeDto {
     @NotBlank(message = "{notnull}")
     @Schema(description = "验证码")
     private String authCode;
+
+    public VerifyAuthCodeDto() {
+    }
+
+    public VerifyAuthCodeDto(String telephone, String authCode) {
+        this.telephone = telephone;
+        this.authCode = authCode;
+    }
 }

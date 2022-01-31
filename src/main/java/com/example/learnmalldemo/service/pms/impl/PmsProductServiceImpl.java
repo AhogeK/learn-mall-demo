@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.service.pms.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.learnmalldemo.entity.PmsProduct;
+import com.example.learnmalldemo.entity.admin.PmsProduct;
 import com.example.learnmalldemo.mapper.PmsProductMapper;
 import com.example.learnmalldemo.service.pms.IPmsProductService;
 import org.springframework.stereotype.Service;

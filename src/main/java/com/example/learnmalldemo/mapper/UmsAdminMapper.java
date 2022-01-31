@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.learnmalldemo.entity.UmsAdmin;
+import com.example.learnmalldemo.entity.admin.UmsAdmin;
 
 /**
  * 后台管理Mapper

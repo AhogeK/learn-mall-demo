@@ -2,8 +2,8 @@ package com.example.learnmalldemo.service.admin;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.learnmalldemo.dto.admin.UmsAdminRegisterDto;
-import com.example.learnmalldemo.entity.UmsAdmin;
-import com.example.learnmalldemo.entity.UmsPermission;
+import com.example.learnmalldemo.entity.admin.UmsAdmin;
+import com.example.learnmalldemo.entity.admin.UmsPermission;
 import com.example.learnmalldemo.vo.AdminUserDetails;
 import com.example.learnmalldemo.vo.UmsAdminDetailVo;
 

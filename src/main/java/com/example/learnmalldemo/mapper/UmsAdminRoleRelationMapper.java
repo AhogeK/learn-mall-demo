@@ -1,8 +1,8 @@
 package com.example.learnmalldemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.learnmalldemo.entity.UmsAdminRoleRelation;
-import com.example.learnmalldemo.entity.UmsPermission;
+import com.example.learnmalldemo.entity.admin.UmsAdminRoleRelation;
+import com.example.learnmalldemo.entity.admin.UmsPermission;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

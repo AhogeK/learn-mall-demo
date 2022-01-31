@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.service.pms;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.learnmalldemo.entity.PmsProductAttribute;
+import com.example.learnmalldemo.entity.admin.PmsProductAttribute;
 
 /**
  * <p>

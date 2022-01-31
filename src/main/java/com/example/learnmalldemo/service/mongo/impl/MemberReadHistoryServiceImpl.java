@@ -2,7 +2,7 @@ package com.example.learnmalldemo.service.mongo.impl;
 
 import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.dto.admin.MemberReadHistoryAddDto;
-import com.example.learnmalldemo.entity.UmsAdmin;
+import com.example.learnmalldemo.entity.admin.UmsAdmin;
 import com.example.learnmalldemo.entity.mongo.MemberReadHistory;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.repository.mongo.MemberReadHistoryRepository;

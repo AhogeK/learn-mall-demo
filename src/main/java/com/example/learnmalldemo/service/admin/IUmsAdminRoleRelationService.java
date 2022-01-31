@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.service.admin;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.learnmalldemo.entity.UmsAdminRoleRelation;
+import com.example.learnmalldemo.entity.admin.UmsAdminRoleRelation;
 
 /**
  * <p>

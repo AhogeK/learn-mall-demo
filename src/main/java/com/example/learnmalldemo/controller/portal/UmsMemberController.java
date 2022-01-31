@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.controller.admin;
+package com.example.learnmalldemo.controller.portal;
 
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.dto.admin.VerifyAuthCodeDto;

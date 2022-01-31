@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.entity;
+package com.example.learnmalldemo.entity.admin;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,6 +28,4 @@ public class PmsProductAttributeValue {
 
     @Schema(description = "手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开")
     private String value;
-
-
 }

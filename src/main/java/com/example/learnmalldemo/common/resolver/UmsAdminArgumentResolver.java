@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.learnmalldemo.common.annotation.LoginUser;
 import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.common.util.JwtTokenUtils;
-import com.example.learnmalldemo.entity.UmsAdmin;
+import com.example.learnmalldemo.entity.admin.UmsAdmin;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.service.admin.IUmsAdminService;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.service.admin.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.learnmalldemo.entity.UmsAdminRoleRelation;
+import com.example.learnmalldemo.entity.admin.UmsAdminRoleRelation;
 import com.example.learnmalldemo.mapper.UmsAdminRoleRelationMapper;
 import com.example.learnmalldemo.service.admin.IUmsAdminRoleRelationService;
 import org.springframework.stereotype.Service;

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.learnmalldemo.dto.admin.PmsBrandDto;
 import com.example.learnmalldemo.dto.admin.UpdateFactoryStatusDto;
 import com.example.learnmalldemo.dto.admin.UpdateShowStatusDto;
-import com.example.learnmalldemo.entity.PmsBrand;
+import com.example.learnmalldemo.entity.admin.PmsBrand;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 
 import java.util.List;

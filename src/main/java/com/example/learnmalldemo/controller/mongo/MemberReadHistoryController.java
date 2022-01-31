@@ -3,7 +3,7 @@ package com.example.learnmalldemo.controller.mongo;
 import com.example.learnmalldemo.common.annotation.LoginUser;
 import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.dto.admin.MemberReadHistoryAddDto;
-import com.example.learnmalldemo.entity.UmsAdmin;
+import com.example.learnmalldemo.entity.admin.UmsAdmin;
 import com.example.learnmalldemo.entity.mongo.MemberReadHistory;
 import com.example.learnmalldemo.service.mongo.IMemberReadHistoryService;
 import io.swagger.v3.oas.annotations.Operation;

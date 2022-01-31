@@ -6,7 +6,7 @@ import com.example.learnmalldemo.common.api.CommonResult;
 import com.example.learnmalldemo.dto.admin.PmsBrandDto;
 import com.example.learnmalldemo.dto.admin.UpdateFactoryStatusDto;
 import com.example.learnmalldemo.dto.admin.UpdateShowStatusDto;
-import com.example.learnmalldemo.entity.PmsBrand;
+import com.example.learnmalldemo.entity.admin.PmsBrand;
 import com.example.learnmalldemo.service.pms.IPmsBrandService;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 import io.swagger.v3.oas.annotations.Operation;

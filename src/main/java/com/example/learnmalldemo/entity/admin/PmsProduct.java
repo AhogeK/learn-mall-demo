@@ -1,4 +1,4 @@
-package com.example.learnmalldemo.entity;
+package com.example.learnmalldemo.entity.admin;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;

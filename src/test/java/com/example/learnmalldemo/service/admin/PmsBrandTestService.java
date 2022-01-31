@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.learnmalldemo.dto.admin.PmsBrandDto;
 import com.example.learnmalldemo.dto.admin.UpdateFactoryStatusDto;
 import com.example.learnmalldemo.dto.admin.UpdateShowStatusDto;
-import com.example.learnmalldemo.entity.PmsBrand;
+import com.example.learnmalldemo.entity.admin.PmsBrand;
 import com.example.learnmalldemo.service.pms.IPmsBrandService;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 import lombok.extern.slf4j.Slf4j;

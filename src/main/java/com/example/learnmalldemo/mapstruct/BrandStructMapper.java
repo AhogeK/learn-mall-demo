@@ -1,6 +1,6 @@
 package com.example.learnmalldemo.mapstruct;
 
-import com.example.learnmalldemo.entity.PmsBrand;
+import com.example.learnmalldemo.entity.admin.PmsBrand;
 import com.example.learnmalldemo.vo.PmsBrandVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

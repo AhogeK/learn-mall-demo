@@ -11,7 +11,7 @@ import com.example.learnmalldemo.common.api.ResultCode;
 import com.example.learnmalldemo.dto.admin.PmsBrandDto;
 import com.example.learnmalldemo.dto.admin.UpdateFactoryStatusDto;
 import com.example.learnmalldemo.dto.admin.UpdateShowStatusDto;
-import com.example.learnmalldemo.entity.PmsBrand;
+import com.example.learnmalldemo.entity.admin.PmsBrand;
 import com.example.learnmalldemo.exception.MallException;
 import com.example.learnmalldemo.mapper.PmsBrandMapper;
 import com.example.learnmalldemo.mapstruct.BrandStructMapper;

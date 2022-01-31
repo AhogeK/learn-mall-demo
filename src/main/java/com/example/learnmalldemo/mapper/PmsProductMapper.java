@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.learnmalldemo.entity.PmsProduct;
+import com.example.learnmalldemo.entity.admin.PmsProduct;
 import com.example.learnmalldemo.entity.es.EsProduct;
 import org.apache.ibatis.annotations.Param;
 

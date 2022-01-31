@@ -16,9 +16,9 @@ public class CodeGenerator {
     /**
      * 数据源配置
      */
-    private static final DataSourceConfig.Builder DATA_SOURCE_CONFIG = new DataSourceConfig
-            .Builder("jdbc:mysql://192.168.50.26:3306/mall?useUnicode=true&useSSL=false&characterEncoding=utf8",
-            "ahogek", "123456");
+    private static final DataSourceConfig.Builder DATA_SOURCE_CONFIG = new DataSourceConfig.Builder("jdbc:mysql://192"
+            + ".168.50.26:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai", "root",
+            "123456");
 
     public static void main(String[] args) {
         /* 代码生成器
@@ -30,7 +30,6 @@ public class CodeGenerator {
                 // 包配置
                 .packageConfig((scanner, builder) -> builder.parent(scanner.apply("请输入包名？")))
                 // 策略配置
-                .strategyConfig((scanner, builder) -> builder.addInclude(scanner.apply("请输入包含的表名？").split(",")))
-                .execute();
+                .strategyConfig((scanner, builder) -> builder.addInclude(scanner.apply("请输入包含的表名？").split(","))).execute();
     }
 }

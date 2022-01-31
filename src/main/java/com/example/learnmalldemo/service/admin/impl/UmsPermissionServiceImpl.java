@@ -1,7 +1,7 @@
 package com.example.learnmalldemo.service.admin.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.learnmalldemo.entity.UmsPermission;
+import com.example.learnmalldemo.entity.admin.UmsPermission;
 import com.example.learnmalldemo.mapper.UmsPermissionMapper;
 import com.example.learnmalldemo.service.admin.IUmsPermissionService;
 import org.springframework.stereotype.Service;
