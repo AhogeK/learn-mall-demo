@@ -44,7 +44,7 @@ public class UmsMemberController {
      */
     @Operation(summary = "获取验证码")
     @GetMapping("/get-auth-code")
-    @Parameter(name = "telephone", description = "用户手机号", in = ParameterIn.PATH)
+    @Parameter(name = "telephone", description = "用户手机号", in = ParameterIn.QUERY)
     public CommonResult<String> getAuthCode(@NotNull(message = "{notnull}") String telephone) {
         return CommonResult.success(umsMemberService.getAuthCode(telephone));
     }
