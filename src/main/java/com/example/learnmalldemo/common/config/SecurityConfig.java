@@ -98,7 +98,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         () -> new UsernameNotFoundException(
                                 String.format("用户: %s, 未找到", username)
                         )
-                ));
+                )).passwordEncoder(passwordEncoder());
     }
 
     @Bean

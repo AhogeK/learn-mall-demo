@@ -49,8 +49,8 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
 
     @Override
     public Optional<AdminUserDetails> getAdminByUsername(String name) {
-        UmsAdmin umsAdmin =
-                getOne(Wrappers.<UmsAdmin>lambdaQuery().eq(StringUtils.isNotBlank(name), UmsAdmin::getUsername, name));
+        UmsAdmin umsAdmin = getOne(Wrappers.<UmsAdmin>lambdaQuery().eq(StringUtils.isNotBlank(name),
+                UmsAdmin::getUsername, name));
         if (umsAdmin != null) {
             List<UmsPermission> permissionList = getPermissionList(umsAdmin.getId());
             return Optional.of(new AdminUserDetails(umsAdmin, permissionList));
@@ -86,8 +86,8 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
             if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new MallException(404002, "登录失败，帐号或密码错误");
             }
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,
-                    null, userDetails.getAuthorities());
+            UsernamePasswordAuthenticationToken authenticationToken =
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             token = JwtTokenUtils.generateToken(userDetails);
         } catch (AuthenticationException e) {
@@ -103,9 +103,7 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return getAdminByUsername(username)
-                .orElseThrow(
-                        () -> new UsernameNotFoundException(String.format("User with username - %s, not found", username))
-                );
+        return getAdminByUsername(username).orElseThrow(() -> new UsernameNotFoundException(String.format("User with " +
+                "username - %s, not found", username)));
     }
 }
