@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -19,9 +19,10 @@ import java.time.LocalDateTime;
  * @since 2021-06-21
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Schema(description = "后台用户权限表")
-public class UmsPermission {
+public class UmsPermission implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @TableId(type = IdType.AUTO)
     @Schema(description = "主键id")

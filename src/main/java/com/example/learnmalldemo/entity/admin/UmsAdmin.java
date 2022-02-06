@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -17,7 +18,9 @@ import java.time.LocalDateTime;
  */
 @Data
 @Schema(description = "后台用户表实体")
-public class UmsAdmin {
+public class UmsAdmin implements Serializable {
+
+    private static final long serialVersionUID = 2L;
 
     @Schema(description = "后台用户表id")
     @TableId(type = IdType.AUTO)
