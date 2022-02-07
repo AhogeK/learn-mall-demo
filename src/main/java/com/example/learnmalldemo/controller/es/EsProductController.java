@@ -5,7 +5,6 @@ import com.example.learnmalldemo.entity.es.EsProduct;
 import com.example.learnmalldemo.service.es.IEsProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
@@ -34,11 +33,9 @@ public class EsProductController {
 
     @Operation(summary = "简单搜索")
     @GetMapping
-    @Parameters({
-            @Parameter(name = "keyword", description = "关键字", in = ParameterIn.QUERY),
-            @Parameter(name = "pageNum", description = "当前页", in = ParameterIn.QUERY, example = "1"),
-            @Parameter(name = "pageSize", description = "每页大小", in = ParameterIn.QUERY, example = "5")
-    })
+    @Parameter(name = "keyword", description = "关键字", in = ParameterIn.QUERY)
+    @Parameter(name = "pageNum", description = "当前页", in = ParameterIn.QUERY, example = "1")
+    @Parameter(name = "pageSize", description = "每页大小", in = ParameterIn.QUERY, example = "5")
     public CommonResult<Page<EsProduct>> search(String keyword, @RequestParam(defaultValue = "1") Integer pageNum,
                                                 @RequestParam(defaultValue = "5") Integer pageSize) {
         return CommonResult.success(esProductService.search(keyword, pageNum - 1, pageSize));
