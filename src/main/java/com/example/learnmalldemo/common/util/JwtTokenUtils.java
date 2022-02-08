@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * JwtToken生成工具
@@ -26,34 +27,31 @@ public class JwtTokenUtils {
 
     private static final String CLAIM_KEY_CREATED = "created";
 
-    private static String secret;
+    @Value("${jwt.secret}")
+    private String secret;
 
-    private static Long expiration;
-
-    public JwtTokenUtils(@Value("${jwt.secret}") String secret, @Value("${jwt.expiration}") Long expiration) {
-        JwtTokenUtils.secret = secret;
-        JwtTokenUtils.expiration = expiration;
-    }
+    @Value("${jwt.expiration}")
+    private Long expiration;
 
     /**
      * 根据负责生成JWT的token
      */
     private static String generateToken(Map<String, Object> claims) {
-        return JWT.create().withHeader(claims).withExpiresAt(generateExpirationDate()).sign(Algorithm.HMAC512(secret));
+        return JWT.create().withHeader(claims).withExpiresAt(generateExpirationDate()).sign(Algorithm.HMAC512(new JwtTokenUtils().secret));
     }
 
     /**
      * 从token中获取JWT中的负载
      */
     private static DecodedJWT getClaimsFromToken(String token) {
-        return JWT.require(Algorithm.HMAC512(secret)).build().verify(token);
+        return JWT.require(Algorithm.HMAC512(new JwtTokenUtils().secret)).build().verify(token);
     }
 
     /**
      * 生成token的过期时间
      */
     private static Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + expiration * 1000);
+        return new Date(System.currentTimeMillis() + new JwtTokenUtils().expiration * 1000);
     }
 
     /**
@@ -62,8 +60,8 @@ public class JwtTokenUtils {
     public static String getUserNameFromToken(String token) {
         String username;
         try {
-            DecodedJWT decodedJWT = getClaimsFromToken(token);
-            username = decodedJWT.getHeaderClaim(CLAIM_KEY_USERNAME).asString();
+            DecodedJWT decodedJwt = getClaimsFromToken(token);
+            username = decodedJwt.getHeaderClaim(CLAIM_KEY_USERNAME).asString();
         } catch (Exception e) {
             username = null;
         }
@@ -77,7 +75,7 @@ public class JwtTokenUtils {
      * @param userDetails 从数据库中查询出来的用户信息
      */
     public static boolean validateToken(String token, UserDetails userDetails) {
-        return getUserNameFromToken(token).equals(userDetails.getUsername()) && isTokenExpired(token);
+        return Objects.equals(getUserNameFromToken(token),userDetails.getUsername()) && isTokenExpired(token);
     }
 
     /**
