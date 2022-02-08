@@ -11,6 +11,10 @@ package com.example.learnmalldemo.common.constants;
  */
 public class NumberConstants {
 
+    private NumberConstants() {
+        throw new IllegalStateException("This is Constant class");
+    }
+
     public static final Integer ZERO = 0;
 
     public static final Integer ONE = 1;
