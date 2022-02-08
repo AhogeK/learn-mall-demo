@@ -13,7 +13,6 @@ public class OrderTimeOutCancelTask implements Runnable {
 
     @Override
     public void run() {
-        // TODO: 2021-07-09 此处应调用取消订单的方法，具体查看mall项目源码
         log.info("取消订单，并根据sku编号释放锁定库存");
     }
 }
