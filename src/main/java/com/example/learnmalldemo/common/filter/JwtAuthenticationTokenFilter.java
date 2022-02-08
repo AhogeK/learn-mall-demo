@@ -30,14 +30,14 @@ import java.util.Collections;
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
-    private final IUmsAdminService IUmsAdminService;
+    private final IUmsAdminService umsAdminService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    public JwtAuthenticationTokenFilter(@Lazy IUmsAdminService IUmsAdminService) {
-        this.IUmsAdminService = IUmsAdminService;
+    public JwtAuthenticationTokenFilter(@Lazy IUmsAdminService umsAdminService) {
+        this.umsAdminService = umsAdminService;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        AdminUserDetails adminUserDetails = IUmsAdminService
+        AdminUserDetails adminUserDetails = umsAdminService
                 .getAdminByUsername(JwtTokenUtils.getUserNameFromToken(token)).orElse(null);
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(adminUserDetails,
                 null, adminUserDetails == null ? Collections.emptyList() : adminUserDetails.getAuthorities());
