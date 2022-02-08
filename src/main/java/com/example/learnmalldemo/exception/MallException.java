@@ -17,9 +17,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class MallException extends RuntimeException {
 
-    private Integer code;
+    private final Integer code;
 
-    private String msg;
+    private final String msg;
 
     public MallException() {
         this.code = ResultCode.FAILED.getCode();
