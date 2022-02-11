@@ -37,8 +37,8 @@ import java.io.IOException;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] GET_ANT_MATCHERS = {"/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js",
-            "/swagger-resources/**", "/v2/api-docs/**", "/swagger-ui/**", "/v3/api-docs/**"};
+    private static final String[] GET_ANT_MATCHERS = {"/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css",
+            "/**/*.js", "/swagger-resources/**", "/v2/api-docs/**", "/swagger-ui/**", "/v3/api-docs/**"};
 
     private final IUmsAdminService adminService;
 
@@ -59,24 +59,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 由于使用 JWT 所以禁用 CSRF
                 .csrf().disable()
                 // 基于 token 所以不需要 session
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, GET_ANT_MATCHERS)
-                .permitAll()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+                .antMatchers(HttpMethod.GET, GET_ANT_MATCHERS).permitAll()
                 // 对登录注册地址开放
-                .antMatchers("/admin/login", "/admin/register")
-                .permitAll()
+                .antMatchers("/admin/login", "/admin/register").permitAll()
                 // 跨域请求会先进行一次 options 请求
-                .antMatchers(HttpMethod.OPTIONS)
-                .permitAll()
-                .anyRequest()
-                .authenticated();
+                .antMatchers(HttpMethod.OPTIONS).permitAll().anyRequest().authenticated();
         // 无缓存
         http.headers().cacheControl();
         //添加自定义未授权和未登录结果返回
-        http.exceptionHandling()
-                .accessDeniedHandler((request, response, ex) -> flushResponse(response))
+        http.exceptionHandling().accessDeniedHandler((request, response, ex) -> flushResponse(response))
                 .authenticationEntryPoint((request, response, ex) -> flushResponse(response));
         // 添加 JWT 拦截
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -92,13 +84,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // 配置认证管理
-        auth.userDetailsService(username -> adminService
-                .getAdminByUsername(username)
-                .orElseThrow(
-                        () -> new UsernameNotFoundException(
-                                String.format("用户: %s, 未找到", username)
-                        )
-                )).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(username -> adminService.getAdminByUsername(username).orElseThrow(() ->
+                new UsernameNotFoundException(String.format("用户: %s, 未找到", username))))
+                .passwordEncoder(passwordEncoder());
     }
 
     @Bean
@@ -119,8 +107,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
