@@ -48,6 +48,9 @@ spring:
   output:
     ansi:
       enabled: always
+  # autoconfigure:
+    # 同样可以在启动类的注解上关闭 security 的自动配置
+    # exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 
 logging:
   level:
