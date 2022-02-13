@@ -21,15 +21,14 @@
    * 接口按 [REST API](https://www.geeksforgeeks.org/rest-api-architectural-constraints/?ref=lbp) 风格配置
 4. 整合 redis 这个与学习项目相同暂未做更改
    1. [添加 redis 用户的方式](https://redis.io/commands/acl-setuser)
-      1.
-      ```shell
-      # 进入redis容器
-      docker exec -it mall-redis redis-cli
-      # 设置账号
-      ACL SETUSER ahogek on allkeys +@all >123456
-      # 验证
-      AUTH ahogek 123456
-      ```
+      1. ```shell
+         # 进入redis容器
+         docker exec -it mall-redis redis-cli
+         # 设置账号
+         ACL SETUSER ahogek on allkeys +@all >123456
+         # 验证
+         AUTH ahogek 123456
+         ```
 5. 整合 Spring Security
    * 在整合 Spring Security 前强烈推荐大家阅读 [码农小胖的关于SpringSecurity的个人电子书](https://felord.cn/)
 6. 添加定时任务
