@@ -4,7 +4,10 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -21,11 +24,13 @@ import java.util.Objects;
  */
 @Slf4j
 @Component
-public class JwtTokenUtils {
+public class JwtTokenUtils implements ApplicationContextAware {
 
     private static final String CLAIM_KEY_USERNAME = "sub";
 
     private static final String CLAIM_KEY_CREATED = "created";
+
+    private static ApplicationContext ac;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -33,25 +38,30 @@ public class JwtTokenUtils {
     @Value("${jwt.expiration}")
     private Long expiration;
 
+    public static JwtTokenUtils getJwtTokenBean() {
+        return ac.getBean(JwtTokenUtils.class);
+    }
+
     /**
      * 根据负责生成JWT的token
      */
     private static String generateToken(Map<String, Object> claims) {
-        return JWT.create().withHeader(claims).withExpiresAt(generateExpirationDate()).sign(Algorithm.HMAC512(new JwtTokenUtils().secret));
+        return JWT.create().withHeader(claims).withExpiresAt(generateExpirationDate())
+                .sign(Algorithm.HMAC512(getJwtTokenBean().secret));
     }
 
     /**
      * 从token中获取JWT中的负载
      */
     private static DecodedJWT getClaimsFromToken(String token) {
-        return JWT.require(Algorithm.HMAC512(new JwtTokenUtils().secret)).build().verify(token);
+        return JWT.require(Algorithm.HMAC512(getJwtTokenBean().secret)).build().verify(token);
     }
 
     /**
      * 生成token的过期时间
      */
     private static Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + new JwtTokenUtils().expiration * 1000);
+        return new Date(System.currentTimeMillis() + getJwtTokenBean().expiration * 1000);
     }
 
     /**
@@ -130,9 +140,14 @@ public class JwtTokenUtils {
     public static String refreshToken(String token) {
         DecodedJWT jwt = getClaimsFromToken(token);
         Map<String, Object> claims = new HashMap<>(16);
-        jwt.getClaims().forEach(claims::put);
+        claims.putAll(jwt.getClaims());
         claims.remove(CLAIM_KEY_CREATED);
         claims.put(CLAIM_KEY_CREATED, new Date());
         return generateToken(claims);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        ac = applicationContext;
     }
 }
