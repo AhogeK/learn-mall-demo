@@ -30,7 +30,8 @@
          AUTH ahogek 123456
          ```
 5. 整合 Spring Security
-   * 在整合 Spring Security 前强烈推荐大家阅读 [码农小胖的关于SpringSecurity的个人电子书](https://felord.cn/)
+   * [Spring Security quick start](https://spring.io/guides/gs/securing-web/)
+   * [Spring Boot Security Auto-Configuration](https://www.baeldung.com/spring-boot-security-autoconfiguration)
 6. 添加定时任务
    * 可以参考学习 [A Guide to the Spring Task Scheduler](https://www.baeldung.com/spring-task-scheduler)
 7. 添加 ES 搜索引擎
