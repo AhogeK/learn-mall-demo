@@ -32,6 +32,7 @@
 5. 整合 Spring Security
    * [Spring Security quick start](https://spring.io/guides/gs/securing-web/)
    * [Spring Boot Security Auto-Configuration](https://www.baeldung.com/spring-boot-security-autoconfiguration)
+   * [Default Password Encoder in Spring Security 5](https://www.baeldung.com/spring-security-5-default-password-encoder)
 6. 添加定时任务
    * 可以参考学习 [A Guide to the Spring Task Scheduler](https://www.baeldung.com/spring-task-scheduler)
 7. 添加 ES 搜索引擎
