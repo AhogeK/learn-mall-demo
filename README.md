@@ -7,6 +7,8 @@
 - 邮箱 ahogek@gmail.com
 - 微信 AhogeK
 
+**近期持续暂停更新**
+
 ## 内容
 
 1. [提前部署准备](doc/提前准备.md)
